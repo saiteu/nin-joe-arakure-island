@@ -46,6 +46,10 @@
   - YOKAI KOBUSHI: 防御と大振り
 - 3戦ランの最小ループ
 - 戦闘後の報酬カード選択とスキップ
+- 型定義、カードデータ、敵データを分離
+  - 型: `src/game/types.ts`
+  - カード: `src/data/cards.ts`
+  - 敵: `src/data/enemies.ts`
 
 ## カード案
 
