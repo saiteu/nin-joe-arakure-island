@@ -1,4 +1,6 @@
 export type CardType = "attack" | "block" | "skill";
+export type CardCategory = "melee" | "guard" | "knockback" | "ranged" | "spirit" | "combo" | "special";
+export type CardRarity = "starter" | "common" | "uncommon" | "rare";
 export type RangeBand = "far" | "mid" | "close";
 
 export type Card = {
@@ -6,6 +8,8 @@ export type Card = {
   name: string;
   cost: number;
   type: CardType;
+  category: CardCategory;
+  rarity: CardRarity;
   description: string;
   damage?: number;
   comboDamage?: number;
