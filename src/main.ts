@@ -30,6 +30,8 @@ type EnemyIntent = {
 type Enemy = {
   name: string;
   hp: number;
+  role: string;
+  pattern: EnemyIntent[];
 };
 
 type GameState = {
@@ -86,17 +88,40 @@ const rewardCardPool: Card[] = [
   { id: "mercy-guard", name: "仁義の受け", cost: 1, type: "block", description: "ブロックを6得る。コンボ中なら8。", block: 6, comboBlock: 8 }
 ];
 
-const enemyPattern: EnemyIntent[] = [
-  { label: "竹刀打ち", damage: 7 },
-  { label: "見得を切る", damage: 0, block: 6, advances: true },
-  { label: "荒武者斬り", damage: 11 },
-  { label: "竹刀打ち", damage: 7 }
-];
-
 const enemies: Enemy[] = [
-  { name: "ARAKURE SAMURAI", hp: 48 },
-  { name: "NINJA MABUSHI", hp: 38 },
-  { name: "YOKAI KOBUSHI", hp: 54 }
+  {
+    name: "ARAKURE SAMURAI",
+    hp: 48,
+    role: "基本敵",
+    pattern: [
+      { label: "竹刀打ち", damage: 7 },
+      { label: "見得を切る", damage: 0, block: 6, advances: true },
+      { label: "荒武者斬り", damage: 11 },
+      { label: "竹刀打ち", damage: 7 }
+    ]
+  },
+  {
+    name: "NINJA MABUSHI",
+    hp: 38,
+    role: "高速接近",
+    pattern: [
+      { label: "煙走り", damage: 0, advances: true },
+      { label: "苦無突き", damage: 6 },
+      { label: "二連斬り", damage: 9 },
+      { label: "煙走り", damage: 0, advances: true }
+    ]
+  },
+  {
+    name: "YOKAI KOBUSHI",
+    hp: 54,
+    role: "防御と大振り",
+    pattern: [
+      { label: "妖気溜め", damage: 0, block: 8, advances: true },
+      { label: "岩拳", damage: 10 },
+      { label: "甲羅構え", damage: 0, block: 12 },
+      { label: "鬼拳落とし", damage: 14 }
+    ]
+  }
 ];
 
 let cardInstanceId = 0;
@@ -126,7 +151,7 @@ function createBattle(options: { runDeck: Card[]; battleNumber: number; playerHp
     enemyHp: enemy.hp,
     enemyMaxHp: enemy.hp,
     enemyBlock: 0,
-    enemyIntent: pickEnemyIntent(1),
+    enemyIntent: pickEnemyIntent(enemy, 1),
     range: "mid",
     runDeck: options.runDeck,
     drawPile: deck,
@@ -162,8 +187,8 @@ function shuffle<T>(items: T[]): T[] {
   return shuffled;
 }
 
-function pickEnemyIntent(turn: number): EnemyIntent {
-  return enemyPattern[(turn - 1) % enemyPattern.length];
+function pickEnemyIntent(enemy: Enemy, turn: number): EnemyIntent {
+  return enemy.pattern[(turn - 1) % enemy.pattern.length];
 }
 
 function drawCards(target: GameState, amount: number): void {
@@ -286,7 +311,7 @@ function endTurn(): void {
   state.playerBlock = 0;
   state.lastPlayedCost = null;
   state.comboCount = 0;
-  state.enemyIntent = pickEnemyIntent(state.turn);
+  state.enemyIntent = pickEnemyIntent(currentEnemy(), state.turn);
   drawCards(state, 5);
   state.log.unshift(`ターン${state.turn}開始。`);
   render();
@@ -321,6 +346,10 @@ function chooseReward(cardId: string | null): void {
 
 function hpPercent(current: number, max: number): string {
   return `${Math.max(0, Math.min(100, (current / max) * 100))}%`;
+}
+
+function currentEnemy(): Enemy {
+  return enemies[state.battleNumber - 1] ?? enemies[0];
 }
 
 function nextComboCost(): number | null {
@@ -425,6 +454,10 @@ function render(): void {
           <div class="meter enemy-meter"><span style="width: ${hpPercent(state.enemyHp, state.enemyMaxHp)}"></span></div>
           <div class="stat-row">
             <span>Block ${state.enemyBlock}</span>
+            <span>${currentEnemy().role}</span>
+          </div>
+          <div class="stat-row">
+            <span>Intent</span>
             <span>${intentLabel(state.enemyIntent)}</span>
           </div>
         </article>
