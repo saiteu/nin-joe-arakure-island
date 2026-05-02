@@ -169,7 +169,7 @@ function endTurn(): void {
   state.hand = [];
 
   if (state.enemyIntent.damage > 0) {
-    if (state.range === "close") {
+    if (state.range === "close" || state.enemyIntent.ranged) {
       const incomingDamage = Math.max(0, state.enemyIntent.damage - state.playerBlock);
       state.playerBlock = Math.max(0, state.playerBlock - state.enemyIntent.damage);
       state.playerHp = Math.max(0, state.playerHp - incomingDamage);
@@ -454,7 +454,7 @@ function renderCard(card: Card): string {
 
 function intentLabel(intent: EnemyIntent): string {
   if (intent.damage > 0) {
-    return `${intent.label}: ${intent.damage} dmg`;
+    return `${intent.label}: ${intent.damage} dmg${intent.ranged ? " ranged" : ""}`;
   }
 
   const parts = [`${intent.label}: ${intent.block ? "block" : "wait"}`];

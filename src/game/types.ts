@@ -27,6 +27,7 @@ export type EnemyIntent = {
   damage: number;
   block?: number;
   advances?: boolean;
+  ranged?: boolean;
 };
 
 export type Enemy = {

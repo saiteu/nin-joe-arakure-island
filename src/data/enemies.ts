@@ -3,7 +3,7 @@ import type { Enemy } from "../game/types";
 export const enemies: Enemy[] = [
   {
     name: "ARAKURE SAMURAI",
-    hp: 48,
+    hp: 56,
     role: "基本敵",
     pattern: [
       { label: "竹刀打ち", damage: 7 },
@@ -14,18 +14,18 @@ export const enemies: Enemy[] = [
   },
   {
     name: "NINJA MABUSHI",
-    hp: 38,
-    role: "高速接近",
+    hp: 46,
+    role: "高速接近と投擲",
     pattern: [
       { label: "煙走り", damage: 0, advances: true },
-      { label: "苦無突き", damage: 6 },
+      { label: "苦無投げ", damage: 5, ranged: true },
       { label: "二連斬り", damage: 9 },
       { label: "煙走り", damage: 0, advances: true }
     ]
   },
   {
     name: "YOKAI KOBUSHI",
-    hp: 54,
+    hp: 68,
     role: "防御と大振り",
     pattern: [
       { label: "妖気溜め", damage: 0, block: 8, advances: true },
