@@ -21,6 +21,8 @@ type Card = {
 type EnemyIntent = {
   label: string;
   damage: number;
+  block?: number;
+  advances?: boolean;
 };
 
 type Enemy = {
@@ -83,7 +85,7 @@ const rewardCardPool: Card[] = [
 
 const enemyPattern: EnemyIntent[] = [
   { label: "竹刀打ち", damage: 7 },
-  { label: "見得を切る", damage: 0 },
+  { label: "見得を切る", damage: 0, block: 6, advances: true },
   { label: "荒武者斬り", damage: 11 },
   { label: "竹刀打ち", damage: 7 }
 ];
@@ -261,10 +263,15 @@ function endTurn(): void {
       state.log.unshift(`敵の${state.enemyIntent.label}。${incomingDamage}ダメージを受けた。`);
     } else {
       state.log.unshift(`敵の${state.enemyIntent.label}は${rangeLabel(state.range)}で空を切った。`);
+      advanceEnemy();
     }
   } else {
-    state.enemyBlock += 6;
-    state.log.unshift("敵は見得を切り、守りを固めた。");
+    const block = state.enemyIntent.block ?? 0;
+    state.enemyBlock += block;
+    state.log.unshift(`敵は${state.enemyIntent.label}、守りを${block}固めた。`);
+    if (state.enemyIntent.advances) {
+      advanceEnemy();
+    }
   }
 
   if (state.playerHp <= 0) {
@@ -343,6 +350,24 @@ function stepAway(range: RangeBand): RangeBand {
   return "far";
 }
 
+function stepCloser(range: RangeBand): RangeBand {
+  if (range === "far") {
+    return "mid";
+  }
+  if (range === "mid") {
+    return "close";
+  }
+  return "close";
+}
+
+function advanceEnemy(): void {
+  const previousRange = state.range;
+  state.range = stepCloser(state.range);
+  if (state.range !== previousRange) {
+    state.log.unshift(`敵が間合いを詰め、${rangeLabel(state.range)}になった。`);
+  }
+}
+
 function comboLabel(): string {
   const nextCost = nextComboCost();
   if (state.comboCount > 1) {
@@ -393,7 +418,7 @@ function render(): void {
           <div class="meter enemy-meter"><span style="width: ${hpPercent(state.enemyHp, state.enemyMaxHp)}"></span></div>
           <div class="stat-row">
             <span>Block ${state.enemyBlock}</span>
-            <span>${state.enemyIntent.label}: ${state.enemyIntent.damage > 0 ? `${state.enemyIntent.damage} dmg` : "block"}</span>
+            <span>${intentLabel(state.enemyIntent)}</span>
           </div>
         </article>
       </section>
@@ -455,6 +480,18 @@ function renderCard(card: Card): string {
   `;
 }
 
+function intentLabel(intent: EnemyIntent): string {
+  if (intent.damage > 0) {
+    return `${intent.label}: ${intent.damage} dmg`;
+  }
+
+  const parts = [`${intent.label}: block`];
+  if (intent.advances) {
+    parts.push("advance");
+  }
+  return parts.join(" + ");
+}
+
 function renderOverlay(): string {
   if (state.status === "reward") {
     return `
@@ -471,7 +508,7 @@ function renderOverlay(): string {
   const title = state.status === "won" ? "Victory" : "Defeat";
   const message =
     state.status === "won"
-      ? "ARAKURE SAMURAIを倒した。だがSHOGUNの地獄はまだ終わらない。"
+      ? "荒くれの包囲を突破した。だがSHOGUNの地獄はまだ終わらない。"
       : "NIN-JOEは始まりへ戻された。SHOGUNの無限地獄が笑っている。";
 
   return `
