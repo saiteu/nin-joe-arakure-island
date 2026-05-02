@@ -179,8 +179,12 @@ function endTurn(): void {
     }
   } else {
     const block = state.enemyIntent.block ?? 0;
-    state.enemyBlock += block;
-    state.log.unshift(`敵は${state.enemyIntent.label}、守りを${block}固めた。`);
+    if (block > 0) {
+      state.enemyBlock += block;
+      state.log.unshift(`敵は${state.enemyIntent.label}、守りを${block}固めた。`);
+    } else {
+      state.log.unshift(`敵は${state.enemyIntent.label}で間合いを測った。`);
+    }
     if (state.enemyIntent.advances) {
       advanceEnemy();
     }
@@ -412,7 +416,7 @@ function intentLabel(intent: EnemyIntent): string {
     return `${intent.label}: ${intent.damage} dmg`;
   }
 
-  const parts = [`${intent.label}: block`];
+  const parts = [`${intent.label}: ${intent.block ? "block" : "wait"}`];
   if (intent.advances) {
     parts.push("advance");
   }
