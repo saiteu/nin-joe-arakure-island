@@ -15,6 +15,7 @@ type Card = {
   comboBlock?: number;
   spiritGain?: number;
   comboSpiritGain?: number;
+  knockback?: boolean;
   wild?: boolean;
 };
 
@@ -52,7 +53,6 @@ type GameState = {
   turn: number;
   lastPlayedCost: number | null;
   comboCount: number;
-  playedAttackThisTurn: boolean;
   log: string[];
   status: "playing" | "reward" | "won" | "lost";
 };
@@ -71,12 +71,12 @@ const starterDeck: Card[] = [
   { id: "strike-2", name: "正拳", cost: 1, type: "attack", description: "敵に6ダメージ。コンボ中なら8ダメージ。", damage: 6, comboDamage: 8 },
   { id: "guard-1", name: "受け", cost: 1, type: "block", description: "ブロックを5得る。コンボ中なら7。", block: 5, comboBlock: 7 },
   { id: "guard-2", name: "受け", cost: 1, type: "block", description: "ブロックを5得る。コンボ中なら7。", block: 5, comboBlock: 7 },
-  { id: "roundhouse-1", name: "回し蹴り", cost: 2, type: "attack", description: "敵に12ダメージ。コンボ中なら16ダメージ。", damage: 12, comboDamage: 16 },
+  { id: "roundhouse-1", name: "回し蹴り", cost: 2, type: "attack", description: "敵に12ダメージ。コンボ中なら16ダメージ。ノックバック。", damage: 12, comboDamage: 16, knockback: true },
   { id: "meditate-1", name: "黙想", cost: 0, type: "skill", description: "ブロックを3得る。", block: 3 }
 ];
 
 const rewardCardPool: Card[] = [
-  { id: "heel-drop", name: "踵落とし", cost: 2, type: "attack", description: "敵に10ダメージ。コンボ中なら15ダメージ。", damage: 10, comboDamage: 15 },
+  { id: "heel-drop", name: "踵落とし", cost: 2, type: "attack", description: "敵に10ダメージ。コンボ中なら15ダメージ。ノックバック。", damage: 10, comboDamage: 15, knockback: true },
   { id: "tanden-breath", name: "丹田呼吸", cost: 0, type: "skill", description: "胆力を1回復。コンボ中なら2回復。", spiritGain: 1, comboSpiritGain: 2 },
   { id: "zanshin", name: "残心", cost: 1, type: "block", description: "ブロックを4得る。コンボ中なら6。", block: 4, comboBlock: 6 },
   { id: "tears-strike", name: "涙の正拳", cost: 2, type: "attack", description: "敵に8ダメージ。コンボ中なら13ダメージ。", damage: 8, comboDamage: 13 },
@@ -134,7 +134,6 @@ function createBattle(options: { runDeck: Card[]; battleNumber: number; playerHp
     turn: 1,
     lastPlayedCost: null,
     comboCount: 0,
-    playedAttackThisTurn: false,
     log: options.log,
     status: "playing"
   };
@@ -202,12 +201,15 @@ function playCard(cardId: string): void {
 
   if (card.damage) {
     state.range = "close";
-    state.playedAttackThisTurn = true;
     const baseDamage = isCombo && card.comboDamage ? card.comboDamage : card.damage;
     const damage = Math.max(0, baseDamage - state.enemyBlock);
     state.enemyBlock = Math.max(0, state.enemyBlock - baseDamage);
     state.enemyHp = Math.max(0, state.enemyHp - damage);
     state.log.unshift(`${comboPrefix}${card.name}で踏み込み、${damage}ダメージを与えた。`);
+
+    if (card.knockback) {
+      knockBackEnemy();
+    }
   }
 
   if (card.block) {
@@ -247,14 +249,6 @@ function endTurn(): void {
   state.discardPile.push(...state.hand);
   state.hand = [];
 
-  if (!state.playedAttackThisTurn) {
-    const previousRange = state.range;
-    state.range = stepAway(state.range);
-    if (state.range !== previousRange) {
-      state.log.unshift(`NIN-JOEは間合いを取り、${rangeLabel(state.range)}へ下がった。`);
-    }
-  }
-
   if (state.enemyIntent.damage > 0) {
     if (state.range === "close") {
       const incomingDamage = Math.max(0, state.enemyIntent.damage - state.playerBlock);
@@ -286,7 +280,6 @@ function endTurn(): void {
   state.playerBlock = 0;
   state.lastPlayedCost = null;
   state.comboCount = 0;
-  state.playedAttackThisTurn = false;
   state.enemyIntent = pickEnemyIntent(state.turn);
   drawCards(state, 5);
   state.log.unshift(`ターン${state.turn}開始。`);
@@ -340,16 +333,6 @@ function rangeLabel(range: RangeBand): string {
   return labels[range];
 }
 
-function stepAway(range: RangeBand): RangeBand {
-  if (range === "close") {
-    return "mid";
-  }
-  if (range === "mid") {
-    return "far";
-  }
-  return "far";
-}
-
 function stepCloser(range: RangeBand): RangeBand {
   if (range === "far") {
     return "mid";
@@ -360,11 +343,29 @@ function stepCloser(range: RangeBand): RangeBand {
   return "close";
 }
 
+function stepFarther(range: RangeBand): RangeBand {
+  if (range === "close") {
+    return "mid";
+  }
+  if (range === "mid") {
+    return "far";
+  }
+  return "far";
+}
+
 function advanceEnemy(): void {
   const previousRange = state.range;
   state.range = stepCloser(state.range);
   if (state.range !== previousRange) {
     state.log.unshift(`敵が間合いを詰め、${rangeLabel(state.range)}になった。`);
+  }
+}
+
+function knockBackEnemy(): void {
+  const previousRange = state.range;
+  state.range = stepFarther(state.range);
+  if (state.range !== previousRange) {
+    state.log.unshift(`ノックバック。敵との間合いが${rangeLabel(state.range)}へ離れた。`);
   }
 }
 
