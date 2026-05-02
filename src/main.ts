@@ -1,7 +1,7 @@
 import "./styles.css";
 import { starterDeck, rewardCardPool } from "./data/cards";
 import { enemies } from "./data/enemies";
-import type { Card, CardRarity, Enemy, EnemyIntent, GameState, RangeBand } from "./game/types";
+import type { Card, CardCategory, CardRarity, Enemy, EnemyIntent, GameState, RangeBand } from "./game/types";
 
 const appRoot = document.querySelector<HTMLDivElement>("#app");
 
@@ -229,13 +229,32 @@ function rollRewardCards(): Card[] {
     selected.push(...fallbackCards.slice(0, 3 - selected.length));
   }
 
-  return selected.map(cloneCard);
+  return reduceRewardCategoryClump(selected).map(cloneCard);
 }
 
 function pickRewardCard(rarities: CardRarity[], selected: Card[]): Card | null {
   const candidates = rewardCardPool.filter(
     (card) => rarities.includes(card.rarity) && !selected.some((selectedCard) => selectedCard.id === card.id)
   );
+  return shuffle(candidates)[0] ?? null;
+}
+
+function reduceRewardCategoryClump(selected: Card[]): Card[] {
+  if (selected.length < 3 || new Set(selected.map((card) => card.category)).size > 1) {
+    return selected;
+  }
+
+  const replacement = pickReplacementRewardCard(selected, selected[0].category);
+  if (!replacement) {
+    return selected;
+  }
+
+  return [...selected.slice(0, 2), replacement];
+}
+
+function pickReplacementRewardCard(selected: Card[], blockedCategory: CardCategory): Card | null {
+  const selectedIds = new Set(selected.map((card) => card.id));
+  const candidates = rewardCardPool.filter((card) => card.category !== blockedCategory && !selectedIds.has(card.id));
   return shuffle(candidates)[0] ?? null;
 }
 
