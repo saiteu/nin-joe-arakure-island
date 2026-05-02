@@ -1,7 +1,7 @@
 import "./styles.css";
 import { starterDeck, rewardCardPool } from "./data/cards";
 import { enemies } from "./data/enemies";
-import type { Card, Enemy, EnemyIntent, GameState, RangeBand } from "./game/types";
+import type { Card, CardRarity, Enemy, EnemyIntent, GameState, RangeBand } from "./game/types";
 
 const appRoot = document.querySelector<HTMLDivElement>("#app");
 
@@ -10,6 +10,7 @@ if (!appRoot) {
 }
 
 const app = appRoot;
+const rewardSlots: CardRarity[][] = [["common"], ["common", "uncommon"], ["common", "uncommon", "rare"]];
 
 let cardInstanceId = 0;
 let state = newGame();
@@ -214,7 +215,28 @@ function resetGame(): void {
 }
 
 function rollRewardCards(): Card[] {
-  return shuffle(rewardCardPool).slice(0, 3).map(cloneCard);
+  const selected: Card[] = [];
+
+  rewardSlots.forEach((rarities) => {
+    const candidate = pickRewardCard(rarities, selected);
+    if (candidate) {
+      selected.push(candidate);
+    }
+  });
+
+  if (selected.length < 3) {
+    const fallbackCards = shuffle(rewardCardPool).filter((card) => !selected.some((selectedCard) => selectedCard.id === card.id));
+    selected.push(...fallbackCards.slice(0, 3 - selected.length));
+  }
+
+  return selected.map(cloneCard);
+}
+
+function pickRewardCard(rarities: CardRarity[], selected: Card[]): Card | null {
+  const candidates = rewardCardPool.filter(
+    (card) => rarities.includes(card.rarity) && !selected.some((selectedCard) => selectedCard.id === card.id)
+  );
+  return shuffle(candidates)[0] ?? null;
 }
 
 function chooseReward(cardId: string | null): void {
