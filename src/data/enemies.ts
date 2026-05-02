@@ -33,5 +33,28 @@ export const enemies: Enemy[] = [
       { label: "甲羅構え", damage: 0, block: 12 },
       { label: "鬼拳落とし", damage: 14 }
     ]
+  },
+  {
+    name: "ONI BANCHOU",
+    hp: 86,
+    role: "中ボス: 大技予告",
+    pattern: [
+      { label: "番長睨み", damage: 0, block: 10, advances: true },
+      { label: "鬼張り手", damage: 12 },
+      { label: "地獄の肩慣らし", damage: 0, block: 6 },
+      { label: "赤鬼ラリアット", damage: 18 }
+    ]
+  },
+  {
+    name: "SHOGUNの影",
+    hp: 104,
+    role: "ボス: 遠近混合",
+    pattern: [
+      { label: "影手裏剣", damage: 7, ranged: true },
+      { label: "将軍結界", damage: 0, block: 14, advances: true },
+      { label: "無限斬り", damage: 13 },
+      { label: "影寄せ", damage: 0, advances: true },
+      { label: "地獄一閃", damage: 20 }
+    ]
   }
 ];
