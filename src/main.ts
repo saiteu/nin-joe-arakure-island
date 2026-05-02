@@ -15,6 +15,7 @@ type Card = {
   comboBlock?: number;
   spiritGain?: number;
   comboSpiritGain?: number;
+  ranged?: boolean;
   knockback?: boolean;
   wild?: boolean;
 };
@@ -77,6 +78,8 @@ const starterDeck: Card[] = [
 
 const rewardCardPool: Card[] = [
   { id: "heel-drop", name: "踵落とし", cost: 2, type: "attack", description: "敵に10ダメージ。コンボ中なら15ダメージ。ノックバック。", damage: 10, comboDamage: 15, knockback: true },
+  { id: "stone-throw", name: "投石", cost: 0, type: "attack", description: "敵に2ダメージ。間合いを変えない。", damage: 2, ranged: true },
+  { id: "shuriken", name: "手裏剣", cost: 1, type: "attack", description: "敵に4ダメージ。コンボ中なら6ダメージ。間合いを変えない。", damage: 4, comboDamage: 6, ranged: true },
   { id: "tanden-breath", name: "丹田呼吸", cost: 0, type: "skill", description: "胆力を1回復。コンボ中なら2回復。", spiritGain: 1, comboSpiritGain: 2 },
   { id: "zanshin", name: "残心", cost: 1, type: "block", description: "ブロックを4得る。コンボ中なら6。", block: 4, comboBlock: 6 },
   { id: "tears-strike", name: "涙の正拳", cost: 2, type: "attack", description: "敵に8ダメージ。コンボ中なら13ダメージ。", damage: 8, comboDamage: 13 },
@@ -200,12 +203,15 @@ function playCard(cardId: string): void {
   const comboPrefix = isCombo ? `コンボ${state.comboCount}。` : "";
 
   if (card.damage) {
-    state.range = "close";
+    if (!card.ranged) {
+      state.range = "close";
+    }
     const baseDamage = isCombo && card.comboDamage ? card.comboDamage : card.damage;
     const damage = Math.max(0, baseDamage - state.enemyBlock);
     state.enemyBlock = Math.max(0, state.enemyBlock - baseDamage);
     state.enemyHp = Math.max(0, state.enemyHp - damage);
-    state.log.unshift(`${comboPrefix}${card.name}で踏み込み、${damage}ダメージを与えた。`);
+    const attackVerb = card.ranged ? "投げつけ" : "踏み込み";
+    state.log.unshift(`${comboPrefix}${card.name}を${attackVerb}、${damage}ダメージを与えた。`);
 
     if (card.knockback) {
       knockBackEnemy();
