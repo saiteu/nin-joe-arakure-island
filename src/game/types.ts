@@ -13,6 +13,7 @@ export type Card = {
   description: string;
   damage?: number;
   comboDamage?: number;
+  blockBreak?: number;
   block?: number;
   comboBlock?: number;
   spiritGain?: number;

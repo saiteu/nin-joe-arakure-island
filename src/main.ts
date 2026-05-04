@@ -143,6 +143,14 @@ function playCard(cardId: string): void {
     const attackVerb = card.ranged ? "投げつけ" : "踏み込み";
     state.log.unshift(`${comboPrefix}${card.name}を${attackVerb}、${damage}ダメージを与えた。`);
 
+    if (card.blockBreak) {
+      const brokenBlock = Math.min(state.enemyBlock, card.blockBreak);
+      state.enemyBlock -= brokenBlock;
+      if (brokenBlock > 0) {
+        state.log.unshift(`${card.name}で敵のブロックを${brokenBlock}崩した。`);
+      }
+    }
+
     if (card.knockback) {
       knockBackEnemy();
     }
