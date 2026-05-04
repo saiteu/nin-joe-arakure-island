@@ -635,10 +635,10 @@ function renderOverlay(): string {
     return renderTravelPanel();
   }
 
-  const title = state.status === "won" ? "Victory" : "Defeat";
+  const title = state.status === "won" ? "Act 1 Clear" : "Defeat";
   const message =
     state.status === "won"
-      ? "荒くれの包囲を突破した。だがSHOGUNの地獄はまだ終わらない。"
+      ? "SHOGUNの影は黒い紙片となって崩れた。城門の奥で、本物のSHOGUNが笑っている。"
       : "NIN-JOEは始まりへ戻された。SHOGUNの無限地獄が笑っている。";
 
   return `
