@@ -577,10 +577,33 @@ function renderCard(card: Card): string {
     <button class="card ${card.type}${comboClass}" data-card-id="${card.id}" ${disabled}>
       <span class="cost">${card.cost}</span>
       ${isComboNext ? `<span class="combo-next-label">Combo Next</span>` : ""}
+      ${renderCardTags(card)}
       <strong>${card.name}</strong>
       <small>${card.description}</small>
     </button>
   `;
+}
+
+function renderCardTags(card: Card): string {
+  return `
+    <span class="card-tags">
+      <span class="card-tag category-${card.category}">${categoryLabel(card.category)}</span>
+      <span class="card-tag rarity-${card.rarity}">${card.rarity}</span>
+    </span>
+  `;
+}
+
+function categoryLabel(category: CardCategory): string {
+  const labels: Record<CardCategory, string> = {
+    melee: "近接",
+    guard: "受け",
+    knockback: "ノックバック",
+    ranged: "投擲",
+    spirit: "呼吸",
+    combo: "コンボ",
+    special: "人情"
+  };
+  return labels[category];
 }
 
 function intentLabel(intent: EnemyIntent): string {
@@ -678,6 +701,7 @@ function renderRewardCard(card: Card): string {
   return `
     <button class="card reward-card ${card.type}" data-reward-id="${card.id}">
       <span class="cost">${card.cost}</span>
+      ${renderCardTags(card)}
       <strong>${card.name}</strong>
       <small>${card.description}</small>
     </button>

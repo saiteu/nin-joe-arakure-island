@@ -259,6 +259,68 @@ h2 {
   font-size: 1.12rem;
 }
 
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 24px;
+  margin-top: 34px;
+}
+
+.card-tag {
+  display: inline-flex;
+  min-height: 22px;
+  align-items: center;
+  padding: 2px 7px;
+  border: 1px solid rgba(245, 239, 231, 0.14);
+  border-radius: 999px;
+  color: #f5efe7;
+  background: rgba(245, 239, 231, 0.08);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.category-melee {
+  background: rgba(197, 84, 78, 0.35);
+}
+
+.category-guard {
+  background: rgba(92, 147, 158, 0.35);
+}
+
+.category-knockback {
+  background: rgba(225, 164, 93, 0.36);
+}
+
+.category-ranged {
+  background: rgba(127, 167, 102, 0.34);
+}
+
+.category-spirit,
+.category-combo {
+  background: rgba(240, 193, 95, 0.3);
+}
+
+.category-special {
+  background: rgba(193, 111, 113, 0.34);
+}
+
+.rarity-starter {
+  color: #d8ccba;
+}
+
+.rarity-common {
+  color: #f5efe7;
+}
+
+.rarity-uncommon {
+  color: #b7d06d;
+}
+
+.rarity-rare {
+  color: #f0c15f;
+}
+
 .card small {
   min-height: 48px;
   color: #e1d8c7;
