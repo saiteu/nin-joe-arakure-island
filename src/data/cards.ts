@@ -16,6 +16,7 @@ export const rewardCardPool: Card[] = [
   { id: "shuriken", name: "手裏剣", cost: 1, type: "attack", category: "ranged", rarity: "common", description: "敵に2ダメージ。コンボ中なら4ダメージ。間合いを変えない。", damage: 2, comboDamage: 4, ranged: true },
   { id: "tanden-breath", name: "丹田呼吸", cost: 0, type: "skill", category: "spirit", rarity: "uncommon", description: "胆力を1回復。コンボ中なら2回復。", spiritGain: 1, comboSpiritGain: 2 },
   { id: "zanshin", name: "残心", cost: 1, type: "block", category: "combo", rarity: "common", description: "ブロックを4得る。コンボ中なら6。", block: 4, comboBlock: 6 },
+  { id: "counter-thrust", name: "返し突き", cost: 1, type: "attack", category: "melee", rarity: "common", description: "敵に4ダメージ。ブロックを3得る。コンボ中なら6ダメージ、ブロック5。", damage: 4, comboDamage: 6, block: 3, comboBlock: 5 },
   { id: "tears-strike", name: "涙の正拳", cost: 2, type: "attack", category: "melee", rarity: "common", description: "敵に8ダメージ。コンボ中なら12ダメージ。", damage: 8, comboDamage: 12 },
   { id: "mercy-guard", name: "仁義の受け", cost: 1, type: "block", category: "guard", rarity: "common", description: "ブロックを6得る。コンボ中なら8。", block: 6, comboBlock: 8 },
   { id: "tile-throw", name: "瓦投げ", cost: 1, type: "attack", category: "ranged", rarity: "uncommon", description: "敵ブロックを4崩す。敵に2ダメージ。コンボ中なら4ダメージ。間合いを変えない。", damage: 2, comboDamage: 4, blockBreak: 4, ranged: true },
