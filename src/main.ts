@@ -39,6 +39,7 @@ function newGame(): GameState {
 
 function createBattle(options: { runDeck: Card[]; battleNumber: number; playerHp: number; ninjo: number; log: string[] }): GameState {
   const enemy = enemies[options.battleNumber - 1] ?? enemies[0];
+  const enemyPattern = pickEnemyPattern(enemy);
   const deck = shuffle([...options.runDeck]);
   const initialState: GameState = {
     playerHp: options.playerHp,
@@ -52,7 +53,8 @@ function createBattle(options: { runDeck: Card[]; battleNumber: number; playerHp
     enemyHp: enemy.hp,
     enemyMaxHp: enemy.hp,
     enemyBlock: 0,
-    enemyIntent: pickEnemyIntent(enemy, 1),
+    enemyPattern,
+    enemyIntent: pickEnemyIntent(enemyPattern, 1),
     range: "mid",
     runDeck: options.runDeck,
     drawPile: deck,
@@ -92,8 +94,13 @@ function shuffle<T>(items: T[]): T[] {
   return shuffled;
 }
 
-function pickEnemyIntent(enemy: Enemy, turn: number): EnemyIntent {
-  return enemy.pattern[(turn - 1) % enemy.pattern.length];
+function pickEnemyPattern(enemy: Enemy): EnemyIntent[] {
+  const patterns = [enemy.pattern, ...(enemy.patternVariants ?? [])];
+  return shuffle(patterns)[0] ?? enemy.pattern;
+}
+
+function pickEnemyIntent(pattern: EnemyIntent[], turn: number): EnemyIntent {
+  return pattern[(turn - 1) % pattern.length];
 }
 
 function drawCards(target: GameState, amount: number): void {
@@ -228,7 +235,7 @@ function endTurn(): void {
   state.playerBlock = 0;
   state.lastPlayedCost = null;
   state.comboCount = 0;
-  state.enemyIntent = pickEnemyIntent(currentEnemy(), state.turn);
+  state.enemyIntent = pickEnemyIntent(state.enemyPattern, state.turn);
   drawCards(state, 5);
   state.log.unshift(`ターン${state.turn}開始。`);
   render();

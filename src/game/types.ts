@@ -36,6 +36,7 @@ export type Enemy = {
   hp: number;
   role: string;
   pattern: EnemyIntent[];
+  patternVariants?: EnemyIntent[][];
 };
 
 export type TravelChoiceEffect =
@@ -72,6 +73,7 @@ export type GameState = {
   enemyHp: number;
   enemyMaxHp: number;
   enemyBlock: number;
+  enemyPattern: EnemyIntent[];
   enemyIntent: EnemyIntent;
   range: RangeBand;
   runDeck: Card[];
