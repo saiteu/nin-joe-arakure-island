@@ -37,10 +37,33 @@ export type Enemy = {
   pattern: EnemyIntent[];
 };
 
+export type TravelChoiceEffect =
+  | { type: "heal"; base: number; ninjoMultiplier: number }
+  | { type: "ninjo"; amount: number }
+  | { type: "hpForNinjo"; hpCost: number; ninjoGain: number }
+  | { type: "none" };
+
+export type TravelEventChoice = {
+  id: string;
+  label: string;
+  effectLabel: string;
+  effect: TravelChoiceEffect;
+};
+
+export type TravelEvent = {
+  id: string;
+  title: string;
+  body: string;
+  weight: number;
+  tags: string[];
+  choices: TravelEventChoice[];
+};
+
 export type GameState = {
   playerHp: number;
   playerMaxHp: number;
   playerBlock: number;
+  ninjo: number;
   spirit: number;
   maxSpirit: number;
   battleNumber: number;
@@ -56,9 +79,13 @@ export type GameState = {
   discardPile: Card[];
   exhausted: Card[];
   rewardOptions: Card[];
+  travelEvent: TravelEvent | null;
+  travelText: string;
+  travelResolved: boolean;
+  travelMessage: string;
   turn: number;
   lastPlayedCost: number | null;
   comboCount: number;
   log: string[];
-  status: "playing" | "reward" | "won" | "lost";
+  status: "playing" | "reward" | "travel" | "won" | "lost";
 };

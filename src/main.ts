@@ -1,7 +1,18 @@
 import "./styles.css";
 import { starterDeck, rewardCardPool } from "./data/cards";
 import { enemies } from "./data/enemies";
-import type { Card, CardCategory, CardRarity, Enemy, EnemyIntent, GameState, RangeBand } from "./game/types";
+import { travelEvents, travelTexts } from "./data/travelEvents";
+import type {
+  Card,
+  CardCategory,
+  CardRarity,
+  Enemy,
+  EnemyIntent,
+  GameState,
+  RangeBand,
+  TravelChoiceEffect,
+  TravelEvent
+} from "./game/types";
 
 const appRoot = document.querySelector<HTMLDivElement>("#app");
 
@@ -21,17 +32,19 @@ function newGame(): GameState {
     runDeck: starterDeck.map(cloneCard),
     battleNumber: 1,
     playerHp: 42,
+    ninjo: 1,
     log: ["NIN-JOEはARAKURE ISLANDへ踏み込んだ。全てはSHOGUNの罠だった。"]
   });
 }
 
-function createBattle(options: { runDeck: Card[]; battleNumber: number; playerHp: number; log: string[] }): GameState {
+function createBattle(options: { runDeck: Card[]; battleNumber: number; playerHp: number; ninjo: number; log: string[] }): GameState {
   const enemy = enemies[options.battleNumber - 1] ?? enemies[0];
   const deck = shuffle([...options.runDeck]);
   const initialState: GameState = {
     playerHp: options.playerHp,
     playerMaxHp: 42,
     playerBlock: 0,
+    ninjo: options.ninjo,
     spirit: 3,
     maxSpirit: 3,
     battleNumber: options.battleNumber,
@@ -47,6 +60,10 @@ function createBattle(options: { runDeck: Card[]; battleNumber: number; playerHp
     discardPile: [],
     exhausted: [],
     rewardOptions: [],
+    travelEvent: null,
+    travelText: "",
+    travelResolved: false,
+    travelMessage: "",
     turn: 1,
     lastPlayedCost: null,
     comboCount: 0,
@@ -267,13 +284,114 @@ function chooseReward(cardId: string | null): void {
   const nextDeck = selectedCard ? [...state.runDeck, selectedCard] : [...state.runDeck];
   const rewardLog = selectedCard ? `${selectedCard.name}をデッキに加えた。` : "報酬を受け取らず先へ進んだ。";
 
+  state.runDeck = nextDeck;
+  state.rewardOptions = [];
+  state.travelText = pickTravelText();
+  state.travelEvent = rollTravelEvent();
+  state.travelResolved = state.travelEvent === null;
+  state.travelMessage = state.travelEvent ? "道中で何かが起きた。" : "道中は静かだった。NIN-JOEは歩を止めない。";
+  state.status = "travel";
+  state.log.unshift(rewardLog);
+  render();
+}
+
+function proceedFromTravel(): void {
+  if (state.status !== "travel" || !state.travelResolved) {
+    return;
+  }
+
+  const nextBattleNumber = state.battleNumber + 1;
+  const travelLog = state.travelMessage;
   state = createBattle({
-    runDeck: nextDeck,
-    battleNumber: state.battleNumber + 1,
+    runDeck: state.runDeck,
+    battleNumber: nextBattleNumber,
     playerHp: state.playerHp,
-    log: [rewardLog, `戦闘${state.battleNumber + 1}開始。`]
+    ninjo: state.ninjo,
+    log: [travelLog, `戦闘${nextBattleNumber}開始。`]
   });
   render();
+}
+
+function chooseTravelOption(choiceId: string): void {
+  if (state.status !== "travel" || !state.travelEvent || state.travelResolved) {
+    return;
+  }
+
+  const choice = state.travelEvent.choices.find((eventChoice) => eventChoice.id === choiceId);
+  if (!choice || isTravelChoiceDisabled(choice.effect)) {
+    return;
+  }
+
+  state.travelMessage = applyTravelEffect(choice.effect, choice.label);
+  state.travelResolved = true;
+  state.log.unshift(state.travelMessage);
+  render();
+}
+
+function applyTravelEffect(effect: TravelChoiceEffect, label: string): string {
+  if (effect.type === "heal") {
+    const healAmount = effect.base + state.ninjo * effect.ninjoMultiplier;
+    const previousHp = state.playerHp;
+    state.playerHp = Math.min(state.playerMaxHp, state.playerHp + healAmount);
+    return `${label}。HPを${state.playerHp - previousHp}回復した。`;
+  }
+
+  if (effect.type === "ninjo") {
+    const previousNinjo = state.ninjo;
+    state.ninjo = clampNinjo(state.ninjo + effect.amount);
+    return `${label}。人情が${state.ninjo - previousNinjo}上がった。`;
+  }
+
+  if (effect.type === "hpForNinjo") {
+    state.playerHp = Math.max(1, state.playerHp - effect.hpCost);
+    const previousNinjo = state.ninjo;
+    state.ninjo = clampNinjo(state.ninjo + effect.ninjoGain);
+    return `${label}。HPを${effect.hpCost}失い、人情が${state.ninjo - previousNinjo}上がった。`;
+  }
+
+  return `${label}。NIN-JOEは先へ進んだ。`;
+}
+
+function rollTravelEvent(): TravelEvent | null {
+  if (Math.random() > travelEventChance()) {
+    return null;
+  }
+
+  const weightedEvents = travelEvents.flatMap((event) => Array.from({ length: eventWeight(event) }, () => event));
+  return shuffle(weightedEvents)[0] ?? null;
+}
+
+function travelEventChance(): number {
+  const hpRatio = state.playerHp / state.playerMaxHp;
+  if (hpRatio < 0.25) {
+    return 0.55;
+  }
+  if (hpRatio < 0.5) {
+    return 0.4;
+  }
+  return 0.25;
+}
+
+function eventWeight(event: TravelEvent): number {
+  if (event.tags.includes("heal") && state.playerHp / state.playerMaxHp < 0.5) {
+    return event.weight + 2;
+  }
+  if (event.tags.includes("risk") && state.playerHp <= 6) {
+    return Math.max(1, event.weight - 1);
+  }
+  return event.weight;
+}
+
+function pickTravelText(): string {
+  return shuffle(travelTexts)[0] ?? "NIN-JOEは次の戦場へ向かう。";
+}
+
+function clampNinjo(value: number): number {
+  return Math.max(0, Math.min(5, value));
+}
+
+function isTravelChoiceDisabled(effect: TravelChoiceEffect): boolean {
+  return effect.type === "hpForNinjo" && state.playerHp <= effect.hpCost;
 }
 
 function hpPercent(current: number, max: number): string {
@@ -370,11 +488,12 @@ function render(): void {
           <div class="stat-row">
             <span>Block ${state.playerBlock}</span>
             <span>胆力 ${state.spirit}/${state.maxSpirit}</span>
+            <span>人情 ${state.ninjo}</span>
           </div>
         </article>
 
         <div class="versus">
-          <span>Battle ${state.battleNumber}<br>Turn ${state.turn}</span>
+          <span>Battle ${state.battleNumber}/${enemies.length}<br>Turn ${state.turn}</span>
           <strong class="range-pill">間合い ${rangeLabel(state.range)}</strong>
         </div>
 
@@ -436,6 +555,10 @@ function render(): void {
   app.querySelectorAll<HTMLButtonElement>("[data-reward-id]").forEach((button) => {
     button.addEventListener("click", () => chooseReward(button.dataset.rewardId ?? null));
   });
+  app.querySelector<HTMLButtonElement>("[data-action='continue-travel']")?.addEventListener("click", proceedFromTravel);
+  app.querySelectorAll<HTMLButtonElement>("[data-travel-choice-id]").forEach((button) => {
+    button.addEventListener("click", () => chooseTravelOption(button.dataset.travelChoiceId ?? ""));
+  });
 }
 
 function renderCard(card: Card): string {
@@ -477,6 +600,10 @@ function renderOverlay(): string {
     `;
   }
 
+  if (state.status === "travel") {
+    return renderTravelPanel();
+  }
+
   const title = state.status === "won" ? "Victory" : "Defeat";
   const message =
     state.status === "won"
@@ -489,6 +616,53 @@ function renderOverlay(): string {
       <p>${message}</p>
       <button class="primary-button" data-action="reset">New Run</button>
     </aside>
+  `;
+}
+
+function renderTravelPanel(): string {
+  const progressText = `戦闘 ${state.battleNumber} / ${enemies.length} を突破`;
+  const eventMarkup =
+    state.travelEvent && !state.travelResolved
+      ? `
+        <div class="travel-event">
+          <p class="eyebrow">道中イベント</p>
+          <h2>${state.travelEvent.title}</h2>
+          <p>${state.travelEvent.body}</p>
+          <div class="travel-choice-grid">
+            ${state.travelEvent.choices.map(renderTravelChoice).join("")}
+          </div>
+        </div>
+      `
+      : `
+        <div class="travel-event is-resolved">
+          <p>${state.travelMessage}</p>
+          <button class="primary-button" data-action="continue-travel">次の戦闘へ</button>
+        </div>
+      `;
+
+  return `
+    <aside class="travel-panel" aria-live="polite">
+      <p class="eyebrow">Travel</p>
+      <h2>次のスポットへ移動中...</h2>
+      <p>${state.travelText}</p>
+      <div class="travel-stats">
+        <span>${progressText}</span>
+        <span>HP ${state.playerHp}/${state.playerMaxHp}</span>
+        <span>人情 ${state.ninjo}</span>
+      </div>
+      ${eventMarkup}
+    </aside>
+  `;
+}
+
+function renderTravelChoice(choice: TravelEvent["choices"][number]): string {
+  const disabled = isTravelChoiceDisabled(choice.effect) ? "disabled" : "";
+  const disabledNote = disabled ? `<small>HPが足りない</small>` : `<small>${choice.effectLabel}</small>`;
+  return `
+    <button class="travel-choice" data-travel-choice-id="${choice.id}" ${disabled}>
+      <strong>${choice.label}</strong>
+      ${disabledNote}
+    </button>
   `;
 }
 
