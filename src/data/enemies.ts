@@ -25,12 +25,12 @@ export const enemies: Enemy[] = [
   },
   {
     name: "YOKAI KOBUSHI",
-    hp: 68,
+    hp: 64,
     role: "防御と大振り",
     pattern: [
       { label: "妖気溜め", damage: 0, block: 8, advances: true },
       { label: "岩拳", damage: 10 },
-      { label: "甲羅構え", damage: 0, block: 12 },
+      { label: "甲羅構え", damage: 0, block: 10 },
       { label: "鬼拳落とし", damage: 14 }
     ]
   },
