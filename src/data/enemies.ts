@@ -36,10 +36,10 @@ export const enemies: Enemy[] = [
   },
   {
     name: "ONI BANCHOU",
-    hp: 78,
+    hp: 74,
     role: "中ボス: 大技予告",
     pattern: [
-      { label: "番長睨み", damage: 0, block: 10, advances: true },
+      { label: "番長睨み", damage: 0, block: 8, advances: true },
       { label: "鬼張り手", damage: 11 },
       { label: "地獄の肩慣らし", damage: 0, block: 6 },
       { label: "赤鬼ラリアット", damage: 16 }
