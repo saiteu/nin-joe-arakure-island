@@ -278,8 +278,7 @@ public/
 
 ## 次の実装候補
 
-1. `public/assets/audio/se/` を作る
-2. SEなしでも壊れない `playSound(id)` の薄い仕組みを追加する
-3. まず `card_select`、`melee_hit`、`guard`、`throw`、`breath`、`combo` だけ差し込む
-4. ブラウザで音量と連打時のうるささを確認する
-5. Act1スポット背景をCSS/Canvasで先に演出する
+1. まず `card_select`、`melee_hit`、`guard`、`throw`、`breath`、`combo` の仮SEを入れるか判断する
+2. 仮SEを入れる場合、`docs/asset-credits.md` に出典/生成条件を記録する
+3. ブラウザで音量と連打時のうるささを確認する
+4. Act1スポット背景をCSS/Canvasで先に演出する

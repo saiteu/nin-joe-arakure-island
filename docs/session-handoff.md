@@ -376,6 +376,12 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - ChatGPT画像生成は、方向確認、下絵、仮素材として使う方針。正式採用時は生成日、サービス、プロンプト要約、加工内容を記録する
   - SE生成は ElevenLabs Sound Effects や SFXforge などを候補化。商用利用はサービス/プラン依存なので、生成日とプランを台帳に残す
   - BGMはSEより後。まずBGMなしでSE、次に移動環境音、最後に通常戦闘/中ボス/ボス曲を検討する
+- SE再生の受け皿を追加
+  - `src/audio.ts` を追加し、`playSound(id)` と `playCardSound(card, options)` を実装
+  - 音ファイルは `public/assets/audio/se/` に置く想定。現時点では `.gitkeep` のみ
+  - 音ファイルが未配置でも、再生失敗したSE IDは以後スキップし、ゲーム進行を止めない
+  - 予約済みSE ID: `card_select`, `melee_hit`, `kick_heavy`, `guard`, `throw`, `block_break`, `breath`, `combo`, `enemy_attack`, `knockback`, `reward`, `travel`, `event`, `act_clear`, `defeat`
+  - カード使用、報酬、移動、道中イベント、敵攻撃、勝利/敗北に薄くSEフックを入れた
 
 ## カード案
 
@@ -398,7 +404,7 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
 
 ## 次にやること
 
-1. SEなしでも壊れない `playSound(id)` の薄い仕組みを追加する
-2. まず `card_select`、`melee_hit`、`guard`、`throw`、`breath`、`combo` の仮SEを入れるか判断する
+1. まず `card_select`, `melee_hit`, `guard`, `throw`, `breath`, `combo` の仮SEを入れるか判断する
+2. 仮SEを入れる場合、`docs/asset-credits.md` に出典/生成条件を記録する
 3. Act1スポットごとの背景トーンを追加するか判断する
 4. Act2本体はまだ作らず、Act1の完成度を優先する

@@ -3,6 +3,7 @@ import { actOneBattleFor, actOneClearUnlock } from "./data/actOne";
 import { starterDeck, rewardCardPool } from "./data/cards";
 import { enemies } from "./data/enemies";
 import { travelEvents } from "./data/travelEvents";
+import { playCardSound, playSound } from "./audio";
 import type {
   Card,
   CardCategory,
@@ -145,6 +146,8 @@ function playCard(cardId: string): void {
     return;
   }
 
+  playSound("card_select");
+
   const isCombo = state.lastPlayedCost !== null && card.cost === state.lastPlayedCost + 1;
   state.spirit -= card.cost;
   state.comboCount = isCombo ? state.comboCount + 1 : 1;
@@ -206,6 +209,7 @@ function playCard(cardId: string): void {
     brokenBlock,
     knockedBack
   });
+  playCardSound(card, { isCombo, brokenBlock });
 
   state.hand.splice(cardIndex, 1);
   state.discardPile.push(card);
@@ -214,10 +218,12 @@ function playCard(cardId: string): void {
     if (state.battleNumber >= enemies.length) {
       state.status = "won";
       state.log.unshift("勝利。NIN-JOEは荒くれの包囲を突破した。");
+      playSound("act_clear");
     } else {
       state.status = "reward";
       state.rewardOptions = rollRewardCards();
       state.log.unshift("勝利。報酬カードを1枚選べる。");
+      playSound("reward");
     }
   }
 
@@ -238,6 +244,7 @@ function endTurn(): void {
       state.playerBlock = Math.max(0, state.playerBlock - state.enemyIntent.damage);
       state.playerHp = Math.max(0, state.playerHp - incomingDamage);
       state.log.unshift(`敵の${state.enemyIntent.label}。${incomingDamage}ダメージを受けた。`);
+      playSound("enemy_attack");
     } else {
       state.log.unshift(`敵の${state.enemyIntent.label}は${rangeLabel(state.range)}で空を切った。`);
       advanceEnemy();
@@ -258,6 +265,7 @@ function endTurn(): void {
   if (state.playerHp <= 0) {
     state.status = "lost";
     state.log.unshift("敗北。デッキと敵行動の調整が必要だ。");
+    playSound("defeat");
     render();
     return;
   }
@@ -275,6 +283,7 @@ function endTurn(): void {
 }
 
 function resetGame(): void {
+  playSound("card_select");
   state = newGame();
   render();
 }
@@ -331,6 +340,7 @@ function chooseReward(cardId: string | null): void {
   const selectedCard = state.rewardOptions.find((card) => card.id === cardId);
   const nextDeck = selectedCard ? [...state.runDeck, selectedCard] : [...state.runDeck];
   const rewardLog = selectedCard ? `${selectedCard.name}をデッキに加えた。` : "報酬を受け取らず先へ進んだ。";
+  playSound(selectedCard ? "reward" : "card_select");
 
   state.runDeck = nextDeck;
   state.rewardOptions = [];
@@ -340,6 +350,7 @@ function chooseReward(cardId: string | null): void {
   state.travelMessage = state.travelEvent ? "道中で何かが起きた。" : "道中は静かだった。NIN-JOEは歩を止めない。";
   state.status = "travel";
   state.log.unshift(rewardLog);
+  playSound(state.travelEvent ? "event" : "travel");
   render();
 }
 
@@ -351,6 +362,7 @@ function proceedFromTravel(): void {
   const nextBattleNumber = state.battleNumber + 1;
   const travelLog = state.travelMessage;
   const spiritBoost = state.nextBattleSpiritBoost;
+  playSound("travel");
   state = createBattle({
     runDeck: state.runDeck,
     battleNumber: nextBattleNumber,
@@ -378,6 +390,7 @@ function chooseTravelOption(choiceId: string): void {
   state.travelMessage = applyTravelEffect(choice.effect, choice.label);
   state.travelResolved = true;
   state.log.unshift(state.travelMessage);
+  playSound("event");
   render();
 }
 
