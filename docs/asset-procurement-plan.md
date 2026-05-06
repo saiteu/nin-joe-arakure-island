@@ -153,7 +153,74 @@ Act1の完成度を上げるための素材計画。今すぐ正式素材を全�
 
 - 自作録音: SEに向く。紙、布、木、息、足音はNIN-JOEの雰囲気と相性がよい
 - AI生成画像: 下絵や方向確認には便利。ただし正式素材に使う場合は、利用規約、商用利用、再現性、加筆方針を確認する
+- AI生成SE: ElevenLabs Sound EffectsやSFXforgeなどが候補。商用利用はプランやサービス規約に依存するため、生成日とプランを `docs/asset-credits.md` に残す
+- AI生成BGM: 使う場合は短い仮ループや方向確認に留めるのが安全。正式採用するなら、有料プランの商用利用条件、配信可否、著作権上の不確実性を個別確認する
 - CSS/Canvas: 背景トーン、紙片、光、影、揺れなどはコードで作れる。今の段階ではかなり有効
+
+### ChatGPT画像生成の使い方
+
+ChatGPTで画像生成できる場合は、まず正式素材ではなく「方向を決めるための仮素材」として使う。
+
+向いている用途:
+
+- NIN-JOEの立ち絵方向確認
+- 敵5体のシルエット案
+- Act1スポット背景のラフ
+- カード背景のムード案
+- キービジュアルの構図検討
+
+使う時の注意:
+
+- 既存IP名、実在俳優名、既存ゲーム名をプロンプトに入れない
+- `Karateka風` のような既存作品直指定は避け、`レトロ武道アクションの空気` 程度に言い換える
+- 採用する場合は、生成日、サービス、プロンプト要約、加工内容を `docs/asset-credits.md` に記録する
+- 正式版は、生成画像をそのまま使うより、加筆/統一タッチ化する方が安全
+
+NIN-JOE向けプロンプトの方向例:
+
+```txt
+人情に熱い黒帯の武道家。忍者ではなく、古い時代劇とB級カラテ映画を混ぜたオリジナル主人公。力強い正拳突きの構え。シルエットで黒帯が読める。ゲーム用立ち絵、全身、背景なし。
+```
+
+### SE生成の使い方
+
+SEは生成サービスと自作録音の相性がよい。最初は短い音だけ作る。
+
+優先する生成音:
+
+- `card_select`: 0.1〜0.2秒
+- `melee_hit`: 0.15〜0.35秒
+- `guard`: 0.2〜0.5秒
+- `throw`: 0.2〜0.4秒
+- `block_break`: 0.2〜0.5秒
+- `breath`: 0.4〜0.8秒
+- `combo`: 0.5〜0.9秒
+
+避けるもの:
+
+- 1秒以上の長すぎるカードSE
+- 攻撃のたびに耳に刺さる高音
+- 実在作品っぽい必殺技音
+- ライセンス条件が曖昧な無料生成音
+
+### BGMの方針
+
+BGMはSEより後でよい。今は戦闘テンポとUI音の手触りを優先する。
+
+おすすめ順:
+
+1. まずBGMなしでSEを入れる
+2. 次に `travel` だけ環境音ループを入れる
+3. 通常戦闘用の短い低音ループを仮で入れる
+4. ONI/SHOGUNだけ差し替えが必要か確認する
+5. 正式化するなら外注、自作、または商用条件が明確な音源にする
+
+生成BGMを使う場合の注意:
+
+- Suno、Udioなどの歌もの生成は、商用権利や配信可否が変わりやすいので慎重に扱う
+- 歌詞入りやボーカル入りは避け、まずインスト/短尺ループにする
+- 有料プランで生成したか、商用利用可か、配信/ゲーム組み込み可かを記録する
+- YouTubeやストア公開を想定するなら、Content IDや類似曲リスクも見る
 
 ### 参照先
 
@@ -164,10 +231,14 @@ Act1の完成度を上げるための素材計画。今すぐ正式素材を全�
 - Pixabay Content License Summary: https://pixabay.com/service/license-summary/
 - Sonniss GDC Game Audio Bundle: https://gdc.sonniss.com/
 - itch.io asset license discussion: https://itch.io/t/364148/asset-licenses
+- ElevenLabs Sound Effects: https://help.elevenlabs.io/hc/en-us/articles/25735182995985-What-is-Sound-Effects
+- ElevenLabs generated content commercial use: https://help.elevenlabs.io/hc/en-us/articles/13313564601361-Can-I-publish-the-content-I-generate-on-the-platform
+- SFXforge license: https://sfxforge.com/license
+- Suno Terms: https://suno.com/terms/
 
 ## ライセンス記録ルール
 
-素材を入れる時は `docs/asset-credits.md` を作り、最低限以下を記録する。
+素材を入れる時は `docs/asset-credits.md` に最低限以下を記録する。
 
 | 項目 | 内容 |
 | --- | --- |
@@ -208,7 +279,7 @@ public/
 ## 次の実装候補
 
 1. `public/assets/audio/se/` を作る
-2. `docs/asset-credits.md` の雛形を作る
-3. SEなしでも壊れない `playSound(id)` の薄い仕組みを追加する
-4. まず `card_select`、`melee_hit`、`guard`、`throw`、`breath`、`combo` だけ差し込む
-5. ブラウザで音量と連打時のうるささを確認する
+2. SEなしでも壊れない `playSound(id)` の薄い仕組みを追加する
+3. まず `card_select`、`melee_hit`、`guard`、`throw`、`breath`、`combo` だけ差し込む
+4. ブラウザで音量と連打時のうるささを確認する
+5. Act1スポット背景をCSS/Canvasで先に演出する

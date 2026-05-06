@@ -371,6 +371,11 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 画像は、Act1スポット背景トーン、NIN-JOE仮立ち絵、敵仮立ち絵の順で進める
   - 調達先候補として Kenney、OpenGameArt、Game-icons.net、Freesound、Pixabay、Sonniss GDC、itch.io、有料外注、自作録音、CSS/Canvasを整理
   - 素材導入時は `docs/asset-credits.md` に出典、ライセンス、作者、加工、商用利用可否を記録する方針
+- 素材クレジット台帳を作成
+  - `docs/asset-credits.md` を追加し、素材一覧、生成AI素材ログ、候補素材メモ、クレジット表示候補の雛形を用意
+  - ChatGPT画像生成は、方向確認、下絵、仮素材として使う方針。正式採用時は生成日、サービス、プロンプト要約、加工内容を記録する
+  - SE生成は ElevenLabs Sound Effects や SFXforge などを候補化。商用利用はサービス/プラン依存なので、生成日とプランを台帳に残す
+  - BGMはSEより後。まずBGMなしでSE、次に移動環境音、最後に通常戦闘/中ボス/ボス曲を検討する
 
 ## カード案
 
@@ -393,8 +398,7 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
 
 ## 次にやること
 
-1. `docs/asset-credits.md` の雛形を作り、素材導入時の記録形式を先に固定する
-2. SEなしでも壊れない `playSound(id)` の薄い仕組みを追加する
-3. まず `card_select`、`melee_hit`、`guard`、`throw`、`breath`、`combo` の仮SEを入れるか判断する
-4. Act1スポットごとの背景トーンを追加するか判断する
-5. Act2本体はまだ作らず、Act1の完成度を優先する
+1. SEなしでも壊れない `playSound(id)` の薄い仕組みを追加する
+2. まず `card_select`、`melee_hit`、`guard`、`throw`、`breath`、`combo` の仮SEを入れるか判断する
+3. Act1スポットごとの背景トーンを追加するか判断する
+4. Act2本体はまだ作らず、Act1の完成度を優先する

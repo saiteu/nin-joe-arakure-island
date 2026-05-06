@@ -15,7 +15,7 @@
 ## Phase 2: 必要アセットの確保
 
 - [x] 素材リストと調達方法を整理する
-- [ ] ライセンス記録用の `docs/asset-credits.md` を作る
+- [x] ライセンス記録用の `docs/asset-credits.md` を作る
 - [ ] 仮UI素材
 - [ ] 効果音
 - [ ] Act1背景トーン
