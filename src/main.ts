@@ -1,7 +1,8 @@
 import "./styles.css";
+import { actOneBattleFor, actOneClearUnlock } from "./data/actOne";
 import { starterDeck, rewardCardPool } from "./data/cards";
 import { enemies } from "./data/enemies";
-import { travelEvents, travelTexts } from "./data/travelEvents";
+import { travelEvents } from "./data/travelEvents";
 import type {
   Card,
   CardCategory,
@@ -301,7 +302,7 @@ function chooseReward(cardId: string | null): void {
 
   state.runDeck = nextDeck;
   state.rewardOptions = [];
-  state.travelText = pickTravelText();
+  state.travelText = pickTravelText(state.battleNumber);
   state.travelEvent = rollTravelEvent();
   state.travelResolved = state.travelEvent === null;
   state.travelMessage = state.travelEvent ? "道中で何かが起きた。" : "道中は静かだった。NIN-JOEは歩を止めない。";
@@ -397,7 +398,8 @@ function eventWeight(event: TravelEvent): number {
   return event.weight;
 }
 
-function pickTravelText(): string {
+function pickTravelText(completedBattleNumber: number): string {
+  const travelTexts = actOneBattleFor(completedBattleNumber).travelTexts;
   return shuffle(travelTexts)[0] ?? "NIN-JOEは次の戦場へ向かう。";
 }
 
@@ -482,12 +484,13 @@ function comboLabel(): string {
 
 function render(): void {
   const resultClass = state.status === "won" ? "is-won" : state.status === "lost" ? "is-lost" : "";
+  const currentActBattle = actOneBattleFor(state.battleNumber);
 
   app.innerHTML = `
     <main class="shell ${resultClass}">
       <section class="topbar" aria-label="Run status">
         <div>
-          <p class="eyebrow">Prototype Run</p>
+          <p class="eyebrow">Act 1 / ${currentActBattle.spot}</p>
           <h1>NIN-JOE: ARAKURE ISLAND</h1>
         </div>
         <button class="ghost-button" data-action="reset">New Run</button>
@@ -521,6 +524,10 @@ function render(): void {
           <div class="stat-row">
             <span>Block ${state.enemyBlock}</span>
             <span>${currentEnemy().role}</span>
+          </div>
+          <div class="stat-row route-note">
+            <span>Spot</span>
+            <span>${currentActBattle.routeNote}</span>
           </div>
           <div class="stat-row">
             <span>Intent</span>
@@ -656,9 +663,9 @@ function renderOverlay(): string {
         state.status === "won"
           ? `
             <div class="result-unlock">
-              <span>次の道</span>
-              <strong>城門への石段</strong>
-              <small>SHOGUNの本丸へ続く道が開いた。</small>
+              <span>${actOneClearUnlock.label}</span>
+              <strong>${actOneClearUnlock.destination}</strong>
+              <small>${actOneClearUnlock.description}</small>
             </div>
           `
           : ""
@@ -670,6 +677,7 @@ function renderOverlay(): string {
 
 function renderTravelPanel(): string {
   const progressText = `戦闘 ${state.battleNumber} / ${enemies.length} を突破`;
+  const nextActBattle = actOneBattleFor(state.battleNumber + 1);
   const eventMarkup =
     state.travelEvent && !state.travelResolved
       ? `
@@ -693,6 +701,7 @@ function renderTravelPanel(): string {
     <aside class="travel-panel" aria-live="polite">
       <p class="eyebrow">Travel</p>
       <h2>次のスポットへ移動中...</h2>
+      <p class="travel-destination">目的地: <strong>${nextActBattle.spot}</strong></p>
       <p>${state.travelText}</p>
       <div class="travel-stats">
         <span>${progressText}</span>

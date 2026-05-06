@@ -144,6 +144,16 @@ h2 {
   font-size: 0.92rem;
 }
 
+.route-note {
+  align-items: flex-start;
+  color: #b8cfa9;
+  font-size: 0.84rem;
+}
+
+.route-note span:last-child {
+  text-align: right;
+}
+
 .versus {
   display: grid;
   min-width: 84px;
@@ -420,6 +430,14 @@ h2 {
 
 .travel-panel {
   width: min(680px, calc(100vw - 48px));
+}
+
+.travel-destination {
+  color: #d8ccba;
+}
+
+.travel-destination strong {
+  color: #f5efe7;
 }
 
 .result-unlock {

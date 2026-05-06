@@ -1,11 +1,5 @@
 import type { TravelEvent } from "../game/types";
 
-export const travelTexts = [
-  "遠くにSHOGUNの城影が見える。NIN-JOEは拳を握り、ぬかるんだ道を進む。",
-  "竹林の奥で風が鳴る。黒帯が揺れ、次の戦場の気配が近づく。",
-  "荒くれ島の山道は静かすぎる。静けさの奥で、誰かが助けを待っている。"
-];
-
 export const travelEvents: TravelEvent[] = [
   {
     id: "old-teahouse",
