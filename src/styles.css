@@ -103,9 +103,10 @@ h2 {
 
 .combatant {
   display: grid;
-  min-height: 190px;
+  min-height: 300px;
   padding: 18px;
   align-content: space-between;
+  gap: 14px;
 }
 
 .combatant strong {
@@ -116,6 +117,168 @@ h2 {
   background:
     linear-gradient(135deg, rgba(118, 38, 42, 0.2), transparent),
     rgba(22, 24, 21, 0.74);
+}
+
+.fighter {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  min-height: 140px;
+}
+
+.fighter-stage {
+  position: relative;
+  display: grid;
+  width: min(180px, 100%);
+  height: 112px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(245, 239, 231, 0.12);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(245, 239, 231, 0.08), transparent 46%),
+    rgba(0, 0, 0, 0.18);
+}
+
+.fighter-stage span {
+  position: absolute;
+  display: block;
+}
+
+.fighter-shadow {
+  bottom: 12px;
+  width: 96px;
+  height: 13px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.36);
+}
+
+.fighter-body {
+  bottom: 24px;
+  width: 46px;
+  height: 62px;
+  border: 2px solid rgba(245, 239, 231, 0.24);
+  border-radius: 16px 16px 10px 10px;
+  background: linear-gradient(180deg, #e8ddc9, #9a846b);
+  transform: skewX(-6deg);
+}
+
+.fighter-head {
+  bottom: 84px;
+  width: 32px;
+  height: 28px;
+  border-radius: 999px 999px 12px 12px;
+  background: #d7b089;
+}
+
+.fighter-belt {
+  bottom: 51px;
+  width: 56px;
+  height: 7px;
+  border-radius: 999px;
+  background: #111615;
+}
+
+.fighter-arm {
+  bottom: 53px;
+  width: 52px;
+  height: 10px;
+  border-radius: 999px;
+  background: #d8ccba;
+}
+
+.arm-front {
+  transform: translateX(36px) rotate(-18deg);
+}
+
+.arm-back {
+  transform: translateX(-34px) rotate(22deg);
+  opacity: 0.78;
+}
+
+.enemy-figure .fighter-body {
+  background: linear-gradient(180deg, #c5544e, #5a2327);
+}
+
+.enemy-figure .fighter-head {
+  background: #b78368;
+}
+
+.enemy-figure .fighter-belt {
+  background: #2b1416;
+}
+
+.enemy-figure .fighter-arm {
+  background: #caa083;
+}
+
+.ninja-mabushi .fighter-body {
+  background: linear-gradient(180deg, #7b86b8, #25283d);
+}
+
+.yokai-kobushi .fighter-body {
+  width: 62px;
+  background: linear-gradient(180deg, #94b66e, #334226);
+}
+
+.oni-banchou .fighter-body {
+  width: 64px;
+  height: 72px;
+  background: linear-gradient(180deg, #d45d53, #5b171c);
+}
+
+.shogun .fighter-stage,
+.shogun- .fighter-stage {
+  border-color: rgba(240, 193, 95, 0.28);
+  background:
+    linear-gradient(180deg, rgba(240, 193, 95, 0.08), transparent 50%),
+    rgba(0, 0, 0, 0.24);
+}
+
+.shogun .fighter-body,
+.shogun- .fighter-body {
+  width: 58px;
+  background: linear-gradient(180deg, #2f303f, #0d0e14);
+}
+
+.fighter-caption {
+  display: grid;
+  gap: 2px;
+  text-align: center;
+}
+
+.fighter-caption strong {
+  font-size: 0.86rem;
+}
+
+.fighter-caption small {
+  color: #d8ccba;
+  font-size: 0.72rem;
+}
+
+.player-figure {
+  transform: translateX(var(--player-offset, 0));
+  transition: transform 180ms ease;
+}
+
+.enemy-figure {
+  transform: translateX(var(--enemy-offset, 0));
+  transition: transform 180ms ease;
+}
+
+.range-far {
+  --player-offset: -18px;
+  --enemy-offset: 18px;
+}
+
+.range-mid {
+  --player-offset: -8px;
+  --enemy-offset: 8px;
+}
+
+.range-close {
+  --player-offset: 10px;
+  --enemy-offset: -10px;
 }
 
 .meter {

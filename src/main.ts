@@ -525,6 +525,18 @@ function rangeLabel(range: RangeBand): string {
   return labels[range];
 }
 
+function rangeClass(range: RangeBand): string {
+  return `range-${range}`;
+}
+
+function enemyClassName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/の/g, "-")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 function stepCloser(range: RangeBand): RangeBand {
   if (range === "far") {
     return "mid";
@@ -586,12 +598,13 @@ function render(): void {
         <button class="ghost-button" data-action="reset">New Run</button>
       </section>
 
-      <section class="battlefield" aria-label="Battlefield">
+      <section class="battlefield ${rangeClass(state.range)}" aria-label="Battlefield">
         <article class="combatant player">
           <div class="combatant-header">
             <span>NIN-JOE</span>
             <strong>${state.playerHp}/${state.playerMaxHp}</strong>
           </div>
+          ${renderFighterFigure("player", "NIN-JOE", "人情黒帯")}
           <div class="meter"><span style="width: ${hpPercent(state.playerHp, state.playerMaxHp)}"></span></div>
           <div class="stat-row">
             <span>Block ${state.playerBlock}</span>
@@ -610,6 +623,7 @@ function render(): void {
             <span>${state.enemyName}</span>
             <strong>${state.enemyHp}/${state.enemyMaxHp}</strong>
           </div>
+          ${renderFighterFigure("enemy", state.enemyName, currentEnemy().role)}
           <div class="meter enemy-meter"><span style="width: ${hpPercent(state.enemyHp, state.enemyMaxHp)}"></span></div>
           <div class="stat-row">
             <span>Block ${state.enemyBlock}</span>
@@ -671,6 +685,26 @@ function render(): void {
   app.querySelectorAll<HTMLButtonElement>("[data-travel-choice-id]").forEach((button) => {
     button.addEventListener("click", () => chooseTravelOption(button.dataset.travelChoiceId ?? ""));
   });
+}
+
+function renderFighterFigure(side: "player" | "enemy", name: string, label: string): string {
+  const figureClass = side === "enemy" ? `fighter enemy-figure ${enemyClassName(name)}` : "fighter player-figure";
+  return `
+    <div class="${figureClass}" aria-label="${name}">
+      <div class="fighter-stage">
+        <span class="fighter-shadow"></span>
+        <span class="fighter-body"></span>
+        <span class="fighter-head"></span>
+        <span class="fighter-belt"></span>
+        <span class="fighter-arm arm-front"></span>
+        <span class="fighter-arm arm-back"></span>
+      </div>
+      <div class="fighter-caption">
+        <strong>${name}</strong>
+        <small>${label}</small>
+      </div>
+    </div>
+  `;
 }
 
 function renderCard(card: Card): string {
