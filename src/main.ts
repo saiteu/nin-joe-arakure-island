@@ -11,6 +11,7 @@ import type {
   EnemyIntent,
   GameState,
   RangeBand,
+  CombatCue,
   TravelChoiceEffect,
   TravelEvent
 } from "./game/types";
@@ -80,6 +81,7 @@ function createBattle(options: {
     turn: 1,
     lastPlayedCost: null,
     comboCount: 0,
+    combatCue: null,
     log: options.log,
     status: "playing"
   };
@@ -149,6 +151,11 @@ function playCard(cardId: string): void {
   state.lastPlayedCost = card.cost;
 
   const comboPrefix = isCombo ? `コンボ${state.comboCount}。` : "";
+  let dealtDamage = 0;
+  let gainedBlock = 0;
+  let gainedSpirit = 0;
+  let brokenBlock = 0;
+  let knockedBack = false;
 
   if (card.damage) {
     if (!card.ranged) {
@@ -158,11 +165,12 @@ function playCard(cardId: string): void {
     const damage = Math.max(0, baseDamage - state.enemyBlock);
     state.enemyBlock = Math.max(0, state.enemyBlock - baseDamage);
     state.enemyHp = Math.max(0, state.enemyHp - damage);
+    dealtDamage = damage;
     const attackVerb = card.ranged ? "投げつけ" : "踏み込み";
     state.log.unshift(`${comboPrefix}${card.name}を${attackVerb}、${damage}ダメージを与えた。`);
 
     if (card.blockBreak) {
-      const brokenBlock = Math.min(state.enemyBlock, card.blockBreak);
+      brokenBlock = Math.min(state.enemyBlock, card.blockBreak);
       state.enemyBlock -= brokenBlock;
       if (brokenBlock > 0) {
         state.log.unshift(`${card.name}で敵のブロックを${brokenBlock}崩した。`);
@@ -170,6 +178,7 @@ function playCard(cardId: string): void {
     }
 
     if (card.knockback) {
+      knockedBack = true;
       knockBackEnemy();
     }
   }
@@ -177,14 +186,26 @@ function playCard(cardId: string): void {
   if (card.block) {
     const block = isCombo && card.comboBlock ? card.comboBlock : card.block;
     state.playerBlock += block;
+    gainedBlock = block;
     state.log.unshift(`${comboPrefix}${card.name}でブロックを${block}得た。`);
   }
 
   if (card.spiritGain) {
     const spiritGain = isCombo && card.comboSpiritGain ? card.comboSpiritGain : card.spiritGain;
     state.spirit = Math.min(state.maxSpirit, state.spirit + spiritGain);
+    gainedSpirit = spiritGain;
     state.log.unshift(`${comboPrefix}${card.name}で胆力を${spiritGain}回復した。`);
   }
+
+  state.combatCue = createCombatCue({
+    card,
+    isCombo,
+    dealtDamage,
+    gainedBlock,
+    gainedSpirit,
+    brokenBlock,
+    knockedBack
+  });
 
   state.hand.splice(cardIndex, 1);
   state.discardPile.push(card);
@@ -246,6 +267,7 @@ function endTurn(): void {
   state.playerBlock = 0;
   state.lastPlayedCost = null;
   state.comboCount = 0;
+  state.combatCue = null;
   state.enemyIntent = pickEnemyIntent(state.enemyPattern, state.turn);
   drawCards(state, 5);
   state.log.unshift(`ターン${state.turn}開始。`);
@@ -584,6 +606,65 @@ function comboLabel(): string {
   return "No Combo";
 }
 
+function createCombatCue(options: {
+  card: Card;
+  isCombo: boolean;
+  dealtDamage: number;
+  gainedBlock: number;
+  gainedSpirit: number;
+  brokenBlock: number;
+  knockedBack: boolean;
+}): CombatCue {
+  const kind = combatCueKind(options.card, options.knockedBack);
+  const detailParts: string[] = [];
+
+  if (options.dealtDamage > 0) {
+    detailParts.push(`${options.dealtDamage} dmg`);
+  }
+  if (options.gainedBlock > 0) {
+    detailParts.push(`Block +${options.gainedBlock}`);
+  }
+  if (options.gainedSpirit > 0) {
+    detailParts.push(`胆力 +${options.gainedSpirit}`);
+  }
+  if (options.brokenBlock > 0) {
+    detailParts.push(`崩し ${options.brokenBlock}`);
+  }
+  if (options.knockedBack) {
+    detailParts.push("ノックバック");
+  }
+
+  return {
+    kind,
+    label: options.isCombo ? `Combo ${state.comboCount}: ${options.card.name}` : options.card.name,
+    detail: detailParts.join(" / ") || "構え",
+    combo: options.isCombo
+  };
+}
+
+function combatCueKind(card: Card, knockedBack: boolean): CombatCue["kind"] {
+  if (knockedBack) {
+    return "knockback";
+  }
+  if (card.ranged) {
+    return "ranged";
+  }
+  if (card.damage) {
+    return "melee";
+  }
+  if (card.spiritGain) {
+    return "spirit";
+  }
+  return "block";
+}
+
+function combatCueClass(cue: CombatCue | null): string {
+  if (!cue) {
+    return "";
+  }
+  return `cue-${cue.kind}${cue.combo ? " cue-combo" : ""}`;
+}
+
 function render(): void {
   const resultClass = state.status === "won" ? "is-won" : state.status === "lost" ? "is-lost" : "";
   const currentActBattle = actOneBattleFor(state.battleNumber);
@@ -598,7 +679,7 @@ function render(): void {
         <button class="ghost-button" data-action="reset">New Run</button>
       </section>
 
-      <section class="battlefield ${rangeClass(state.range)}" aria-label="Battlefield">
+      <section class="battlefield ${rangeClass(state.range)} ${combatCueClass(state.combatCue)}" aria-label="Battlefield">
         <article class="combatant player">
           <div class="combatant-header">
             <span>NIN-JOE</span>
@@ -616,6 +697,7 @@ function render(): void {
         <div class="versus">
           <span>Battle ${state.battleNumber}/${enemies.length}<br>Turn ${state.turn}</span>
           <strong class="range-pill">間合い ${rangeLabel(state.range)}</strong>
+          ${renderCombatCue()}
         </div>
 
         <article class="combatant enemy">
@@ -685,6 +767,19 @@ function render(): void {
   app.querySelectorAll<HTMLButtonElement>("[data-travel-choice-id]").forEach((button) => {
     button.addEventListener("click", () => chooseTravelOption(button.dataset.travelChoiceId ?? ""));
   });
+}
+
+function renderCombatCue(): string {
+  if (!state.combatCue) {
+    return "";
+  }
+
+  return `
+    <div class="combat-cue ${state.combatCue.combo ? "is-combo" : ""}" aria-live="polite">
+      <strong>${state.combatCue.label}</strong>
+      <small>${state.combatCue.detail}</small>
+    </div>
+  `;
 }
 
 function renderFighterFigure(side: "player" | "enemy", name: string, label: string): string {

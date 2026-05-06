@@ -87,10 +87,12 @@ h2 {
 }
 
 .battlefield {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: stretch;
   gap: 16px;
+  overflow: hidden;
 }
 
 .combatant,
@@ -279,6 +281,236 @@ h2 {
 .range-close {
   --player-offset: 10px;
   --enemy-offset: -10px;
+}
+
+.battlefield::after {
+  position: absolute;
+  z-index: 2;
+  top: 46%;
+  left: 50%;
+  display: block;
+  width: 0;
+  height: 0;
+  border-radius: 999px;
+  pointer-events: none;
+  content: "";
+}
+
+.cue-melee .player-figure .fighter-stage,
+.cue-knockback .player-figure .fighter-stage {
+  animation: player-strike 360ms ease-out both;
+}
+
+.cue-ranged .player-figure .fighter-stage {
+  animation: ranged-throw 360ms ease-out both;
+}
+
+.cue-block .player-figure .fighter-stage {
+  animation: guard-brace 460ms ease-out both;
+}
+
+.cue-spirit .player-figure .fighter-stage {
+  animation: spirit-breathe 620ms ease-out both;
+}
+
+.cue-melee .enemy-figure .fighter-stage,
+.cue-ranged .enemy-figure .fighter-stage {
+  animation: enemy-hit 340ms ease-out both;
+}
+
+.cue-knockback .enemy-figure .fighter-stage {
+  animation: enemy-knockback 460ms ease-out both;
+}
+
+.cue-ranged::after {
+  width: 12px;
+  height: 12px;
+  background: #f0c15f;
+  box-shadow: 0 0 18px rgba(240, 193, 95, 0.8);
+  animation: projectile-flight 420ms ease-out both;
+}
+
+.cue-melee::after,
+.cue-knockback::after {
+  width: 74px;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, rgba(240, 193, 95, 0.95), transparent);
+  box-shadow: 0 0 16px rgba(240, 193, 95, 0.5);
+  transform: translate(-50%, -50%) rotate(-12deg);
+  animation: strike-arc 360ms ease-out both;
+}
+
+.cue-combo::before {
+  position: absolute;
+  z-index: 1;
+  top: 18px;
+  right: 22%;
+  left: 22%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #f0c15f, transparent);
+  content: "";
+  animation: combo-flash 520ms ease-out both;
+}
+
+.combat-cue {
+  display: grid;
+  min-width: 120px;
+  max-width: 180px;
+  gap: 2px;
+  padding: 8px 10px;
+  border: 1px solid rgba(245, 239, 231, 0.18);
+  border-radius: 8px;
+  color: #f5efe7;
+  background: rgba(17, 22, 21, 0.86);
+  text-align: center;
+  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.28);
+  animation: cue-pop 460ms ease-out both;
+}
+
+.combat-cue.is-combo {
+  border-color: rgba(240, 193, 95, 0.44);
+  color: #f0c15f;
+  background: rgba(40, 31, 17, 0.9);
+}
+
+.combat-cue strong {
+  overflow-wrap: anywhere;
+  font-size: 0.78rem;
+}
+
+.combat-cue small {
+  color: #d8ccba;
+  font-size: 0.7rem;
+}
+
+@keyframes player-strike {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+  42% {
+    transform: translateX(22px) scale(1.04);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes ranged-throw {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  40% {
+    transform: translateX(10px) rotate(-3deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes guard-brace {
+  0%,
+  100% {
+    box-shadow: none;
+  }
+  45% {
+    box-shadow:
+      inset 0 0 0 2px rgba(245, 239, 231, 0.2),
+      0 0 0 5px rgba(109, 177, 109, 0.16);
+  }
+}
+
+@keyframes spirit-breathe {
+  0%,
+  100% {
+    filter: none;
+    transform: scale(1);
+  }
+  48% {
+    filter: drop-shadow(0 0 14px rgba(159, 192, 143, 0.75));
+    transform: scale(1.05);
+  }
+}
+
+@keyframes enemy-hit {
+  0%,
+  100% {
+    transform: translateX(0);
+    filter: none;
+  }
+  30% {
+    transform: translateX(8px);
+    filter: brightness(1.35);
+  }
+  58% {
+    transform: translateX(-4px);
+  }
+}
+
+@keyframes enemy-knockback {
+  0% {
+    transform: translateX(0);
+  }
+  42% {
+    transform: translateX(28px) rotate(2deg);
+    filter: brightness(1.3);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes projectile-flight {
+  0% {
+    opacity: 0;
+    transform: translate(-140px, -50%) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(130px, -50%) scale(1.2);
+  }
+}
+
+@keyframes strike-arc {
+  0% {
+    opacity: 0;
+    transform: translate(-90%, -50%) rotate(-20deg) scaleX(0.2);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-8%, -50%) rotate(-6deg) scaleX(1);
+  }
+}
+
+@keyframes combo-flash {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.2);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes cue-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .meter {

@@ -2,6 +2,14 @@ export type CardType = "attack" | "block" | "skill";
 export type CardCategory = "melee" | "guard" | "knockback" | "ranged" | "spirit" | "combo" | "special";
 export type CardRarity = "starter" | "common" | "uncommon" | "rare";
 export type RangeBand = "far" | "mid" | "close";
+export type CombatCueKind = "melee" | "ranged" | "knockback" | "block" | "spirit";
+
+export type CombatCue = {
+  kind: CombatCueKind;
+  label: string;
+  detail: string;
+  combo: boolean;
+};
 
 export type Card = {
   id: string;
@@ -93,6 +101,7 @@ export type GameState = {
   turn: number;
   lastPlayedCost: number | null;
   comboCount: number;
+  combatCue: CombatCue | null;
   log: string[];
   status: "playing" | "reward" | "travel" | "won" | "lost";
 };
