@@ -715,10 +715,7 @@ function render(): void {
             <span>Spot</span>
             <span>${currentActBattle.routeNote}</span>
           </div>
-          <div class="stat-row">
-            <span>Intent</span>
-            <span>${intentLabel(state.enemyIntent)}</span>
-          </div>
+          ${renderEnemyIntent(state.enemyIntent)}
         </article>
       </section>
 
@@ -841,14 +838,60 @@ function categoryLabel(category: CardCategory): string {
 
 function intentLabel(intent: EnemyIntent): string {
   if (intent.damage > 0) {
-    return `${intent.label}: ${intent.damage} dmg${intent.ranged ? " ranged" : ""}`;
+    const attackType = intent.ranged ? "遠距離攻撃" : intent.damage >= 14 ? "大技" : "攻撃";
+    return `${attackType} ${intent.damage}`;
   }
 
-  const parts = [`${intent.label}: ${intent.block ? "block" : "wait"}`];
+  const parts = [intent.block ? `防御 ${intent.block}` : "様子見"];
   if (intent.advances) {
-    parts.push("advance");
+    parts.push("接近");
   }
   return parts.join(" + ");
+}
+
+function intentKind(intent: EnemyIntent): string {
+  if (intent.damage > 0) {
+    if (intent.ranged) {
+      return "ranged";
+    }
+    if (intent.damage >= 14) {
+      return "heavy";
+    }
+    return "attack";
+  }
+  if (intent.block && intent.advances) {
+    return "guard-advance";
+  }
+  if (intent.block) {
+    return "guard";
+  }
+  if (intent.advances) {
+    return "advance";
+  }
+  return "wait";
+}
+
+function intentTypeLabel(intent: EnemyIntent): string {
+  const labels: Record<string, string> = {
+    attack: "攻撃",
+    ranged: "遠距離",
+    heavy: "大技",
+    "guard-advance": "防御接近",
+    guard: "防御",
+    advance: "接近",
+    wait: "待機"
+  };
+  return labels[intentKind(intent)];
+}
+
+function renderEnemyIntent(intent: EnemyIntent): string {
+  return `
+    <div class="intent-card intent-${intentKind(intent)}">
+      <span class="intent-type">${intentTypeLabel(intent)}</span>
+      <strong>${intentLabel(intent)}</strong>
+      <small>${intent.label}</small>
+    </div>
+  `;
 }
 
 function renderOverlay(): string {

@@ -549,6 +549,84 @@ h2 {
   text-align: right;
 }
 
+.intent-card {
+  display: grid;
+  gap: 3px;
+  padding: 10px 12px;
+  border: 1px solid rgba(245, 239, 231, 0.14);
+  border-radius: 8px;
+  background: rgba(245, 239, 231, 0.07);
+}
+
+.intent-type {
+  width: fit-content;
+  padding: 2px 7px;
+  border-radius: 999px;
+  color: #161815;
+  background: #d8ccba;
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.intent-card strong {
+  color: #f5efe7;
+  font-size: 0.98rem;
+}
+
+.intent-card small {
+  color: #d8ccba;
+  font-size: 0.76rem;
+}
+
+.intent-attack {
+  border-color: rgba(197, 84, 78, 0.32);
+  background: rgba(197, 84, 78, 0.12);
+}
+
+.intent-attack .intent-type {
+  background: #e1a45d;
+}
+
+.intent-ranged {
+  border-color: rgba(123, 134, 184, 0.38);
+  background: rgba(123, 134, 184, 0.14);
+}
+
+.intent-ranged .intent-type {
+  background: #aab7e8;
+}
+
+.intent-heavy {
+  border-color: rgba(240, 193, 95, 0.46);
+  background: rgba(118, 38, 42, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(240, 193, 95, 0.12);
+}
+
+.intent-heavy .intent-type {
+  background: #f0c15f;
+}
+
+.intent-guard,
+.intent-guard-advance {
+  border-color: rgba(109, 177, 109, 0.32);
+  background: rgba(109, 177, 109, 0.11);
+}
+
+.intent-guard .intent-type,
+.intent-guard-advance .intent-type {
+  background: #9fc08f;
+}
+
+.intent-advance,
+.intent-wait {
+  border-color: rgba(245, 239, 231, 0.16);
+}
+
+.intent-advance .intent-type,
+.intent-wait .intent-type {
+  background: #d8ccba;
+}
+
 .versus {
   display: grid;
   min-width: 84px;
