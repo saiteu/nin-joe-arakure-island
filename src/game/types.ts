@@ -21,6 +21,7 @@ export type Card = {
   ranged?: boolean;
   knockback?: boolean;
   wild?: boolean;
+  upgraded?: boolean;
 };
 
 export type EnemyIntent = {
@@ -43,6 +44,8 @@ export type TravelChoiceEffect =
   | { type: "heal"; base: number; ninjoMultiplier: number }
   | { type: "ninjo"; amount: number }
   | { type: "hpForNinjo"; hpCost: number; ninjoGain: number }
+  | { type: "upgradeCard" }
+  | { type: "hpForNextBattleSpirit"; hpCost: number; spiritBoost: number }
   | { type: "none" };
 
 export type TravelEventChoice = {
@@ -68,6 +71,7 @@ export type GameState = {
   ninjo: number;
   spirit: number;
   maxSpirit: number;
+  nextBattleSpiritBoost: number;
   battleNumber: number;
   enemyName: string;
   enemyHp: number;

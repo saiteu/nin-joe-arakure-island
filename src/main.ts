@@ -34,21 +34,31 @@ function newGame(): GameState {
     battleNumber: 1,
     playerHp: 42,
     ninjo: 1,
+    spiritBoost: 0,
     log: ["NIN-JOEはARAKURE ISLANDへ踏み込んだ。全てはSHOGUNの罠だった。"]
   });
 }
 
-function createBattle(options: { runDeck: Card[]; battleNumber: number; playerHp: number; ninjo: number; log: string[] }): GameState {
+function createBattle(options: {
+  runDeck: Card[];
+  battleNumber: number;
+  playerHp: number;
+  ninjo: number;
+  spiritBoost: number;
+  log: string[];
+}): GameState {
   const enemy = enemies[options.battleNumber - 1] ?? enemies[0];
   const enemyPattern = pickEnemyPattern(enemy);
   const deck = shuffle([...options.runDeck]);
+  const maxSpirit = 3 + options.spiritBoost;
   const initialState: GameState = {
     playerHp: options.playerHp,
     playerMaxHp: 42,
     playerBlock: 0,
     ninjo: options.ninjo,
-    spirit: 3,
-    maxSpirit: 3,
+    spirit: maxSpirit,
+    maxSpirit,
+    nextBattleSpiritBoost: 0,
     battleNumber: options.battleNumber,
     enemyName: enemy.name,
     enemyHp: enemy.hp,
@@ -318,12 +328,17 @@ function proceedFromTravel(): void {
 
   const nextBattleNumber = state.battleNumber + 1;
   const travelLog = state.travelMessage;
+  const spiritBoost = state.nextBattleSpiritBoost;
   state = createBattle({
     runDeck: state.runDeck,
     battleNumber: nextBattleNumber,
     playerHp: state.playerHp,
     ninjo: state.ninjo,
-    log: [travelLog, `戦闘${nextBattleNumber}開始。`]
+    spiritBoost,
+    log: [
+      travelLog,
+      spiritBoost > 0 ? `荒行の余熱。次の戦闘だけ胆力が${3 + spiritBoost}になった。` : `戦闘${nextBattleNumber}開始。`
+    ]
   });
   render();
 }
@@ -365,7 +380,82 @@ function applyTravelEffect(effect: TravelChoiceEffect, label: string): string {
     return `${label}。HPを${effect.hpCost}失い、人情が${state.ninjo - previousNinjo}上がった。`;
   }
 
+  if (effect.type === "upgradeCard") {
+    const upgradedCard = upgradeRandomCard();
+    if (!upgradedCard) {
+      return `${label}。師匠の幻は静かに消えた。鍛えられるカードはなかった。`;
+    }
+    return `${label}。${upgradedCard.name}を鍛えた。`;
+  }
+
+  if (effect.type === "hpForNextBattleSpirit") {
+    state.playerHp = Math.max(1, state.playerHp - effect.hpCost);
+    state.nextBattleSpiritBoost = Math.max(state.nextBattleSpiritBoost, effect.spiritBoost);
+    return `${label}。HPを${effect.hpCost}失い、次の戦闘だけ胆力が${3 + state.nextBattleSpiritBoost}になる。`;
+  }
+
   return `${label}。NIN-JOEは先へ進んだ。`;
+}
+
+function upgradeRandomCard(): Card | null {
+  const upgradeableCards = state.runDeck.filter((card) => isUpgradeableCard(card));
+  const card = shuffle(upgradeableCards)[0];
+  if (!card) {
+    return null;
+  }
+
+  card.upgraded = true;
+  card.name = `${card.name}+`;
+
+  if (card.damage) {
+    card.damage += 2;
+    if (card.comboDamage) {
+      card.comboDamage += 2;
+    }
+  }
+
+  if (card.block) {
+    card.block += 2;
+    if (card.comboBlock) {
+      card.comboBlock += 2;
+    }
+  }
+
+  card.description = upgradedDescription(card);
+  return card;
+}
+
+function isUpgradeableCard(card: Card): boolean {
+  return !card.upgraded && (Boolean(card.damage) || Boolean(card.block));
+}
+
+function upgradedDescription(card: Card): string {
+  const parts: string[] = [];
+  if (card.blockBreak) {
+    parts.push(`敵ブロックを${card.blockBreak}崩す`);
+  }
+  if (card.damage) {
+    const rangeNote = card.ranged ? "間合いを変えない" : "";
+    const damageText = card.comboDamage
+      ? `敵に${card.damage}ダメージ。コンボ中なら${card.comboDamage}ダメージ`
+      : `敵に${card.damage}ダメージ`;
+    parts.push(damageText);
+    if (card.knockback) {
+      parts.push("ノックバック");
+    }
+    if (rangeNote) {
+      parts.push(rangeNote);
+    }
+  }
+  if (card.block) {
+    const blockText = card.comboBlock ? `ブロックを${card.block}得る。コンボ中なら${card.comboBlock}` : `ブロックを${card.block}得る`;
+    parts.push(blockText);
+  }
+  if (card.spiritGain) {
+    const spiritText = card.comboSpiritGain ? `胆力を${card.spiritGain}回復。コンボ中なら${card.comboSpiritGain}回復` : `胆力を${card.spiritGain}回復`;
+    parts.push(spiritText);
+  }
+  return `${parts.join("。")}。`;
 }
 
 function rollTravelEvent(): TravelEvent | null {
@@ -408,7 +498,7 @@ function clampNinjo(value: number): number {
 }
 
 function isTravelChoiceDisabled(effect: TravelChoiceEffect): boolean {
-  return effect.type === "hpForNinjo" && state.playerHp <= effect.hpCost;
+  return (effect.type === "hpForNinjo" || effect.type === "hpForNextBattleSpirit") && state.playerHp <= effect.hpCost;
 }
 
 function hpPercent(current: number, max: number): string {

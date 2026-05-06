@@ -54,5 +54,59 @@ export const travelEvents: TravelEvent[] = [
         effect: { type: "none" }
       }
     ]
+  },
+  {
+    id: "masters-vision",
+    title: "師匠の幻影",
+    body: "霧の中に、亡き師匠の影が立つ。言葉はない。ただ一度だけ、型の乱れを正す掌が伸びた。",
+    weight: 2,
+    tags: ["upgrade", "ninjo"],
+    choices: [
+      {
+        id: "review-kata",
+        label: "型を見直す",
+        effectLabel: "カード1枚を鍛える",
+        effect: { type: "upgradeCard" }
+      },
+      {
+        id: "bow-to-master",
+        label: "深く礼をする",
+        effectLabel: "人情 +1",
+        effect: { type: "ninjo", amount: 1 }
+      },
+      {
+        id: "leave-vision",
+        label: "幻を振り切る",
+        effectLabel: "何も起きない",
+        effect: { type: "none" }
+      }
+    ]
+  },
+  {
+    id: "ascetic-steps",
+    title: "荒行の石段",
+    body: "苔むした石段が、夜の山腹へ続いている。一段ごとに膝が軋むが、登り切れば腹の底に火が灯る。",
+    weight: 2,
+    tags: ["risk", "spirit"],
+    choices: [
+      {
+        id: "climb-steps",
+        label: "石段を駆け上がる",
+        effectLabel: "HP -4 / 次の戦闘だけ胆力 +1",
+        effect: { type: "hpForNextBattleSpirit", hpCost: 4, spiritBoost: 1 }
+      },
+      {
+        id: "steady-breath",
+        label: "息を整える",
+        effectLabel: "人情 +1",
+        effect: { type: "ninjo", amount: 1 }
+      },
+      {
+        id: "avoid-steps",
+        label: "迂回する",
+        effectLabel: "何も起きない",
+        effect: { type: "none" }
+      }
+    ]
   }
 ];
