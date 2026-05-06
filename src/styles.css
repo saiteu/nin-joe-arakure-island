@@ -422,6 +422,31 @@ h2 {
   width: min(680px, calc(100vw - 48px));
 }
 
+.result-unlock {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid rgba(240, 193, 95, 0.28);
+  border-radius: 8px;
+  background: rgba(240, 193, 95, 0.1);
+}
+
+.result-unlock span {
+  color: #f0c15f;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.result-unlock strong {
+  color: #f5efe7;
+}
+
+.result-unlock small {
+  color: #d8ccba;
+  line-height: 1.5;
+}
+
 .travel-stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

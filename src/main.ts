@@ -652,6 +652,17 @@ function renderOverlay(): string {
     <aside class="result-panel" aria-live="polite">
       <h2>${title}</h2>
       <p>${message}</p>
+      ${
+        state.status === "won"
+          ? `
+            <div class="result-unlock">
+              <span>次の道</span>
+              <strong>城門への石段</strong>
+              <small>SHOGUNの本丸へ続く道が開いた。</small>
+            </div>
+          `
+          : ""
+      }
       <button class="primary-button" data-action="reset">New Run</button>
     </aside>
   `;
