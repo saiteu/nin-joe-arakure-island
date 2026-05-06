@@ -382,6 +382,12 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 音ファイルが未配置でも、再生失敗したSE IDは以後スキップし、ゲーム進行を止めない
   - 予約済みSE ID: `card_select`, `melee_hit`, `kick_heavy`, `guard`, `throw`, `block_break`, `breath`, `combo`, `enemy_attack`, `knockback`, `reward`, `travel`, `event`, `act_clear`, `defeat`
   - カード使用、報酬、移動、道中イベント、敵攻撃、勝利/敗北に薄くSEフックを入れた
+- 生成SE依頼リストを作成
+  - 詳細は `docs/se-generation-brief.md`
+  - まず欲しい優先度Aは `card_select`, `melee_hit`, `guard`, `throw`, `breath`, `combo` の6音
+  - 次点で `kick_heavy`, `block_break`, `knockback`, `enemy_attack`, `reward`, `event`
+  - 後回しで `travel`, `act_clear`, `defeat`
+  - 各SEの秒数、用途、方向、英語生成プロンプト、NG条件を整理
 
 ## カード案
 
@@ -404,7 +410,7 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
 
 ## 次にやること
 
-1. まず `card_select`, `melee_hit`, `guard`, `throw`, `breath`, `combo` の仮SEを入れるか判断する
-2. 仮SEを入れる場合、`docs/asset-credits.md` に出典/生成条件を記録する
+1. `docs/se-generation-brief.md` をもとに、優先度Aの生成SEを用意する
+2. SEを受け取ったら `public/assets/audio/se/` に配置し、`docs/asset-credits.md` に出典/生成条件を記録する
 3. Act1スポットごとの背景トーンを追加するか判断する
 4. Act2本体はまだ作らず、Act1の完成度を優先する

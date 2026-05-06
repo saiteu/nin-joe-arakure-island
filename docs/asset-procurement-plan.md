@@ -77,6 +77,8 @@ Act1の完成度を上げるための素材計画。今すぐ正式素材を全�
 
 ## SEリスト
 
+生成する場合の具体的な発注リストは `docs/se-generation-brief.md` にまとめる。
+
 | ID案 | 用途 | 音の方向 |
 | --- | --- | --- |
 | `card_select` | カードを押す | 軽い紙/札の音 |
@@ -278,7 +280,7 @@ public/
 
 ## 次の実装候補
 
-1. まず `card_select`、`melee_hit`、`guard`、`throw`、`breath`、`combo` の仮SEを入れるか判断する
+1. `docs/se-generation-brief.md` をもとに、まず優先度Aの6音を用意する
 2. 仮SEを入れる場合、`docs/asset-credits.md` に出典/生成条件を記録する
 3. ブラウザで音量と連打時のうるささを確認する
 4. Act1スポット背景をCSS/Canvasで先に演出する
