@@ -15,7 +15,21 @@
 
 | ファイル | 用途 | 作者/サービス | 配布元URL | ライセンス | 表記要否 | 加工 | 使用可否メモ |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| なし | まだ素材未導入 | - | - | - | - | - | - |
+| `public/assets/audio/se/card_select.wav` | カード押下、軽いUI選択 | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/melee_hit.wav` | 近接攻撃 | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/kick_heavy.wav` | 重め攻撃 | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/guard.wav` | ガード/受け | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/throw.wav` | 投擲 | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/block_break.wav` | 敵ブロック崩し | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。拡張子なしファイルを `.wav` へリネーム |
+| `public/assets/audio/se/breath.wav` | 呼吸/胆力回復 | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/combo.wav` | コンボ成立 | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/enemy_attack.wav` | 敵攻撃 | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/knockback.wav` | ノックバック | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/reward.wav` | 報酬取得 | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/travel.wav` | 移動開始/次戦へ | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/event.wav` | 道中イベント | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/act_clear.wav` | Act1 Clear | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
+| `public/assets/audio/se/defeat.wav` | 敗北 | ユーザー作成 / 使用ツール未確認 | - | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。使用ツール確認待ち |
 
 ## 生成AI素材ログ
 

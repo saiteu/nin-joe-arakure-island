@@ -18,21 +18,21 @@ export type SoundId =
   | "defeat";
 
 const soundFiles: Record<SoundId, string> = {
-  card_select: "/assets/audio/se/card_select.mp3",
-  melee_hit: "/assets/audio/se/melee_hit.mp3",
-  kick_heavy: "/assets/audio/se/kick_heavy.mp3",
-  guard: "/assets/audio/se/guard.mp3",
-  throw: "/assets/audio/se/throw.mp3",
-  block_break: "/assets/audio/se/block_break.mp3",
-  breath: "/assets/audio/se/breath.mp3",
-  combo: "/assets/audio/se/combo.mp3",
-  enemy_attack: "/assets/audio/se/enemy_attack.mp3",
-  knockback: "/assets/audio/se/knockback.mp3",
-  reward: "/assets/audio/se/reward.mp3",
-  travel: "/assets/audio/se/travel.mp3",
-  event: "/assets/audio/se/event.mp3",
-  act_clear: "/assets/audio/se/act_clear.mp3",
-  defeat: "/assets/audio/se/defeat.mp3"
+  card_select: "/assets/audio/se/card_select.wav",
+  melee_hit: "/assets/audio/se/melee_hit.wav",
+  kick_heavy: "/assets/audio/se/kick_heavy.wav",
+  guard: "/assets/audio/se/guard.wav",
+  throw: "/assets/audio/se/throw.wav",
+  block_break: "/assets/audio/se/block_break.wav",
+  breath: "/assets/audio/se/breath.wav",
+  combo: "/assets/audio/se/combo.wav",
+  enemy_attack: "/assets/audio/se/enemy_attack.wav",
+  knockback: "/assets/audio/se/knockback.wav",
+  reward: "/assets/audio/se/reward.wav",
+  travel: "/assets/audio/se/travel.wav",
+  event: "/assets/audio/se/event.wav",
+  act_clear: "/assets/audio/se/act_clear.wav",
+  defeat: "/assets/audio/se/defeat.wav"
 };
 
 const unavailableSounds = new Set<SoundId>();
