@@ -564,6 +564,10 @@ function rangeClass(range: RangeBand): string {
   return `range-${range}`;
 }
 
+function spotClass(battleNumber: number): string {
+  return `spot-${battleNumber}`;
+}
+
 function enemyClassName(name: string): string {
   return name
     .toLowerCase()
@@ -692,7 +696,7 @@ function render(): void {
         <button class="ghost-button" data-action="reset">New Run</button>
       </section>
 
-      <section class="battlefield ${rangeClass(state.range)} ${combatCueClass(state.combatCue)}" aria-label="Battlefield">
+      <section class="battlefield ${spotClass(state.battleNumber)} ${rangeClass(state.range)} ${combatCueClass(state.combatCue)}" aria-label="Battlefield">
         <article class="combatant player">
           <div class="combatant-header">
             <span>NIN-JOE</span>

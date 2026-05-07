@@ -93,6 +93,88 @@ h2 {
   align-items: stretch;
   gap: 16px;
   overflow: hidden;
+  border: 1px solid rgba(245, 239, 231, 0.1);
+  border-radius: 8px;
+  background:
+    var(--spot-mark, linear-gradient(90deg, transparent, transparent)),
+    var(--spot-pattern, linear-gradient(90deg, transparent, transparent)),
+    radial-gradient(circle at 50% 22%, rgba(245, 239, 231, 0.1), transparent 26rem),
+    linear-gradient(180deg, var(--spot-sky, #24302a), var(--spot-ground, #141813));
+  box-shadow:
+    inset 0 -42px 0 rgba(0, 0, 0, 0.12),
+    0 22px 80px rgba(0, 0, 0, 0.2);
+}
+
+.battlefield > * {
+  position: relative;
+  z-index: 1;
+}
+
+.battlefield::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(180deg, transparent 0 58%, rgba(0, 0, 0, 0.2) 58% 100%),
+    radial-gradient(ellipse at 50% 84%, rgba(0, 0, 0, 0.24), transparent 30rem);
+  opacity: 0.9;
+}
+
+.spot-1 {
+  --spot-sky: #26352f;
+  --spot-ground: #313125;
+  --spot-pattern:
+    linear-gradient(90deg, transparent 0 18%, rgba(214, 76, 64, 0.2) 18% 20%, transparent 20% 80%, rgba(214, 76, 64, 0.2) 80% 82%, transparent 82%),
+    linear-gradient(180deg, transparent 0 28%, rgba(214, 76, 64, 0.22) 28% 33%, transparent 33%);
+  --spot-mark:
+    radial-gradient(ellipse at 18% 88%, rgba(208, 186, 132, 0.3), transparent 18rem),
+    radial-gradient(circle at 78% 18%, rgba(219, 181, 89, 0.16), transparent 16rem);
+}
+
+.spot-2 {
+  --spot-sky: #1c372e;
+  --spot-ground: #122118;
+  --spot-pattern:
+    repeating-linear-gradient(102deg, rgba(119, 173, 102, 0.26) 0 3px, transparent 3px 48px),
+    repeating-linear-gradient(78deg, rgba(184, 214, 127, 0.16) 0 2px, transparent 2px 58px);
+  --spot-mark:
+    radial-gradient(circle at 66% 18%, rgba(226, 214, 139, 0.16), transparent 18rem),
+    linear-gradient(90deg, rgba(14, 28, 23, 0.44), transparent 42%, rgba(14, 28, 23, 0.36));
+}
+
+.spot-3 {
+  --spot-sky: #273329;
+  --spot-ground: #24271e;
+  --spot-pattern:
+    repeating-linear-gradient(0deg, transparent 0 20px, rgba(210, 198, 170, 0.13) 20px 23px),
+    linear-gradient(115deg, transparent 0 45%, rgba(110, 178, 112, 0.18) 45% 48%, transparent 48%);
+  --spot-mark:
+    radial-gradient(circle at 52% 20%, rgba(128, 205, 117, 0.18), transparent 17rem),
+    radial-gradient(ellipse at 50% 88%, rgba(93, 77, 53, 0.46), transparent 20rem);
+}
+
+.spot-4 {
+  --spot-sky: #332724;
+  --spot-ground: #1f1715;
+  --spot-pattern:
+    linear-gradient(90deg, transparent 0 24%, rgba(164, 49, 47, 0.24) 24% 26%, transparent 26% 74%, rgba(164, 49, 47, 0.24) 74% 76%, transparent 76%),
+    repeating-linear-gradient(90deg, rgba(217, 80, 61, 0.13) 0 8px, transparent 8px 64px);
+  --spot-mark:
+    radial-gradient(circle at 30% 82%, rgba(230, 91, 55, 0.28), transparent 12rem),
+    radial-gradient(circle at 78% 70%, rgba(239, 176, 75, 0.2), transparent 10rem);
+}
+
+.spot-5 {
+  --spot-sky: #191a22;
+  --spot-ground: #101014;
+  --spot-pattern:
+    linear-gradient(90deg, transparent 0 29%, rgba(240, 193, 95, 0.2) 29% 30%, transparent 30% 70%, rgba(240, 193, 95, 0.2) 70% 71%, transparent 71%),
+    repeating-linear-gradient(160deg, rgba(245, 239, 231, 0.09) 0 2px, transparent 2px 36px);
+  --spot-mark:
+    radial-gradient(circle at 50% 18%, rgba(240, 193, 95, 0.13), transparent 18rem),
+    radial-gradient(ellipse at 50% 86%, rgba(0, 0, 0, 0.48), transparent 22rem);
 }
 
 .combatant,
