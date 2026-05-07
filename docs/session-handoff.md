@@ -422,7 +422,10 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - アニメーションさせやすいよう、低解像度、横向き、少ない差分から始める
   - NIN-JOE本体はカラテの構え、間合い、踏み込みを芯にする
   - 投擲、素早いステップ、影の軌跡は忍者アクション的な見やすさを借りる
-  - NIN-JOEは `idle`, `step`, `strike`, `guard`, `breath`, `throw`, `hit` を最小候補にする
+  - NIN-JOEは必要モーションを先に全て洗い出し、初期実装では優先度順に仮差分を入れる
+  - 初期実用セットは `idle`, `walk`, `attack_light`, `attack_heavy`, `throw`, `guard`, `breath`, `hit`, `evade`, `victory`, `defeat`
+  - 後続候補は `knockback_attack`, `block_break`, `combo`, `ready`, `reward`, `event`, `low_hp`, `act_clear`
+  - `walk` は最初は道中移動と戦闘中の間合い移動を兼用し、必要になったら `travel_walk` と `combat_step` に分ける
   - 敵はまず `idle`, `attack`, `hit` 程度でよい
 
 ## カード案
@@ -447,8 +450,9 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
 ## 次にやること
 
 1. NIN-JOEのドット絵プロンプト/仕様を作る
-2. NIN-JOE仮スプライトを作る、または生成用ラフを準備する
-3. ゲーム画面へNIN-JOE仮スプライトを差し込む
-4. 使用カードに応じて `strike`, `guard`, `breath`, `throw` などの仮アニメーションを切り替える
-5. その後、敵5体のドット絵方向と最小差分を決める
-6. Act2本体はまだ作らず、Act1の完成度を優先する
+2. NIN-JOEの初期実用モーション11種について、画像サイズ、色数、フレーム数、命名規則を決める
+3. NIN-JOE仮スプライトを作る、または生成用ラフを準備する
+4. ゲーム画面へNIN-JOE仮スプライトを差し込む
+5. 使用カードに応じて `attack_light`, `attack_heavy`, `guard`, `breath`, `throw` などの仮アニメーションを切り替える
+6. その後、敵5体のドット絵方向と最小差分を決める
+7. Act2本体はまだ作らず、Act1の完成度を優先する
