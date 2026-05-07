@@ -426,6 +426,11 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 初期実用セットは `idle`, `walk`, `attack_light`, `attack_heavy`, `throw`, `guard`, `breath`, `hit`, `evade`, `victory`, `defeat`
   - 後続候補は `knockback_attack`, `block_break`, `combo`, `ready`, `reward`, `event`, `low_hp`, `act_clear`
   - `walk` は最初は道中移動と戦闘中の間合い移動を兼用し、必要になったら `travel_walk` と `combat_step` に分ける
+  - 見た目は8bit風の制限パレット。NIN-JOE本体は8〜12色程度、最大16色まで
+  - PNG自体は透過PNGでよく、技術的なビット深度より見た目の色数を優先する
+  - 1フレームは64x64px、モーションごとの横並びスプライトシートを基本にする
+  - 初期は1モーション最大8フレーム。通常8〜12fps、攻撃のみ12〜15fpsまで許容
+  - 命名は `public/assets/images/ninjoe/ninjoe_<motion>.png` を基本にする。個別フレームなら `ninjoe_<motion>_000.png`
   - 敵はまず `idle`, `attack`, `hit` 程度でよい
 
 ## カード案
@@ -449,10 +454,9 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
 
 ## 次にやること
 
-1. NIN-JOEのドット絵プロンプト/仕様を作る
-2. NIN-JOEの初期実用モーション11種について、画像サイズ、色数、フレーム数、命名規則を決める
-3. NIN-JOE仮スプライトを作る、または生成用ラフを準備する
-4. ゲーム画面へNIN-JOE仮スプライトを差し込む
-5. 使用カードに応じて `attack_light`, `attack_heavy`, `guard`, `breath`, `throw` などの仮アニメーションを切り替える
-6. その後、敵5体のドット絵方向と最小差分を決める
-7. Act2本体はまだ作らず、Act1の完成度を優先する
+1. NIN-JOEのドット絵生成プロンプトを作る
+2. NIN-JOE仮スプライトを作る、または生成用ラフを準備する
+3. ゲーム画面へNIN-JOE仮スプライトを差し込む
+4. 使用カードに応じて `attack_light`, `attack_heavy`, `guard`, `breath`, `throw` などの仮アニメーションを切り替える
+5. その後、敵5体のドット絵方向と最小差分を決める
+6. Act2本体はまだ作らず、Act1の完成度を優先する
