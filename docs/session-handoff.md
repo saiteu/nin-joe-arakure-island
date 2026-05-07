@@ -395,7 +395,9 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 形式確認: 全ファイル `pcm_s16le`, 44.1kHz, mono
   - 長さ確認: `card_select` 0.041s, `melee_hit` 0.071s, `guard` 0.046s, `throw` 0.245s, `breath` 0.468s, `combo` 0.282s, `kick_heavy` 0.185s, `block_break` 0.601s, `knockback` 0.540s, `enemy_attack` 0.389s, `reward` 0.564s, `event` 0.203s, `travel` 0.709s, `act_clear` 0.045s, `defeat` 0.537s
   - ブラウザでWAV参照後にカード使用を確認。コンソールエラーなし
-  - 台帳 `docs/asset-credits.md` にユーザー作成素材として仮記録。使用ツール名は後で確認する
+  - 台帳 `docs/asset-credits.md` にユーザー作成素材として仮記録
+  - 作成ツールは `Bfxr`。URLは `https://www.bfxr.net/`
+  - あくまで間に合わせの仮SE。合わない音があれば、後でフリーSE公開サイトから調達する方針
 
 ## カード案
 
@@ -419,6 +421,6 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
 ## 次にやること
 
 1. 実プレイでSE音量と鳴り方を確認し、必要なら `src/audio.ts` の音量やSE割り当てを調整する
-2. ユーザーにSE作成ツール名を確認し、`docs/asset-credits.md` の `使用ツール未確認` を更新する
+2. 合わないSEがあれば、Bfxr再調整またはフリーSE公開サイトから差し替える
 3. Act1スポットごとの背景トーンを追加するか判断する
 4. Act2本体はまだ作らず、Act1の完成度を優先する
