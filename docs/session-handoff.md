@@ -432,6 +432,10 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 初期は1モーション最大8フレーム。通常8〜12fps、攻撃のみ12〜15fpsまで許容
   - 命名は `public/assets/images/ninjoe/ninjoe_<motion>.png` を基本にする。個別フレームなら `ninjoe_<motion>_000.png`
   - 敵はまず `idle`, `attack`, `hit` 程度でよい
+- NIN-JOEドット絵生成ブリーフを作成
+  - `docs/ninjoe-sprite-generation-brief.md`
+  - 基本プロンプト、11種のモーション別プロンプト、失敗時の修正指示を記載
+  - まず `idle` だけ生成し、見た目が固まってから他モーションへ進む方針
 
 ## カード案
 
@@ -454,8 +458,8 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
 
 ## 次にやること
 
-1. NIN-JOEのドット絵生成プロンプトを作る
-2. NIN-JOE仮スプライトを作る、または生成用ラフを準備する
+1. `docs/ninjoe-sprite-generation-brief.md` を使って、まず `idle` の仮スプライトを作る
+2. NIN-JOEの見た目が良ければ `walk`, `attack_light`, `guard` へ進む
 3. ゲーム画面へNIN-JOE仮スプライトを差し込む
 4. 使用カードに応じて `attack_light`, `attack_heavy`, `guard`, `breath`, `throw` などの仮アニメーションを切り替える
 5. その後、敵5体のドット絵方向と最小差分を決める
