@@ -453,6 +453,10 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 実装用スプライトはピクセルエディタで手付け/手直しして作る
   - ベスト案は `Aseprite`。無料で進める場合は `LibreSprite` または `Piskel`
   - 最初は `idle`, `attack_light`, `guard` の3種で品質基準を作る
+- Aseprite作業手順を作成
+  - `docs/aseprite-ninjoe-workflow.md`
+  - 初めて触る前提で、64x64新規作成、レイヤー構成、ガイド、`idle`, `attack_light`, `guard`、書き出し設定を整理
+  - 制作元は `assets-source/aseprite/ninjoe/`、ゲーム用PNGは `public/assets/images/ninjoe/` に置く方針
 
 ## カード案
 
@@ -475,7 +479,7 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
 
 ## 次にやること
 
-1. ピクセルエディタでNIN-JOE `idle` を正式寄りに手直しする
+1. `docs/aseprite-ninjoe-workflow.md` を見ながら、AsepriteでNIN-JOE `idle` を正式寄りに手直しする
 2. `attack_light` と `guard` を同じ基準で作る
 3. ゲーム内で `idle`, `attack_light`, `guard` の切り替えを確認する
 4. 品質基準が固まったら `walk`, `attack_heavy`, `throw`, `breath`, `hit`, `evade` へ広げる

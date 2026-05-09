@@ -149,6 +149,7 @@ Act1の完成度を上げるための素材計画。今すぐ正式素材を全�
 - ベスト案は `Aseprite` で制作すること。ドット絵アニメーション、フレーム管理、スプライトシート出力が揃っている
 - 無料で進める場合は `LibreSprite` または `Piskel` を使う
 - 最初は `idle`, `attack_light`, `guard` の3種だけ手付けで品質基準を作り、その基準で残りを増やす
+- Asepriteでの具体的な手順は `docs/aseprite-ninjoe-workflow.md` にまとめる
 
 制作フロー:
 
