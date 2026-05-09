@@ -272,6 +272,8 @@ h2 {
 }
 
 .fighter-sprite {
+  --sprite-scale: 1.55;
+
   bottom: 7px;
   left: 50%;
   width: 64px;
@@ -279,14 +281,15 @@ h2 {
   margin-left: -32px;
   background-repeat: no-repeat;
   background-size: auto 64px;
+  background-position: 0 0;
   image-rendering: pixelated;
-  transform: scale(1.55);
+  transform: translateY(0) scale(var(--sprite-scale));
   transform-origin: bottom center;
 }
 
 .ninjoe-idle {
   background-image: url("/assets/images/ninjoe/ninjoe_idle.png");
-  animation: ninjoe-idle 720ms steps(4) infinite;
+  animation: ninjoe-idle 960ms ease-in-out infinite;
 }
 
 .arm-front {
@@ -497,11 +500,13 @@ h2 {
 }
 
 @keyframes ninjoe-idle {
-  from {
-    background-position: 0 0;
+  0%,
+  100% {
+    transform: translateY(0) scale(var(--sprite-scale));
   }
-  to {
-    background-position: -256px 0;
+
+  50% {
+    transform: translateY(-3px) scale(var(--sprite-scale));
   }
 }
 
