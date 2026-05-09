@@ -457,6 +457,9 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - `docs/aseprite-ninjoe-workflow.md`
   - 初めて触る前提で、64x64新規作成、レイヤー構成、ガイド、`idle`, `attack_light`, `guard`、書き出し設定を整理
   - 制作元は `assets-source/aseprite/ninjoe/`、ゲーム用PNGは `public/assets/images/ninjoe/` に置く方針
+- Aseprite制作元フォルダを作成
+  - `assets-source/aseprite/ninjoe/.gitkeep`
+  - `.aseprite` の制作元ファイルはこのフォルダに置く
 
 ## カード案
 
