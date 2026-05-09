@@ -798,15 +798,25 @@ function renderCombatCue(): string {
 
 function renderFighterFigure(side: "player" | "enemy", name: string, label: string): string {
   const figureClass = side === "enemy" ? `fighter enemy-figure ${enemyClassName(name)}` : "fighter player-figure";
-  return `
-    <div class="${figureClass}" aria-label="${name}">
-      <div class="fighter-stage">
+  const stageContent =
+    side === "player"
+      ? `
+        <span class="fighter-shadow"></span>
+        <span class="fighter-sprite ninjoe-idle"></span>
+      `
+      : `
         <span class="fighter-shadow"></span>
         <span class="fighter-body"></span>
         <span class="fighter-head"></span>
         <span class="fighter-belt"></span>
         <span class="fighter-arm arm-front"></span>
         <span class="fighter-arm arm-back"></span>
+      `;
+
+  return `
+    <div class="${figureClass}" aria-label="${name}">
+      <div class="fighter-stage">
+        ${stageContent}
       </div>
       <div class="fighter-caption">
         <strong>${name}</strong>

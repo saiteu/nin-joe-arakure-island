@@ -436,6 +436,12 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - `docs/ninjoe-sprite-generation-brief.md`
   - 基本プロンプト、11種のモーション別プロンプト、失敗時の修正指示を記載
   - まず `idle` だけ生成し、見た目が固まってから他モーションへ進む方針
+- NIN-JOE idle仮スプライトを追加
+  - `public/assets/images/ninjoe/ninjoe_idle.png`
+  - ユーザーがChatGPT画像生成で作成した白道着版を採用ベースにする
+  - プレビュー画像から4フレームを切り出し、256x64の横並び透過PNGへ仮加工
+  - プレイヤー表示だけCSSシルエットから画像スプライトへ差し替え
+  - 透過は仮加工のため、正式素材化前に再生成または手作業クリンナップする
 
 ## カード案
 
@@ -458,9 +464,8 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
 
 ## 次にやること
 
-1. `docs/ninjoe-sprite-generation-brief.md` を使って、まず `idle` の仮スプライトを作る
-2. NIN-JOEの見た目が良ければ `walk`, `attack_light`, `guard` へ進む
-3. ゲーム画面へNIN-JOE仮スプライトを差し込む
-4. 使用カードに応じて `attack_light`, `attack_heavy`, `guard`, `breath`, `throw` などの仮アニメーションを切り替える
-5. その後、敵5体のドット絵方向と最小差分を決める
-6. Act2本体はまだ作らず、Act1の完成度を優先する
+1. ブラウザでNIN-JOE idle仮スプライトのサイズ感、背景抜き、視認性を確認する
+2. 問題なければ `walk`, `attack_light`, `guard` の生成へ進む
+3. 使用カードに応じて `attack_light`, `attack_heavy`, `guard`, `breath`, `throw` などの仮アニメーションを切り替える
+4. その後、敵5体のドット絵方向と最小差分を決める
+5. Act2本体はまだ作らず、Act1の完成度を優先する

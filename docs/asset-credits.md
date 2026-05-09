@@ -30,6 +30,7 @@
 | `public/assets/audio/se/event.wav` | 道中イベント | ユーザー作成 / Bfxr | https://www.bfxr.net/ | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。Bfxrで作成。間に合わせの仮SEとして採用 |
 | `public/assets/audio/se/act_clear.wav` | Act1 Clear | ユーザー作成 / Bfxr | https://www.bfxr.net/ | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。Bfxrで作成。間に合わせの仮SEとして採用 |
 | `public/assets/audio/se/defeat.wav` | 敗北 | ユーザー作成 / Bfxr | https://www.bfxr.net/ | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。Bfxrで作成。間に合わせの仮SEとして採用 |
+| `public/assets/images/ninjoe/ninjoe_idle.png` | NIN-JOE idle仮スプライト | ユーザー作成 / ChatGPT画像生成 | - | 生成AI素材 | 不要 | プレビュー画像から4フレームを切り出し、256x64の透過PNGへ仮加工 | 仮素材。正式採用前に生成サービスの利用条件と透過品質を再確認する |
 
 ## 生成AI素材ログ
 
@@ -37,7 +38,7 @@
 
 | 生成日 | 種別 | サービス | プラン/権利メモ | プロンプト要約 | 採用ファイル | 備考 |
 | --- | --- | --- | --- | --- | --- | --- |
-| なし | - | - | - | - | - | - |
+| 2026-05-09 | キャラクター | ChatGPT画像生成 | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、低いカラテ構え、4フレームidle、8bit風ドット絵 | `public/assets/images/ninjoe/ninjoe_idle.png` | プレビュー画像から切り出した仮実装用素材 |
 
 ## 候補素材メモ
 
