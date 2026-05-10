@@ -428,7 +428,7 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - `walk` は最初は道中移動と戦闘中の間合い移動を兼用し、必要になったら `travel_walk` と `combat_step` に分ける
   - 見た目は8bit風の制限パレット。NIN-JOE本体は8〜12色程度、最大16色まで
   - PNG自体は透過PNGでよく、技術的なビット深度より見た目の色数を優先する
-  - 1フレームは64x64px、モーションごとの横並びスプライトシートを基本にする
+  - 1フレームサイズは制作しやすい解像度で固定し、モーションごとの横並びスプライトシートを基本にする
   - 初期は1モーション最大8フレーム。通常8〜12fps、攻撃のみ12〜15fpsまで許容
   - 命名は `public/assets/images/ninjoe/ninjoe_<motion>.png` を基本にする。個別フレームなら `ninjoe_<motion>_000.png`
   - 敵はまず `idle`, `attack`, `hit` 程度でよい
@@ -449,11 +449,11 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 生成画像由来の背景抜きノイズは残るため、正式素材化前にPiskel/Aseprite系で手直し、または透過前提で再生成する
 - NIN-JOE idleをAseprite手直し版へ更新
   - `public/assets/images/ninjoe/ninjoe_idle.png`
-  - 320x64、5フレームの横並びスプライト
+  - 1725x432、5フレームの横並びスプライト。1フレームは345x432
   - 足位置が以前より揃っているため、CSSの上下呼吸から `steps(5)` のスプライト再生へ変更
   - 白道着、黒帯、拳の読みやすさが改善
 - NIN-JOE生成参照用1フレームを作成
-  - `public/assets/images/ninjoe/ninjoe_idle_reference_frame1.png`
+  - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
   - 通常クロマキー抜き版から左端フレームを切り出した透過PNG
   - 次の `attack_light` / `guard` 生成では、この画像を参照にして同一キャラ化を狙う
   - 髪周りに緑フリンジが少し残るため、最終素材では手直しする
@@ -465,11 +465,16 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 最初は `idle`, `attack_light`, `guard` の3種で品質基準を作る
 - Aseprite作業手順を作成
   - `docs/aseprite-ninjoe-workflow.md`
-  - 初めて触る前提で、64x64新規作成、レイヤー構成、ガイド、`idle`, `attack_light`, `guard`、書き出し設定を整理
-  - 制作元は `assets-source/aseprite/ninjoe/`、ゲーム用PNGは `public/assets/images/ninjoe/` に置く方針
+  - 初めて触る前提で、Import Sprite Sheet、レイヤー構成、ガイド、`idle`, `attack_light`, `guard`、書き出し設定を整理
+  - 生成元/参照画像は `assets-source/generated/ninjoe/`、制作元は `assets-source/aseprite/ninjoe/`、ゲーム用PNGは `public/assets/images/ninjoe/` に置く方針
 - Aseprite制作元フォルダを作成
   - `assets-source/aseprite/ninjoe/.gitkeep`
   - `.aseprite` の制作元ファイルはこのフォルダに置く
+- NIN-JOE画像フォルダを3層に整理
+  - 元となる画像: `assets-source/generated/ninjoe/`
+  - Asepriteファイル: `assets-source/aseprite/ninjoe/`
+  - ゲームで使う画像: `public/assets/images/ninjoe/`
+  - `public/assets/images/ninjoe/` は実装で読み込む完成PNGだけを置く
 
 ## カード案
 

@@ -7,13 +7,13 @@ NIN-JOEの戦闘アニメーションをAsepriteで作るための手順。Asepr
 - ChatGPT/Grok/Stable Diffusionはキャラ案と方向確認に使う
 - 実装用スプライトはAsepriteで手付け/手直しする
 - 背景ノイズ、フレーム位置ズレ、キャラ形状ブレをなくす
-- 64x64の透過PNGとして、ゲームにそのまま差し込める素材にする
+- 生成や手直しは高解像度でもよい。ゲーム画面ではCSS側で表示サイズを調整する
 
 ## 共通仕様
 
 | 項目 | 指定 |
 | --- | --- |
-| 1フレーム | 64x64px |
+| 1フレーム | 当面は素材ごとに固定。例: `idle` は345x432px |
 | 背景 | 完全透過 |
 | 見た目 | 8bit風、最大16色程度 |
 | 拡大表示 | ゲーム側で `image-rendering: pixelated` |
@@ -21,7 +21,15 @@ NIN-JOEの戦闘アニメーションをAsepriteで作るための手順。Asepr
 | 書き出し | 横並びスプライトシートPNG |
 | 保存元 | `.aseprite` 形式で必ず残す |
 
+64x64pxは初期MVPの仮基準だったが、生成AIが小サイズ出力を安定して守れないため、固定ルールから外す。
+制作は高解像度で行い、実装時にフレーム幅/高さとCSSスケールを合わせる。
+
 ## 作業フォルダ
+
+生成元/参照画像:
+
+- `assets-source/generated/ninjoe/ninjoe_idle_generated_transparent.png`
+- `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
 
 作業ファイル:
 
@@ -36,6 +44,7 @@ NIN-JOEの戦闘アニメーションをAsepriteで作るための手順。Asepr
 - `public/assets/images/ninjoe/ninjoe_guard.png`
 
 `assets-source` はゲームから直接読み込まない制作元フォルダとして扱う。
+`public/assets/images/ninjoe/` には、実際にゲームで読み込む完成PNGだけを置く。
 
 ## 初回設定
 
@@ -48,9 +57,26 @@ NIN-JOEの戦闘アニメーションをAsepriteで作るための手順。Asepr
 
 迷ったら、最初はRGBAで作って問題ない。最終的に見た目の色数を絞ればよい。
 
+## 生成スプライトシートからAseprite化する
+
+生成AIから横並びのスプライトシートが出た場合は、Asepriteの `Import Sprite Sheet` を使う。
+
+1. 生成画像を `assets-source/generated/ninjoe/` に置く
+2. Asepriteで画像を開く
+3. `File > Import Sprite Sheet` を選ぶ
+4. `Type` は等間隔なら `Rows` または `Columns` を選ぶ
+5. フレーム数、フレーム幅、フレーム高さを指定する
+6. 取り込み後、足位置、輪郭ノイズ、背景抜きを確認する
+7. `.aseprite` として `assets-source/aseprite/ninjoe/` に保存する
+8. 完成PNGとして `public/assets/images/ninjoe/` に書き出す
+
+現行の `idle` は5フレーム、1フレーム345x432px、横並び1725x432pxで運用する。
+ゲーム側ではCSSの `width`, `height`, `background-position`, `scale` をこの値に合わせる。
+
 ## 既存PNGから下絵を作る
 
-現在の仮素材 `public/assets/images/ninjoe/ninjoe_idle.png` を下絵にして、清書用の `.aseprite` を作る手順。
+小さな仮素材を下絵にして、清書用の `.aseprite` を作る場合の手順。
+これは初期64px素材向けの旧手順。現在の基本ルートは、上のImport Sprite Sheet手順を使う。
 
 ### 1. 仮素材を開く
 
@@ -132,7 +158,7 @@ assets-source/aseprite/ninjoe/ninjoe_idle.aseprite
 
 | レイヤー | 用途 |
 | --- | --- |
-| `guide` | 地面ライン、中心線、64x64枠の目安 |
+| `guide` | 地面ライン、中心線、フレーム枠の目安 |
 | `body` | NIN-JOE本体 |
 | `effects` | 攻撃線、受けの衝撃、投擲軌跡など |
 
@@ -242,9 +268,9 @@ assets-source/aseprite/ninjoe/ninjoe_idle.aseprite
 
 | モーション | フレーム数 | 書き出しサイズ |
 | --- | ---: | --- |
-| `idle` | 4 | 256x64 |
-| `attack_light` | 5 | 320x64 |
-| `guard` | 4 | 256x64 |
+| `idle` | 5 | 1725x432 |
+| `attack_light` | 5 | モーション作成時に確定 |
+| `guard` | 4 | モーション作成時に確定 |
 
 ## CLIで書き出す場合
 
