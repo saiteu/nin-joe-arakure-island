@@ -31,6 +31,7 @@
 | `public/assets/audio/se/act_clear.wav` | Act1 Clear | ユーザー作成 / Bfxr | https://www.bfxr.net/ | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。Bfxrで作成。間に合わせの仮SEとして採用 |
 | `public/assets/audio/se/defeat.wav` | 敗北 | ユーザー作成 / Bfxr | https://www.bfxr.net/ | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。Bfxrで作成。間に合わせの仮SEとして採用 |
 | `public/assets/images/ninjoe/ninjoe_idle.png` | NIN-JOE idle仮スプライト | ユーザー作成 / ChatGPT画像生成 + Aseprite手直し | - | 生成AI素材 | 不要 | Asepriteで5フレーム、320x64の横並びスプライトへ手直し | 仮素材。正式採用前に生成サービスの利用条件を再確認する |
+| `public/assets/images/ninjoe/ninjoe_idle_reference_frame1.png` | NIN-JOE生成参照用1フレーム | ユーザー作成 / ChatGPT画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 通常クロマキー抜き版から1フレーム目を切り出し、透過PNG化 | 次の攻撃/防御生成の参照用。髪周りの緑フリンジは手直し候補 |
 
 ## 生成AI素材ログ
 
@@ -39,6 +40,7 @@
 | 生成日 | 種別 | サービス | プラン/権利メモ | プロンプト要約 | 採用ファイル | 備考 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-05-09 | キャラクター | ChatGPT画像生成 + Aseprite | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、低いカラテ構え、5フレームidle、8bit風ドット絵 | `public/assets/images/ninjoe/ninjoe_idle.png` | Asepriteで手直しした仮実装用素材 |
+| 2026-05-10 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 純緑背景の白道着NIN-JOE idleから1フレーム目を抽出 | `public/assets/images/ninjoe/ninjoe_idle_reference_frame1.png` | 次モーション生成時の参照画像 |
 
 ## 候補素材メモ
 
