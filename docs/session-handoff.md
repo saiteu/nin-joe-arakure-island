@@ -466,6 +466,11 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - ゲーム用: `public/assets/images/ninjoe/ninjoe_idle.png`
   - Asepriteからは365x399の5フレーム縦並びで出力。Codex側で1825x399の横並びに変換
   - JSONのdurationに合わせ、idleアニメーションは1500msに調整
+- NIN-JOE guard Gemini下絵を追加
+  - 元画像: `assets-source/generated/ninjoe/ninjoe_guard_gemini_green.png`
+  - 透過加工版: `assets-source/generated/ninjoe/ninjoe_guard_gemini_transparent.png`
+  - 2320x464。6ポーズ入りで6等分に割り切れないため、Asepriteで手動フレーム化する
+  - 最後のフレーム足元に星の欠片が少し残るため、Asepriteで手直し候補
 - NIN-JOE生成参照用1フレームを作成
   - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
   - 通常クロマキー抜き版から左端フレームを切り出した透過PNG

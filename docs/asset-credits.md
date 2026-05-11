@@ -39,6 +39,8 @@
 | `assets-source/generated/ninjoe/ninjoe_idle_1frame.png` | NIN-JOE生成参照用1フレーム別案 | ユーザー作成 / ChatGPT画像生成 | - | 生成AI素材 | 不要 | 高解像度の1フレーム参照画像 | 攻撃/防御生成時のキャラ参照候補。ゲームからは直接読み込まない |
 | `assets-source/generated/ninjoe/ninjoe_idle_gemini_green.png` | NIN-JOE idle Gemini生成元 | ユーザー作成 / Gemini画像生成 | - | 生成AI素材 | 不要 | 緑背景の5フレーム横並びスプライト | 加工前の元画像として保管 |
 | `assets-source/generated/ninjoe/ninjoe_idle_gemini_transparent.png` | NIN-JOE idle Gemini透過版 | ユーザー作成 / Gemini画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 緑背景、右下の星、足元ラインを透明化した2320x464 PNG | `public/assets/images/ninjoe/ninjoe_idle.png` の元 |
+| `assets-source/generated/ninjoe/ninjoe_guard_gemini_green.png` | NIN-JOE guard Gemini生成元 | ユーザー作成 / Gemini画像生成 | - | 生成AI素材 | 不要 | 緑背景のガード候補スプライト。6ポーズ入り | 加工前の元画像として保管。Asepriteで手動フレーム化する |
+| `assets-source/generated/ninjoe/ninjoe_guard_gemini_transparent.png` | NIN-JOE guard Gemini透過版 | ユーザー作成 / Gemini画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 緑背景と足元ラインを透明化した2320x464 PNG | ガードモーション制作の下絵。最後のフレームの星欠片はAsepriteで手直し候補 |
 
 ## 生成AI素材ログ
 
@@ -49,6 +51,7 @@
 | 2026-05-09 | キャラクター | ChatGPT画像生成 + Aseprite | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、低いカラテ構え、5フレームidle、8bit風ドット絵 | `assets-source/aseprite/ninjoe/ninjoe_idle.aseprite` | 旧idle制作元 |
 | 2026-05-10 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 純緑背景の白道着NIN-JOE idleから1フレーム目を抽出 | `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png` | 次モーション生成時の参照画像 |
 | 2026-05-11 | キャラクター | Gemini画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、低いカラテ構え、5フレームidle、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_idle.png` | 現行idle仮実装用素材。1825x399 |
+| 2026-05-11 | キャラクター | Gemini画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、ガード構え候補、6ポーズ、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_guard_gemini_transparent.png` | Aseprite手動フレーム化前の下絵 |
 
 ## 候補素材メモ
 
