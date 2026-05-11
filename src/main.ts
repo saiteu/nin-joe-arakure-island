@@ -798,7 +798,7 @@ function renderCombatCue(): string {
 
 function renderFighterFigure(side: "player" | "enemy", name: string, label: string): string {
   const figureClass = side === "enemy" ? `fighter enemy-figure ${enemyClassName(name)}` : "fighter player-figure";
-  const playerSpriteClass = state.combatCue?.kind === "block" ? "ninjoe-guard" : "ninjoe-idle";
+  const playerSpriteClass = playerSpriteClassForCue(state.combatCue);
   const stageContent =
     side === "player"
       ? `
@@ -825,6 +825,16 @@ function renderFighterFigure(side: "player" | "enemy", name: string, label: stri
       </div>
     </div>
   `;
+}
+
+function playerSpriteClassForCue(cue: CombatCue | null): string {
+  if (cue?.kind === "block") {
+    return "ninjoe-guard";
+  }
+  if (cue?.kind === "melee") {
+    return "ninjoe-attack-light";
+  }
+  return "ninjoe-idle";
 }
 
 function renderCard(card: Card): string {

@@ -47,6 +47,10 @@
 | `public/assets/images/ninjoe/ninjoe_guard.png` | NIN-JOE guard仮スプライト | ユーザー作成 / Gemini画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 5フレーム、1825x399の横並びスプライト。Aseprite出力をゲーム用に変換 | 防御カード使用時のガードモーションとして使用 |
 | `assets-source/generated/ninjoe/ninjoe_attack_light_gemini_green.png` | NIN-JOE light attack生成元 | ユーザー作成 / ChatGPT画像生成 | - | 生成AI素材 | 不要 | 緑背景の小攻撃候補スプライト。5ポーズ入り | 加工前の元画像として保管。Asepriteで手動フレーム化する |
 | `assets-source/generated/ninjoe/ninjoe_attack_light_gemini_transparent.png` | NIN-JOE light attack透過版 | ユーザー作成 / ChatGPT画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 緑背景を透明化した2172x724 PNG | 小攻撃モーション制作の下絵。白余白はAsepriteで切り直す |
+| `assets-source/aseprite/ninjoe/ninjoe_attack_light.aseprite` | NIN-JOE light attack制作元 | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | ChatGPT版をAsepriteで手動調整した制作元。ゲームからは直接読み込まない | 書き出しPNG/JSONとセットで保管する |
+| `assets-source/aseprite/ninjoe/ninjoe_attack_light.png` | NIN-JOE light attack Aseprite書き出しPNG | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | 367x401の5フレーム縦並びPNG | Codex側で横並びに変換してゲーム用PNGにする |
+| `assets-source/aseprite/ninjoe/ninjoe_attack_light.json` | NIN-JOE light attack Aseprite書き出しJSON | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | フレーム寸法367x401、5フレーム、各100ms | CSSアニメーション速度の参照にする |
+| `public/assets/images/ninjoe/ninjoe_attack_light.png` | NIN-JOE light attack仮スプライト | ユーザー作成 / ChatGPT画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 5フレーム、1835x401の横並びスプライト。Aseprite出力をゲーム用に変換 | 近接攻撃カード使用時の小攻撃モーションとして使用 |
 
 ## 生成AI素材ログ
 
@@ -60,6 +64,7 @@
 | 2026-05-11 | キャラクター | Gemini画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、ガード構え候補、6ポーズ、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_guard_gemini_transparent.png` | Aseprite手動フレーム化前の下絵 |
 | 2026-05-11 | キャラクター | Gemini画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、ガード構え、5フレーム、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_guard.png` | 防御カード使用時の仮実装用素材。1825x399 |
 | 2026-05-11 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、小攻撃、5ポーズ、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_attack_light_gemini_transparent.png` | Aseprite手動フレーム化前の下絵 |
+| 2026-05-11 | キャラクター | ChatGPT画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、小攻撃、5フレーム、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_attack_light.png` | 近接攻撃カード使用時の仮実装用素材。1835x401 |
 
 ## 候補素材メモ
 

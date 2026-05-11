@@ -482,6 +482,13 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 元画像: `assets-source/generated/ninjoe/ninjoe_attack_light_gemini_green.png`
   - 透過加工版: `assets-source/generated/ninjoe/ninjoe_attack_light_gemini_transparent.png`
   - 2172x724。5ポーズ入りだが上下に白余白があるため、Asepriteで365x399基準に手動フレーム化する
+- NIN-JOE light attackをAseprite手動調整版として追加
+  - 制作元: `assets-source/aseprite/ninjoe/ninjoe_attack_light.aseprite`
+  - Aseprite書き出し: `assets-source/aseprite/ninjoe/ninjoe_attack_light.png`
+  - Aseprite JSON: `assets-source/aseprite/ninjoe/ninjoe_attack_light.json`
+  - ゲーム用: `public/assets/images/ninjoe/ninjoe_attack_light.png`
+  - Asepriteからは367x401の5フレーム縦並びで出力。Codex側で1835x401の横並びに変換
+  - 近接攻撃カード使用時は `ninjoe_attack_light.png` を500msで1回再生する
 - NIN-JOE生成参照用1フレームを作成
   - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
   - 通常クロマキー抜き版から左端フレームを切り出した透過PNG

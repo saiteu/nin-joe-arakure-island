@@ -1,0 +1,58 @@
+{ "frames": {
+   "ninjoe_attack_light 0.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 367, "h": 401 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 367, "h": 401 },
+    "sourceSize": { "w": 367, "h": 401 },
+    "duration": 100
+   },
+   "ninjoe_attack_light 1.aseprite": {
+    "frame": { "x": 0, "y": 401, "w": 367, "h": 401 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 367, "h": 401 },
+    "sourceSize": { "w": 367, "h": 401 },
+    "duration": 100
+   },
+   "ninjoe_attack_light 2.aseprite": {
+    "frame": { "x": 0, "y": 802, "w": 367, "h": 401 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 367, "h": 401 },
+    "sourceSize": { "w": 367, "h": 401 },
+    "duration": 100
+   },
+   "ninjoe_attack_light 3.aseprite": {
+    "frame": { "x": 0, "y": 1203, "w": 367, "h": 401 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 367, "h": 401 },
+    "sourceSize": { "w": 367, "h": 401 },
+    "duration": 100
+   },
+   "ninjoe_attack_light 4.aseprite": {
+    "frame": { "x": 0, "y": 1604, "w": 367, "h": 401 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 367, "h": 401 },
+    "sourceSize": { "w": 367, "h": 401 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.x-dev",
+  "image": "ninjoe_attack_light.png",
+  "format": "RGBA8888",
+  "size": { "w": 367, "h": 2005 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "GUIDE Copy", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
