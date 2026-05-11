@@ -13,7 +13,7 @@ NIN-JOEの戦闘アニメーションをAsepriteで作るための手順。Asepr
 
 | 項目 | 指定 |
 | --- | --- |
-| 1フレーム | 当面は素材ごとに固定。例: `idle` は464x464px |
+| 1フレーム | 当面は素材ごとに固定。例: `idle` は365x399px |
 | 背景 | 完全透過 |
 | 見た目 | 8bit風、最大16色程度 |
 | 拡大表示 | ゲーム側で `image-rendering: pixelated` |
@@ -70,7 +70,7 @@ NIN-JOEの戦闘アニメーションをAsepriteで作るための手順。Asepr
 7. `.aseprite` として `assets-source/aseprite/ninjoe/` に保存する
 8. 完成PNGとして `public/assets/images/ninjoe/` に書き出す
 
-現行の `idle` は5フレーム、1フレーム464x464px、横並び2320x464pxで運用する。
+現行の `idle` は5フレーム、1フレーム365x399px、横並び1825x399pxで運用する。
 ゲーム側ではCSSの `width`, `height`, `background-position`, `scale` をこの値に合わせる。
 
 ## 既存PNGから下絵を作る
@@ -268,7 +268,7 @@ assets-source/aseprite/ninjoe/ninjoe_idle.aseprite
 
 | モーション | フレーム数 | 書き出しサイズ |
 | --- | ---: | --- |
-| `idle` | 5 | 2320x464 |
+| `idle` | 5 | 1825x399 |
 | `attack_light` | 5 | モーション作成時に確定 |
 | `guard` | 4 | モーション作成時に確定 |
 
@@ -277,8 +277,10 @@ assets-source/aseprite/ninjoe/ninjoe_idle.aseprite
 AsepriteのCLIが使える場合は、次の形で書き出せる。
 
 ```sh
-aseprite -b assets-source/aseprite/ninjoe/ninjoe_idle.aseprite --sheet public/assets/images/ninjoe/ninjoe_idle.png --sheet-type horizontal
+aseprite -b assets-source/aseprite/ninjoe/ninjoe_idle.aseprite --sheet assets-source/aseprite/ninjoe/ninjoe_idle.png --data assets-source/aseprite/ninjoe/ninjoe_idle.json
 ```
+
+Asepriteから縦並びで出した場合は、Codex側で横並びゲーム用PNGに変換して `public/assets/images/ninjoe/ninjoe_idle.png` に配置する。
 
 自前ビルドで実行ファイル名や場所が違う場合は、`aseprite` の部分を実際のパスに置き換える。
 

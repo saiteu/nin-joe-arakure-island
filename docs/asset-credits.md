@@ -30,8 +30,10 @@
 | `public/assets/audio/se/event.wav` | 道中イベント | ユーザー作成 / Bfxr | https://www.bfxr.net/ | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。Bfxrで作成。間に合わせの仮SEとして採用 |
 | `public/assets/audio/se/act_clear.wav` | Act1 Clear | ユーザー作成 / Bfxr | https://www.bfxr.net/ | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。Bfxrで作成。間に合わせの仮SEとして採用 |
 | `public/assets/audio/se/defeat.wav` | 敗北 | ユーザー作成 / Bfxr | https://www.bfxr.net/ | ユーザー作成素材 | 不要 | 生成/加工済みWAV | 44.1kHz mono PCM。Bfxrで作成。間に合わせの仮SEとして採用 |
-| `public/assets/images/ninjoe/ninjoe_idle.png` | NIN-JOE idle仮スプライト | ユーザー作成 / Gemini画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 5フレーム、2320x464の横並びスプライト。緑背景、星、足元ラインを加工 | 仮素材。正式採用前に生成サービスの利用条件を再確認する |
-| `assets-source/aseprite/ninjoe/ninjoe_idle.aseprite` | NIN-JOE idle旧制作元 | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | 以前のidle制作元ファイル。ゲームからは直接読み込まない | 現行ゲーム用PNGはGemini版に差し替え済み |
+| `public/assets/images/ninjoe/ninjoe_idle.png` | NIN-JOE idle仮スプライト | ユーザー作成 / Gemini画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 5フレーム、1825x399の横並びスプライト。Aseprite出力をゲーム用に変換 | 仮素材。正式採用前に生成サービスの利用条件を再確認する |
+| `assets-source/aseprite/ninjoe/ninjoe_idle.aseprite` | NIN-JOE idle制作元 | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | Gemini版をAsepriteで手動調整した制作元。ゲームからは直接読み込まない | 書き出しPNG/JSONとセットで保管する |
+| `assets-source/aseprite/ninjoe/ninjoe_idle.png` | NIN-JOE idle Aseprite書き出しPNG | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | 365x399の5フレーム縦並びPNG | Codex側で横並びに変換してゲーム用PNGにする |
+| `assets-source/aseprite/ninjoe/ninjoe_idle.json` | NIN-JOE idle Aseprite書き出しJSON | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | フレーム寸法365x399、5フレーム、各300ms | CSSアニメーション速度の参照にする |
 | `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png` | NIN-JOE生成参照用1フレーム | ユーザー作成 / ChatGPT画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 通常クロマキー抜き版から1フレーム目を切り出し、透過PNG化 | 次の攻撃/防御生成の参照用。髪周りの緑フリンジは手直し候補 |
 | `assets-source/generated/ninjoe/ninjoe_idle_generated_transparent.png` | NIN-JOE idle生成元透過シート | ユーザー作成 / ChatGPT画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 純緑背景の生成シートを通常クロマキー抜きした参照用素材 | 制作元フォルダで保管し、ゲームからは直接読み込まない |
 | `assets-source/generated/ninjoe/ninjoe_idle_1frame.png` | NIN-JOE生成参照用1フレーム別案 | ユーザー作成 / ChatGPT画像生成 | - | 生成AI素材 | 不要 | 高解像度の1フレーム参照画像 | 攻撃/防御生成時のキャラ参照候補。ゲームからは直接読み込まない |
@@ -46,7 +48,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-05-09 | キャラクター | ChatGPT画像生成 + Aseprite | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、低いカラテ構え、5フレームidle、8bit風ドット絵 | `assets-source/aseprite/ninjoe/ninjoe_idle.aseprite` | 旧idle制作元 |
 | 2026-05-10 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 純緑背景の白道着NIN-JOE idleから1フレーム目を抽出 | `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png` | 次モーション生成時の参照画像 |
-| 2026-05-11 | キャラクター | Gemini画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、低いカラテ構え、5フレームidle、単色緑背景 | `public/assets/images/ninjoe/ninjoe_idle.png` | 現行idle仮実装用素材。2320x464 |
+| 2026-05-11 | キャラクター | Gemini画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、低いカラテ構え、5フレームidle、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_idle.png` | 現行idle仮実装用素材。1825x399 |
 
 ## 候補素材メモ
 
