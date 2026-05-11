@@ -452,6 +452,13 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 1725x432、5フレームの横並びスプライト。1フレームは345x432
   - 足位置が以前より揃っているため、CSSの上下呼吸から `steps(5)` のスプライト再生へ変更
   - 白道着、黒帯、拳の読みやすさが改善
+- NIN-JOE idleをGemini生成版へ差し替え
+  - 元画像: `assets-source/generated/ninjoe/ninjoe_idle_gemini_green.png`
+  - 透過加工版: `assets-source/generated/ninjoe/ninjoe_idle_gemini_transparent.png`
+  - ゲーム用: `public/assets/images/ninjoe/ninjoe_idle.png`
+  - 2320x464、5フレームの横並びスプライト。1フレームは464x464
+  - ImageMagickで緑背景、右下の星、足元ラインを透明化
+  - CSSのフレーム幅、高さ、背景移動量を464x464 / 2320pxに更新
 - NIN-JOE生成参照用1フレームを作成
   - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
   - 通常クロマキー抜き版から左端フレームを切り出した透過PNG

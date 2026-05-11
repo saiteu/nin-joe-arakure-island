@@ -272,15 +272,15 @@ h2 {
 }
 
 .fighter-sprite {
-  --sprite-scale: 0.23;
+  --sprite-scale: 0.215;
 
   bottom: 7px;
   left: 50%;
-  width: 345px;
-  height: 432px;
-  margin-left: -172.5px;
+  width: 464px;
+  height: 464px;
+  margin-left: -232px;
   background-repeat: no-repeat;
-  background-size: auto 432px;
+  background-size: auto 464px;
   background-position: 0 0;
   image-rendering: pixelated;
   transform: translateY(0) scale(var(--sprite-scale));
@@ -505,7 +505,7 @@ h2 {
   }
 
   to {
-    background-position: -1725px 0;
+    background-position: -2320px 0;
   }
 }
 
