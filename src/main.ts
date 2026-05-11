@@ -28,6 +28,7 @@ const rewardSlots: CardRarity[][] = [["common"], ["common", "uncommon"], ["commo
 
 let cardInstanceId = 0;
 let state = newGame();
+let combatCueTimer: number | null = null;
 
 function newGame(): GameState {
   cardInstanceId = 0;
@@ -209,6 +210,7 @@ function playCard(cardId: string): void {
     brokenBlock,
     knockedBack
   });
+  scheduleCombatCueClear();
   playCardSound(card, { isCombo, brokenBlock });
 
   state.hand.splice(cardIndex, 1);
@@ -275,6 +277,7 @@ function endTurn(): void {
   state.playerBlock = 0;
   state.lastPlayedCost = null;
   state.comboCount = 0;
+  clearCombatCueTimer();
   state.combatCue = null;
   state.enemyIntent = pickEnemyIntent(state.enemyPattern, state.turn);
   drawCards(state, 5);
@@ -283,9 +286,30 @@ function endTurn(): void {
 }
 
 function resetGame(): void {
+  clearCombatCueTimer();
   playSound("card_select");
   state = newGame();
   render();
+}
+
+function scheduleCombatCueClear(): void {
+  clearCombatCueTimer();
+  combatCueTimer = window.setTimeout(() => {
+    combatCueTimer = null;
+    if (state.status !== "playing" || !state.combatCue) {
+      return;
+    }
+    state.combatCue = null;
+    render();
+  }, 560);
+}
+
+function clearCombatCueTimer(): void {
+  if (combatCueTimer === null) {
+    return;
+  }
+  window.clearTimeout(combatCueTimer);
+  combatCueTimer = null;
 }
 
 function rollRewardCards(): Card[] {
