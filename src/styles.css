@@ -294,7 +294,7 @@ h2 {
 
 .ninjoe-guard {
   background-image: url("/assets/images/ninjoe/ninjoe_guard.png");
-  animation: ninjoe-guard 500ms steps(5) both;
+  animation: ninjoe-guard 500ms linear both;
 }
 
 .arm-front {
@@ -515,12 +515,29 @@ h2 {
 }
 
 @keyframes ninjoe-guard {
-  from {
+  0%,
+  19.99% {
     background-position: 0 0;
   }
 
-  to {
-    background-position: -1825px 0;
+  20%,
+  39.99% {
+    background-position: -365px 0;
+  }
+
+  40%,
+  59.99% {
+    background-position: -730px 0;
+  }
+
+  60%,
+  79.99% {
+    background-position: -1095px 0;
+  }
+
+  80%,
+  100% {
+    background-position: -1460px 0;
   }
 }
 
