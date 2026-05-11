@@ -798,11 +798,12 @@ function renderCombatCue(): string {
 
 function renderFighterFigure(side: "player" | "enemy", name: string, label: string): string {
   const figureClass = side === "enemy" ? `fighter enemy-figure ${enemyClassName(name)}` : "fighter player-figure";
+  const playerSpriteClass = state.combatCue?.kind === "block" ? "ninjoe-guard" : "ninjoe-idle";
   const stageContent =
     side === "player"
       ? `
         <span class="fighter-shadow"></span>
-        <span class="fighter-sprite ninjoe-idle"></span>
+        <span class="fighter-sprite ${playerSpriteClass}"></span>
       `
       : `
         <span class="fighter-shadow"></span>

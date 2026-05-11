@@ -292,6 +292,11 @@ h2 {
   animation: ninjoe-idle 1500ms steps(5) infinite;
 }
 
+.ninjoe-guard {
+  background-image: url("/assets/images/ninjoe/ninjoe_guard.png");
+  animation: ninjoe-guard 500ms steps(5) both;
+}
+
 .arm-front {
   transform: translateX(36px) rotate(-18deg);
 }
@@ -500,6 +505,16 @@ h2 {
 }
 
 @keyframes ninjoe-idle {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -1825px 0;
+  }
+}
+
+@keyframes ninjoe-guard {
   from {
     background-position: 0 0;
   }

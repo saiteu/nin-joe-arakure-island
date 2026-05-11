@@ -41,6 +41,10 @@
 | `assets-source/generated/ninjoe/ninjoe_idle_gemini_transparent.png` | NIN-JOE idle Gemini透過版 | ユーザー作成 / Gemini画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 緑背景、右下の星、足元ラインを透明化した2320x464 PNG | `public/assets/images/ninjoe/ninjoe_idle.png` の元 |
 | `assets-source/generated/ninjoe/ninjoe_guard_gemini_green.png` | NIN-JOE guard Gemini生成元 | ユーザー作成 / Gemini画像生成 | - | 生成AI素材 | 不要 | 緑背景のガード候補スプライト。6ポーズ入り | 加工前の元画像として保管。Asepriteで手動フレーム化する |
 | `assets-source/generated/ninjoe/ninjoe_guard_gemini_transparent.png` | NIN-JOE guard Gemini透過版 | ユーザー作成 / Gemini画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 緑背景と足元ラインを透明化した2320x464 PNG | ガードモーション制作の下絵。最後のフレームの星欠片はAsepriteで手直し候補 |
+| `assets-source/aseprite/ninjoe/ninjoe_guard.aseprite` | NIN-JOE guard制作元 | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | Gemini版をAsepriteで手動調整した制作元。ゲームからは直接読み込まない | 書き出しPNG/JSONとセットで保管する |
+| `assets-source/aseprite/ninjoe/ninjoe_guard.png` | NIN-JOE guard Aseprite書き出しPNG | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | 365x399の5フレーム縦並びPNG | Codex側で横並びに変換してゲーム用PNGにする |
+| `assets-source/aseprite/ninjoe/ninjoe_guard.json` | NIN-JOE guard Aseprite書き出しJSON | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | フレーム寸法365x399、5フレーム、各100ms | CSSアニメーション速度の参照にする |
+| `public/assets/images/ninjoe/ninjoe_guard.png` | NIN-JOE guard仮スプライト | ユーザー作成 / Gemini画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 5フレーム、1825x399の横並びスプライト。Aseprite出力をゲーム用に変換 | 防御カード使用時のガードモーションとして使用 |
 
 ## 生成AI素材ログ
 
@@ -52,6 +56,7 @@
 | 2026-05-10 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 純緑背景の白道着NIN-JOE idleから1フレーム目を抽出 | `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png` | 次モーション生成時の参照画像 |
 | 2026-05-11 | キャラクター | Gemini画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、低いカラテ構え、5フレームidle、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_idle.png` | 現行idle仮実装用素材。1825x399 |
 | 2026-05-11 | キャラクター | Gemini画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、ガード構え候補、6ポーズ、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_guard_gemini_transparent.png` | Aseprite手動フレーム化前の下絵 |
+| 2026-05-11 | キャラクター | Gemini画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、ガード構え、5フレーム、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_guard.png` | 防御カード使用時の仮実装用素材。1825x399 |
 
 ## 候補素材メモ
 
