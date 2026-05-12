@@ -311,6 +311,11 @@ h2 {
   animation: ninjoe-hit 520ms steps(4, end) both;
 }
 
+.ninjoe-throw {
+  background-image: url("/assets/images/ninjoe/ninjoe_throw.png");
+  animation: ninjoe-throw 420ms steps(3, end) both;
+}
+
 .ninjoe-intro-bow {
   --sprite-scale: 0.29;
 
@@ -567,6 +572,16 @@ h2 {
 
   to {
     background-position: -1460px 0;
+  }
+}
+
+@keyframes ninjoe-throw {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -1095px 0;
   }
 }
 

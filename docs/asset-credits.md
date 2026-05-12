@@ -65,6 +65,10 @@
 | `public/assets/images/ninjoe/ninjoe_hit.png` | NIN-JOE hit仮スプライト | ユーザー作成 / ChatGPT画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 5フレーム、1825x399の横並びスプライト。Aseprite出力をゲーム用に変換 | 敵攻撃で実ダメージを受けた時の被弾モーションとして使用 |
 | `assets-source/generated/ninjoe/ninjoe_throw_chatgpt_green.png` | NIN-JOE throw生成元 | ユーザー作成 / ChatGPT画像生成 | - | 生成AI素材 | 不要 | 緑背景の投擲候補スプライト。6ポーズ入り | 加工前の元画像として保管。Asepriteで手動フレーム化する |
 | `assets-source/generated/ninjoe/ninjoe_throw_chatgpt_transparent.png` | NIN-JOE throw透過版 | ユーザー作成 / ChatGPT画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 緑背景を透明化した2172x724 PNG | 投擲モーション制作の下絵。ゲームからは直接読み込まない |
+| `assets-source/aseprite/ninjoe/ninjoe_throw.aseprite` | NIN-JOE throw制作元 | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | ChatGPT版をAsepriteで手動調整した制作元。ゲームからは直接読み込まない | 書き出しPNG/JSONとセットで保管する |
+| `assets-source/aseprite/ninjoe/ninjoe_throw.png` | NIN-JOE throw Aseprite書き出しPNG | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | 365x399の4フレーム縦並びPNG | Codex側で横並びに変換してゲーム用PNGにする |
+| `assets-source/aseprite/ninjoe/ninjoe_throw.json` | NIN-JOE throw Aseprite書き出しJSON | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | フレーム寸法365x399、4フレーム、各100ms | CSSアニメーション速度の参照にする |
+| `public/assets/images/ninjoe/ninjoe_throw.png` | NIN-JOE throw仮スプライト | ユーザー作成 / ChatGPT画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 4フレーム、1460x399の横並びスプライト。Aseprite出力をゲーム用に変換 | 投擲カード使用時のモーションとして使用 |
 
 ## 生成AI素材ログ
 
@@ -84,6 +88,7 @@
 | 2026-05-19 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、被弾モーション、7ポーズ、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_hit_chatgpt_transparent.png` | Aseprite手動フレーム化前の下絵。1〜3フレーム中心に使う想定 |
 | 2026-05-12 | キャラクター | ChatGPT画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、被弾モーション、5フレーム、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_hit.png` | 敵攻撃で実ダメージを受けた時の仮実装用素材。1825x399 |
 | 2026-05-12 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、投擲モーション、6ポーズ、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_throw_chatgpt_transparent.png` | Aseprite手動フレーム化前の下絵 |
+| 2026-05-12 | キャラクター | ChatGPT画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、投擲モーション、4フレーム、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_throw.png` | 投擲カード使用時の仮実装用素材。1460x399 |
 
 ## 候補素材メモ
 

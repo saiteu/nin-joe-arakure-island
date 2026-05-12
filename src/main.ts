@@ -929,6 +929,9 @@ function playerSpriteClassForCue(cue: CombatCue | null): string {
   if (cue?.kind === "block") {
     return "ninjoe-guard";
   }
+  if (cue?.kind === "ranged") {
+    return "ninjoe-throw";
+  }
   if (cue?.kind === "melee") {
     return "ninjoe-attack-light";
   }
