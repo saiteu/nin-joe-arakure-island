@@ -57,6 +57,8 @@
 | `assets-source/aseprite/ninjoe/ninjoe_intro_bow.png` | NIN-JOE intro bow Aseprite書き出しPNG | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | 329x345の7フレーム縦並びPNG | Codex側で横並びに変換してゲーム用PNGにする |
 | `assets-source/aseprite/ninjoe/ninjoe_intro_bow.json` | NIN-JOE intro bow Aseprite書き出しJSON | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | フレーム寸法329x345、7フレーム、各100ms | CSSアニメーション速度の参照にする |
 | `public/assets/images/ninjoe/ninjoe_intro_bow.png` | NIN-JOE intro bow仮スプライト | ユーザー作成 / ChatGPT画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 7フレーム、2303x345の横並びスプライト。Aseprite出力をゲーム用に変換 | 戦闘開始時の一礼モーションとして使用 |
+| `assets-source/generated/ninjoe/ninjoe_hit_chatgpt_green.png` | NIN-JOE hit生成元 | ユーザー作成 / ChatGPT画像生成 | - | 生成AI素材 | 不要 | 緑背景の被弾候補スプライト。7ポーズ入り | 加工前の元画像として保管。Asepriteでは主に1〜3フレームを使う想定 |
+| `assets-source/generated/ninjoe/ninjoe_hit_chatgpt_transparent.png` | NIN-JOE hit透過版 | ユーザー作成 / ChatGPT画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 緑背景を透明化した1914x822 PNG | 被弾モーション制作の下絵。ゲームからは直接読み込まない |
 
 ## 生成AI素材ログ
 
@@ -73,6 +75,7 @@
 | 2026-05-11 | キャラクター | ChatGPT画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、小攻撃、5フレーム、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_attack_light.png` | 近接攻撃カード使用時の仮実装用素材。1835x401 |
 | 2026-05-12 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、一礼モーション、9フレーム、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_intro_bow_chatgpt_transparent.png` | Aseprite手動フレーム化前の下絵。文字/番号は残存 |
 | 2026-05-12 | キャラクター | ChatGPT画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、一礼モーション、7フレーム、手動で文字除去と足位置調整 | `public/assets/images/ninjoe/ninjoe_intro_bow.png` | 戦闘開始時の仮実装用素材。2303x345 |
+| 2026-05-19 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、被弾モーション、7ポーズ、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_hit_chatgpt_transparent.png` | Aseprite手動フレーム化前の下絵。1〜3フレーム中心に使う想定 |
 
 ## 候補素材メモ
 
