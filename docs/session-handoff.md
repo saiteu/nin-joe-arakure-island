@@ -423,7 +423,11 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - NIN-JOE本体はカラテの構え、間合い、踏み込みを芯にする
   - 投擲、素早いステップ、影の軌跡は忍者アクション的な見やすさを借りる
   - NIN-JOEは必要モーションを先に全て洗い出し、初期実装では優先度順に仮差分を入れる
-  - 初期実用セットは `idle`, `walk`, `attack_light`, `attack_heavy`, `throw`, `guard`, `breath`, `hit`, `evade`, `victory`, `defeat`
+  - 初期実用セットは `idle`, `intro_bow`, `attack_punch_light`, `attack_punch_heavy`, `attack_kick_light`, `attack_kick_heavy`, `throw`, `guard_ready`, `guard_impact`, `hit`, `evade`, `victory_oss`, `defeat`
+  - 投擲モーションは石/手裏剣などで共通化する。差分は飛翔物、SE、カード性能で出す
+  - 戦闘開始時はNIN-JOEも敵も一礼する。空手の世界として、敵も礼をする
+  - `Ready / Fight` 風の開始演出は後続で追加する
+  - 敵はAct1〜4の雑魚4パターン、ボス4体を想定。まずAct1雑魚の `idle / intro_bow / attack / hit` から作る
   - 後続候補は `knockback_attack`, `block_break`, `combo`, `ready`, `reward`, `event`, `low_hp`, `act_clear`
   - `walk` は最初は道中移動と戦闘中の間合い移動を兼用し、必要になったら `travel_walk` と `combat_step` に分ける
   - 見た目は8bit風の制限パレット。NIN-JOE本体は8〜12色程度、最大16色まで
