@@ -294,7 +294,7 @@ h2 {
 
 .ninjoe-guard {
   background-image: url("/assets/images/ninjoe/ninjoe_guard.png");
-  animation: ninjoe-guard 500ms linear both;
+  animation: ninjoe-guard 500ms steps(4, end) both;
 }
 
 .ninjoe-attack-light {
@@ -303,7 +303,7 @@ h2 {
   margin-left: -183.5px;
   background-image: url("/assets/images/ninjoe/ninjoe_attack_light.png");
   background-size: auto 401px;
-  animation: ninjoe-attack-light 500ms linear both;
+  animation: ninjoe-attack-light 500ms steps(4, end) both;
 }
 
 .arm-front {
@@ -524,55 +524,21 @@ h2 {
 }
 
 @keyframes ninjoe-guard {
-  0%,
-  19.99% {
+  from {
     background-position: 0 0;
   }
 
-  20%,
-  39.99% {
-    background-position: -365px 0;
-  }
-
-  40%,
-  59.99% {
-    background-position: -730px 0;
-  }
-
-  60%,
-  79.99% {
-    background-position: -1095px 0;
-  }
-
-  80%,
-  100% {
+  to {
     background-position: -1460px 0;
   }
 }
 
 @keyframes ninjoe-attack-light {
-  0%,
-  19.99% {
+  from {
     background-position: 0 0;
   }
 
-  20%,
-  39.99% {
-    background-position: -367px 0;
-  }
-
-  40%,
-  59.99% {
-    background-position: -734px 0;
-  }
-
-  60%,
-  79.99% {
-    background-position: -1101px 0;
-  }
-
-  80%,
-  100% {
+  to {
     background-position: -1468px 0;
   }
 }
