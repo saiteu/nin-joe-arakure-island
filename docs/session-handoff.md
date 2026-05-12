@@ -517,6 +517,11 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - ゲーム用: `public/assets/images/ninjoe/ninjoe_hit.png`
   - Asepriteからは365x399の5フレーム縦並びで出力。Codex側で1825x399の横並びに変換
   - 敵攻撃で実ダメージを受けた時だけ `ninjoe_hit.png` を520msで1回再生する
+- NIN-JOE throw ChatGPT下絵を追加
+  - 元画像: `assets-source/generated/ninjoe/ninjoe_throw_chatgpt_green.png`
+  - 透過加工版: `assets-source/generated/ninjoe/ninjoe_throw_chatgpt_transparent.png`
+  - 2172x724。6ポーズ入りで、投擲モーション制作の下絵として使う
+  - 少し指差しっぽいフレームがあるため、Asepriteで腕と手の形を必要に応じて手直しする
 - NIN-JOE生成参照用1フレームを作成
   - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
   - 通常クロマキー抜き版から左端フレームを切り出した透過PNG
