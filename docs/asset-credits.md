@@ -53,6 +53,10 @@
 | `public/assets/images/ninjoe/ninjoe_attack_light.png` | NIN-JOE light attack仮スプライト | ユーザー作成 / ChatGPT画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 5フレーム、1835x401の横並びスプライト。Aseprite出力をゲーム用に変換 | 近接攻撃カード使用時の小攻撃モーションとして使用 |
 | `assets-source/generated/ninjoe/ninjoe_intro_bow_chatgpt_green.png` | NIN-JOE intro bow生成元 | ユーザー作成 / ChatGPT画像生成 | - | 生成AI素材 | 不要 | 緑背景の一礼候補スプライト。9ポーズ、文字/番号入り | 加工前の元画像として保管。Asepriteで文字を除去し手動フレーム化する |
 | `assets-source/generated/ninjoe/ninjoe_intro_bow_chatgpt_transparent.png` | NIN-JOE intro bow透過版 | ユーザー作成 / ChatGPT画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 緑背景を透明化した1678x937 PNG。文字/番号は残したまま | 一礼モーション制作の下絵。ゲームからは直接読み込まない |
+| `assets-source/aseprite/ninjoe/ninjoe_intro_bow.aseprite` | NIN-JOE intro bow制作元 | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | ChatGPT版をAsepriteで手動調整した制作元。ゲームからは直接読み込まない | 書き出しPNG/JSONとセットで保管する |
+| `assets-source/aseprite/ninjoe/ninjoe_intro_bow.png` | NIN-JOE intro bow Aseprite書き出しPNG | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | 329x345の7フレーム縦並びPNG | Codex側で横並びに変換してゲーム用PNGにする |
+| `assets-source/aseprite/ninjoe/ninjoe_intro_bow.json` | NIN-JOE intro bow Aseprite書き出しJSON | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | フレーム寸法329x345、7フレーム、各100ms | CSSアニメーション速度の参照にする |
+| `public/assets/images/ninjoe/ninjoe_intro_bow.png` | NIN-JOE intro bow仮スプライト | ユーザー作成 / ChatGPT画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 7フレーム、2303x345の横並びスプライト。Aseprite出力をゲーム用に変換 | 戦闘開始時の一礼モーションとして使用 |
 
 ## 生成AI素材ログ
 
@@ -68,6 +72,7 @@
 | 2026-05-11 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、小攻撃、5ポーズ、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_attack_light_gemini_transparent.png` | Aseprite手動フレーム化前の下絵 |
 | 2026-05-11 | キャラクター | ChatGPT画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、小攻撃、5フレーム、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_attack_light.png` | 近接攻撃カード使用時の仮実装用素材。1835x401 |
 | 2026-05-12 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、一礼モーション、9フレーム、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_intro_bow_chatgpt_transparent.png` | Aseprite手動フレーム化前の下絵。文字/番号は残存 |
+| 2026-05-12 | キャラクター | ChatGPT画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、一礼モーション、7フレーム、手動で文字除去と足位置調整 | `public/assets/images/ninjoe/ninjoe_intro_bow.png` | 戦闘開始時の仮実装用素材。2303x345 |
 
 ## 候補素材メモ
 

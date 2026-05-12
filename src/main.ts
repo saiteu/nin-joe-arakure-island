@@ -29,6 +29,7 @@ const rewardSlots: CardRarity[][] = [["common"], ["common", "uncommon"], ["commo
 let cardInstanceId = 0;
 let state = newGame();
 let combatCueTimer: number | null = null;
+let introCueTimer: number | null = null;
 
 function newGame(): GameState {
   cardInstanceId = 0;
@@ -84,6 +85,7 @@ function createBattle(options: {
     lastPlayedCost: null,
     comboCount: 0,
     combatCue: null,
+    introCue: true,
     log: options.log,
     status: "playing"
   };
@@ -140,6 +142,8 @@ function playCard(cardId: string): void {
   if (state.status !== "playing") {
     return;
   }
+
+  clearIntroCue();
 
   const cardIndex = state.hand.findIndex((card) => card.id === cardId);
   const card = state.hand[cardIndex];
@@ -237,6 +241,8 @@ function endTurn(): void {
     return;
   }
 
+  clearIntroCue();
+
   state.discardPile.push(...state.hand);
   state.hand = [];
 
@@ -287,9 +293,11 @@ function endTurn(): void {
 
 function resetGame(): void {
   clearCombatCueTimer();
+  clearIntroCueTimer();
   playSound("card_select");
   state = newGame();
   render();
+  scheduleIntroCueClear();
 }
 
 function scheduleCombatCueClear(): void {
@@ -310,6 +318,31 @@ function clearCombatCueTimer(): void {
   }
   window.clearTimeout(combatCueTimer);
   combatCueTimer = null;
+}
+
+function scheduleIntroCueClear(): void {
+  clearIntroCueTimer();
+  introCueTimer = window.setTimeout(() => {
+    introCueTimer = null;
+    if (state.status !== "playing" || !state.introCue) {
+      return;
+    }
+    state.introCue = false;
+    render();
+  }, 900);
+}
+
+function clearIntroCue(): void {
+  clearIntroCueTimer();
+  state.introCue = false;
+}
+
+function clearIntroCueTimer(): void {
+  if (introCueTimer === null) {
+    return;
+  }
+  window.clearTimeout(introCueTimer);
+  introCueTimer = null;
 }
 
 function rollRewardCards(): Card[] {
@@ -399,6 +432,7 @@ function proceedFromTravel(): void {
     ]
   });
   render();
+  scheduleIntroCueClear();
 }
 
 function chooseTravelOption(choiceId: string): void {
@@ -852,6 +886,9 @@ function renderFighterFigure(side: "player" | "enemy", name: string, label: stri
 }
 
 function playerSpriteClassForCue(cue: CombatCue | null): string {
+  if (state.introCue && !cue) {
+    return "ninjoe-intro-bow";
+  }
   if (cue?.kind === "block") {
     return "ninjoe-guard";
   }
@@ -1060,3 +1097,4 @@ function renderRewardCard(card: Card): string {
 }
 
 render();
+scheduleIntroCueClear();

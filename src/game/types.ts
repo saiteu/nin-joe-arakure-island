@@ -102,6 +102,7 @@ export type GameState = {
   lastPlayedCost: number | null;
   comboCount: number;
   combatCue: CombatCue | null;
+  introCue: boolean;
   log: string[];
   status: "playing" | "reward" | "travel" | "won" | "lost";
 };

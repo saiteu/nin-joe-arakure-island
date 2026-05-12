@@ -498,6 +498,13 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 透過加工版: `assets-source/generated/ninjoe/ninjoe_intro_bow_chatgpt_transparent.png`
   - 1678x937。9ポーズ入りで文字/番号が残っているため、Asepriteで不要部分を消して手動フレーム化する
   - ゲーム用の `ninjoe_intro_bow.png` は未作成
+- NIN-JOE intro bowをAseprite手動調整版として追加
+  - 制作元: `assets-source/aseprite/ninjoe/ninjoe_intro_bow.aseprite`
+  - Aseprite書き出し: `assets-source/aseprite/ninjoe/ninjoe_intro_bow.png`
+  - Aseprite JSON: `assets-source/aseprite/ninjoe/ninjoe_intro_bow.json`
+  - ゲーム用: `public/assets/images/ninjoe/ninjoe_intro_bow.png`
+  - Asepriteからは329x345の7フレーム縦並びで出力。Codex側で2303x345の横並びに変換
+  - 戦闘開始時だけ `ninjoe_intro_bow.png` を900msで1回再生し、その後idleへ戻す
 - NIN-JOE生成参照用1フレームを作成
   - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
   - 通常クロマキー抜き版から左端フレームを切り出した透過PNG

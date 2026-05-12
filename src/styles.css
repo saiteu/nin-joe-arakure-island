@@ -306,6 +306,18 @@ h2 {
   animation: ninjoe-attack-light 500ms steps(4, end) both;
 }
 
+.ninjoe-intro-bow {
+  --sprite-scale: 0.29;
+
+  bottom: 8px;
+  width: 329px;
+  height: 345px;
+  margin-left: -164.5px;
+  background-image: url("/assets/images/ninjoe/ninjoe_intro_bow.png");
+  background-size: auto 345px;
+  animation: ninjoe-intro-bow 900ms steps(6, end) both;
+}
+
 .arm-front {
   transform: translateX(36px) rotate(-18deg);
 }
@@ -540,6 +552,16 @@ h2 {
 
   to {
     background-position: -1468px 0;
+  }
+}
+
+@keyframes ninjoe-intro-bow {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -1974px 0;
   }
 }
 
