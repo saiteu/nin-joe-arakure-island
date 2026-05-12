@@ -493,6 +493,11 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - ゲーム用: `public/assets/images/ninjoe/ninjoe_attack_light.png`
   - Asepriteからは367x401の5フレーム縦並びで出力。Codex側で1835x401の横並びに変換
   - 近接攻撃カード使用時は `ninjoe_attack_light.png` を500msで1回再生する
+- NIN-JOE intro bow ChatGPT下絵を追加
+  - 元画像: `assets-source/generated/ninjoe/ninjoe_intro_bow_chatgpt_green.png`
+  - 透過加工版: `assets-source/generated/ninjoe/ninjoe_intro_bow_chatgpt_transparent.png`
+  - 1678x937。9ポーズ入りで文字/番号が残っているため、Asepriteで不要部分を消して手動フレーム化する
+  - ゲーム用の `ninjoe_intro_bow.png` は未作成
 - NIN-JOE生成参照用1フレームを作成
   - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
   - 通常クロマキー抜き版から左端フレームを切り出した透過PNG
