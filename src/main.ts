@@ -30,6 +30,7 @@ let cardInstanceId = 0;
 let state = newGame();
 let combatCueTimer: number | null = null;
 let introCueTimer: number | null = null;
+let playerHitCueTimer: number | null = null;
 
 function newGame(): GameState {
   cardInstanceId = 0;
@@ -86,6 +87,7 @@ function createBattle(options: {
     comboCount: 0,
     combatCue: null,
     introCue: true,
+    playerHitCue: false,
     log: options.log,
     status: "playing"
   };
@@ -144,6 +146,7 @@ function playCard(cardId: string): void {
   }
 
   clearIntroCue();
+  clearPlayerHitCue();
 
   const cardIndex = state.hand.findIndex((card) => card.id === cardId);
   const card = state.hand[cardIndex];
@@ -242,6 +245,7 @@ function endTurn(): void {
   }
 
   clearIntroCue();
+  clearPlayerHitCue();
 
   state.discardPile.push(...state.hand);
   state.hand = [];
@@ -252,6 +256,7 @@ function endTurn(): void {
       state.playerBlock = Math.max(0, state.playerBlock - state.enemyIntent.damage);
       state.playerHp = Math.max(0, state.playerHp - incomingDamage);
       state.log.unshift(`敵の${state.enemyIntent.label}。${incomingDamage}ダメージを受けた。`);
+      state.playerHitCue = incomingDamage > 0;
       playSound("enemy_attack");
     } else {
       state.log.unshift(`敵の${state.enemyIntent.label}は${rangeLabel(state.range)}で空を切った。`);
@@ -289,11 +294,15 @@ function endTurn(): void {
   drawCards(state, 5);
   state.log.unshift(`ターン${state.turn}開始。`);
   render();
+  if (state.playerHitCue) {
+    schedulePlayerHitCueClear();
+  }
 }
 
 function resetGame(): void {
   clearCombatCueTimer();
   clearIntroCueTimer();
+  clearPlayerHitCueTimer();
   playSound("card_select");
   state = newGame();
   render();
@@ -343,6 +352,31 @@ function clearIntroCueTimer(): void {
   }
   window.clearTimeout(introCueTimer);
   introCueTimer = null;
+}
+
+function schedulePlayerHitCueClear(): void {
+  clearPlayerHitCueTimer();
+  playerHitCueTimer = window.setTimeout(() => {
+    playerHitCueTimer = null;
+    if (state.status !== "playing" || !state.playerHitCue) {
+      return;
+    }
+    state.playerHitCue = false;
+    render();
+  }, 520);
+}
+
+function clearPlayerHitCue(): void {
+  clearPlayerHitCueTimer();
+  state.playerHitCue = false;
+}
+
+function clearPlayerHitCueTimer(): void {
+  if (playerHitCueTimer === null) {
+    return;
+  }
+  window.clearTimeout(playerHitCueTimer);
+  playerHitCueTimer = null;
 }
 
 function rollRewardCards(): Card[] {
@@ -886,6 +920,9 @@ function renderFighterFigure(side: "player" | "enemy", name: string, label: stri
 }
 
 function playerSpriteClassForCue(cue: CombatCue | null): string {
+  if (state.playerHitCue) {
+    return "ninjoe-hit";
+  }
   if (state.introCue && !cue) {
     return "ninjoe-intro-bow";
   }

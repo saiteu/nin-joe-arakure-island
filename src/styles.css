@@ -306,6 +306,11 @@ h2 {
   animation: ninjoe-attack-light 500ms steps(4, end) both;
 }
 
+.ninjoe-hit {
+  background-image: url("/assets/images/ninjoe/ninjoe_hit.png");
+  animation: ninjoe-hit 520ms steps(4, end) both;
+}
+
 .ninjoe-intro-bow {
   --sprite-scale: 0.29;
 
@@ -552,6 +557,16 @@ h2 {
 
   to {
     background-position: -1468px 0;
+  }
+}
+
+@keyframes ninjoe-hit {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -1460px 0;
   }
 }
 

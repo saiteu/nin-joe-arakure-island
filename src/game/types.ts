@@ -103,6 +103,7 @@ export type GameState = {
   comboCount: number;
   combatCue: CombatCue | null;
   introCue: boolean;
+  playerHitCue: boolean;
   log: string[];
   status: "playing" | "reward" | "travel" | "won" | "lost";
 };
