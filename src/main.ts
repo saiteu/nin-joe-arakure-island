@@ -920,6 +920,9 @@ function renderFighterFigure(side: "player" | "enemy", name: string, label: stri
 }
 
 function playerSpriteClassForCue(cue: CombatCue | null): string {
+  if (state.status === "reward" || state.status === "won") {
+    return "ninjoe-victory-oss";
+  }
   if (state.playerHitCue) {
     return "ninjoe-hit";
   }

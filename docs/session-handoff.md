@@ -534,6 +534,13 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 透過加工版: `assets-source/generated/ninjoe/ninjoe_victory_oss_gemini_transparent.png`
   - 1376x768。複数ポーズ入りで、勝利時の押忍モーション制作の下絵として使う
   - 右下の小さな押忍ポーズが最終候補として使いやすい。上段右の大きい正面立ちは顔向きが変わりすぎるため避ける
+- NIN-JOE victory ossをAseprite手動調整版として追加
+  - 制作元: `assets-source/aseprite/ninjoe/ninjoe_victory_oss.aseprite`
+  - Aseprite書き出し: `assets-source/aseprite/ninjoe/ninjoe_victory_oss.png`
+  - Aseprite JSON: `assets-source/aseprite/ninjoe/ninjoe_victory_oss.json`
+  - ゲーム用: `public/assets/images/ninjoe/ninjoe_victory_oss.png`
+  - Asepriteからは365x399の7フレーム横並びで出力
+  - 敵撃破後の報酬/Act Clear画面では `ninjoe_victory_oss.png` を700msで1回再生し、最終押忍ポーズを保持する
 - NIN-JOE生成参照用1フレームを作成
   - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
   - 通常クロマキー抜き版から左端フレームを切り出した透過PNG

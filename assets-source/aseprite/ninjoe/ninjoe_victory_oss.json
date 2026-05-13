@@ -1,0 +1,74 @@
+{ "frames": [
+   {
+    "filename": "ninjoe_victory_oss 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   {
+    "filename": "ninjoe_victory_oss 1.aseprite",
+    "frame": { "x": 365, "y": 0, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   {
+    "filename": "ninjoe_victory_oss 2.aseprite",
+    "frame": { "x": 730, "y": 0, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   {
+    "filename": "ninjoe_victory_oss 3.aseprite",
+    "frame": { "x": 1095, "y": 0, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   {
+    "filename": "ninjoe_victory_oss 4.aseprite",
+    "frame": { "x": 1460, "y": 0, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   {
+    "filename": "ninjoe_victory_oss 5.aseprite",
+    "frame": { "x": 1825, "y": 0, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   {
+    "filename": "ninjoe_victory_oss 6.aseprite",
+    "frame": { "x": 2190, "y": 0, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.x-dev",
+  "image": "ninjoe_victory_oss.png",
+  "format": "RGBA8888",
+  "size": { "w": 2555, "h": 399 },
+  "scale": "1"
+ }
+}

@@ -316,6 +316,11 @@ h2 {
   animation: ninjoe-throw 420ms steps(3, end) both;
 }
 
+.ninjoe-victory-oss {
+  background-image: url("/assets/images/ninjoe/ninjoe_victory_oss.png");
+  animation: ninjoe-victory-oss 700ms steps(6, end) both;
+}
+
 .ninjoe-intro-bow {
   --sprite-scale: 0.29;
 
@@ -582,6 +587,16 @@ h2 {
 
   to {
     background-position: -1095px 0;
+  }
+}
+
+@keyframes ninjoe-victory-oss {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -2190px 0;
   }
 }
 
