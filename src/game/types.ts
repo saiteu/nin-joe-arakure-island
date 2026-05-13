@@ -104,6 +104,7 @@ export type GameState = {
   combatCue: CombatCue | null;
   introCue: boolean;
   playerHitCue: boolean;
+  victoryCueReady: boolean;
   log: string[];
   status: "playing" | "reward" | "travel" | "won" | "lost";
 };

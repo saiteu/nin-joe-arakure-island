@@ -31,6 +31,7 @@ let state = newGame();
 let combatCueTimer: number | null = null;
 let introCueTimer: number | null = null;
 let playerHitCueTimer: number | null = null;
+let victoryCueTimer: number | null = null;
 
 function newGame(): GameState {
   cardInstanceId = 0;
@@ -88,6 +89,7 @@ function createBattle(options: {
     combatCue: null,
     introCue: true,
     playerHitCue: false,
+    victoryCueReady: false,
     log: options.log,
     status: "playing"
   };
@@ -224,6 +226,8 @@ function playCard(cardId: string): void {
   state.discardPile.push(card);
 
   if (state.enemyHp <= 0) {
+    state.victoryCueReady = false;
+    scheduleVictoryCueReady();
     if (state.battleNumber >= enemies.length) {
       state.status = "won";
       state.log.unshift("勝利。NIN-JOEは荒くれの包囲を突破した。");
@@ -303,6 +307,7 @@ function resetGame(): void {
   clearCombatCueTimer();
   clearIntroCueTimer();
   clearPlayerHitCueTimer();
+  clearVictoryCueTimer();
   playSound("card_select");
   state = newGame();
   render();
@@ -379,6 +384,26 @@ function clearPlayerHitCueTimer(): void {
   playerHitCueTimer = null;
 }
 
+function scheduleVictoryCueReady(): void {
+  clearVictoryCueTimer();
+  victoryCueTimer = window.setTimeout(() => {
+    victoryCueTimer = null;
+    if (state.status !== "reward" && state.status !== "won") {
+      return;
+    }
+    state.victoryCueReady = true;
+    render();
+  }, 560);
+}
+
+function clearVictoryCueTimer(): void {
+  if (victoryCueTimer === null) {
+    return;
+  }
+  window.clearTimeout(victoryCueTimer);
+  victoryCueTimer = null;
+}
+
 function rollRewardCards(): Card[] {
   const selected: Card[] = [];
 
@@ -427,6 +452,7 @@ function chooseReward(cardId: string | null): void {
   if (state.status !== "reward") {
     return;
   }
+  clearVictoryCueTimer();
 
   const selectedCard = state.rewardOptions.find((card) => card.id === cardId);
   const nextDeck = selectedCard ? [...state.runDeck, selectedCard] : [...state.runDeck];
@@ -920,7 +946,7 @@ function renderFighterFigure(side: "player" | "enemy", name: string, label: stri
 }
 
 function playerSpriteClassForCue(cue: CombatCue | null): string {
-  if (state.status === "reward" || state.status === "won") {
+  if ((state.status === "reward" || state.status === "won") && state.victoryCueReady) {
     return "ninjoe-victory-oss";
   }
   if (state.playerHitCue) {
