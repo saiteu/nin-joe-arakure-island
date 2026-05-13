@@ -779,6 +779,9 @@ function createCombatCue(options: {
 }
 
 function combatCueMotion(card: Card): CombatCue["motion"] {
+  if (card.name.includes("回し蹴り")) {
+    return "roundhouse";
+  }
   if (card.name.includes("正拳")) {
     return "punchHeavy";
   }
@@ -977,6 +980,9 @@ function playerSpriteClassForCue(cue: CombatCue | null): string {
   }
   if (cue?.motion === "frontKickLight") {
     return "ninjoe-attack-kick-light";
+  }
+  if (cue?.motion === "roundhouse") {
+    return "ninjoe-attack-roundhouse";
   }
   if (cue?.motion === "punchHeavy") {
     return "ninjoe-attack-punch-heavy";

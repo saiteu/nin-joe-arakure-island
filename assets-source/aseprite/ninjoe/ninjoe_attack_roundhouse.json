@@ -1,0 +1,74 @@
+{ "frames": {
+   "ninjoe_attack_roundhouse 0.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_roundhouse 1.aseprite": {
+    "frame": { "x": 0, "y": 399, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_roundhouse 2.aseprite": {
+    "frame": { "x": 0, "y": 798, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_roundhouse 3.aseprite": {
+    "frame": { "x": 0, "y": 1197, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_roundhouse 4.aseprite": {
+    "frame": { "x": 0, "y": 1596, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_roundhouse 5.aseprite": {
+    "frame": { "x": 0, "y": 1995, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_roundhouse 6.aseprite": {
+    "frame": { "x": 0, "y": 2394, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.x-dev",
+  "image": "ninjoe_attack_roundhouse.png",
+  "format": "RGBA8888",
+  "size": { "w": 365, "h": 2793 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

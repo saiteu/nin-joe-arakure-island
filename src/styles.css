@@ -316,6 +316,11 @@ h2 {
   animation: ninjoe-attack-kick-light 420ms steps(4, end) both;
 }
 
+.ninjoe-attack-roundhouse {
+  background-image: url("/assets/images/ninjoe/ninjoe_attack_roundhouse.png");
+  animation: ninjoe-attack-roundhouse 560ms steps(6, end) both;
+}
+
 .ninjoe-hit {
   background-image: url("/assets/images/ninjoe/ninjoe_hit.png");
   animation: ninjoe-hit 520ms steps(4, end) both;
@@ -597,6 +602,16 @@ h2 {
 
   to {
     background-position: -1460px 0;
+  }
+}
+
+@keyframes ninjoe-attack-roundhouse {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -2190px 0;
   }
 }
 

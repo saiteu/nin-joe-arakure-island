@@ -87,6 +87,12 @@
 | `assets-source/aseprite/ninjoe/ninjoe_attack_punch_heavy.png` | NIN-JOE heavy punch Aseprite書き出しPNG | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | 365x399の9フレーム縦並びPNG | Codex側で横並びに変換してゲーム用PNGにする |
 | `assets-source/aseprite/ninjoe/ninjoe_attack_punch_heavy.json` | NIN-JOE heavy punch Aseprite書き出しJSON | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | フレーム寸法365x399、9フレーム、各100ms | CSSアニメーション速度の参照にする |
 | `public/assets/images/ninjoe/ninjoe_attack_punch_heavy.png` | NIN-JOE heavy punch仮スプライト | ユーザー作成 / ChatGPT画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 9フレーム、3285x399の横並びスプライト。Aseprite出力をゲーム用に変換 | `正拳` / `涙の正拳` など正拳系カード用モーション |
+| `assets-source/generated/ninjoe/ninjoe_attack_roundhouse_chatgpt_green.png` | NIN-JOE roundhouse生成元 | ユーザー作成 / ChatGPT画像生成 | - | 生成AI素材 | 不要 | 緑背景の回し蹴り候補スプライト。複数ポーズ入り | 加工前の元画像として保管。Asepriteで手動フレーム化する |
+| `assets-source/generated/ninjoe/ninjoe_attack_roundhouse_chatgpt_transparent.png` | NIN-JOE roundhouse透過版 | ユーザー作成 / ChatGPT画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 緑背景を透明化した1881x836 PNG | 回し蹴りモーション制作の下絵。ゲームからは直接読み込まない |
+| `assets-source/aseprite/ninjoe/ninjoe_attack_roundhouse.aseprite` | NIN-JOE roundhouse制作元 | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | ChatGPT版をAsepriteで手動調整した制作元。ゲームからは直接読み込まない | 書き出しPNG/JSONとセットで保管する |
+| `assets-source/aseprite/ninjoe/ninjoe_attack_roundhouse.png` | NIN-JOE roundhouse Aseprite書き出しPNG | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | 365x399の7フレーム縦並びPNG | Codex側で横並びに変換してゲーム用PNGにする |
+| `assets-source/aseprite/ninjoe/ninjoe_attack_roundhouse.json` | NIN-JOE roundhouse Aseprite書き出しJSON | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | フレーム寸法365x399、7フレーム、各100ms | CSSアニメーション速度の参照にする |
+| `public/assets/images/ninjoe/ninjoe_attack_roundhouse.png` | NIN-JOE roundhouse仮スプライト | ユーザー作成 / ChatGPT画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 7フレーム、2555x399の横並びスプライト。Aseprite出力をゲーム用に変換 | `回し蹴り` 用モーション |
 
 ## 生成AI素材ログ
 
@@ -113,6 +119,8 @@
 | 2026-05-13 | キャラクター | ChatGPT画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、軽い前蹴り、5フレーム、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_attack_kick_light.png` | 前蹴り用の仮実装素材。1825x399 |
 | 2026-05-13 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、正拳突き、9ポーズ、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_attack_punch_heavy_chatgpt_transparent.png` | Aseprite手動フレーム化前の下絵 |
 | 2026-05-13 | キャラクター | ChatGPT画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、正拳突き、9フレーム、手動で中間フレーム調整 | `public/assets/images/ninjoe/ninjoe_attack_punch_heavy.png` | 正拳系カード用の仮実装素材。3285x399 |
+| 2026-05-14 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、回し蹴り、複数ポーズ、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_attack_roundhouse_chatgpt_transparent.png` | Aseprite手動フレーム化前の下絵 |
+| 2026-05-14 | キャラクター | ChatGPT画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、回し蹴り、7フレーム、手動でフレーム選定 | `public/assets/images/ninjoe/ninjoe_attack_roundhouse.png` | 回し蹴りカード用の仮実装素材。2555x399 |
 
 ## 候補素材メモ
 

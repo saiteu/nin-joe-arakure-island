@@ -3,7 +3,7 @@ export type CardCategory = "melee" | "guard" | "knockback" | "ranged" | "spirit"
 export type CardRarity = "starter" | "common" | "uncommon" | "rare";
 export type RangeBand = "far" | "mid" | "close";
 export type CombatCueKind = "melee" | "ranged" | "knockback" | "block" | "spirit";
-export type CombatCueMotion = "punchLight" | "punchHeavy" | "frontKickLight";
+export type CombatCueMotion = "punchLight" | "punchHeavy" | "frontKickLight" | "roundhouse";
 
 export type CombatCue = {
   kind: CombatCueKind;
