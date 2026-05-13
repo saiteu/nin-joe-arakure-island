@@ -779,6 +779,9 @@ function createCombatCue(options: {
 }
 
 function combatCueMotion(card: Card): CombatCue["motion"] {
+  if (card.name.includes("正拳")) {
+    return "punchHeavy";
+  }
   if (card.name.includes("前蹴り")) {
     return "frontKickLight";
   }
@@ -974,6 +977,9 @@ function playerSpriteClassForCue(cue: CombatCue | null): string {
   }
   if (cue?.motion === "frontKickLight") {
     return "ninjoe-attack-kick-light";
+  }
+  if (cue?.motion === "punchHeavy") {
+    return "ninjoe-attack-punch-heavy";
   }
   if (cue?.kind === "melee") {
     return "ninjoe-attack-light";

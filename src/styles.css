@@ -306,6 +306,11 @@ h2 {
   animation: ninjoe-attack-light 500ms steps(4, end) both;
 }
 
+.ninjoe-attack-punch-heavy {
+  background-image: url("/assets/images/ninjoe/ninjoe_attack_punch_heavy.png");
+  animation: ninjoe-attack-punch-heavy 560ms steps(8, end) both;
+}
+
 .ninjoe-attack-kick-light {
   background-image: url("/assets/images/ninjoe/ninjoe_attack_kick_light.png");
   animation: ninjoe-attack-kick-light 420ms steps(4, end) both;
@@ -572,6 +577,16 @@ h2 {
 
   to {
     background-position: -1468px 0;
+  }
+}
+
+@keyframes ninjoe-attack-punch-heavy {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -2920px 0;
   }
 }
 

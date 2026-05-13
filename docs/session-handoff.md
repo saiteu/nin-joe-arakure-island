@@ -555,6 +555,15 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - Asepriteからは365x399の5フレーム縦並びで出力。Codex側で1825x399の横並びに変換
   - この素材は前蹴り専用として扱う。`回し蹴り`, `踵落とし`, `胴払い` には使わず、それぞれ別モーションを作る
   - 既存カードの `正拳` / `涙の正拳` も、汎用パンチではなくカード内容に応じた専用モーションを今後作る
+- NIN-JOE heavy punch / 正拳突きをAseprite手動調整版として追加
+  - 元画像: `assets-source/generated/ninjoe/ninjoe_attack_punch_heavy_chatgpt_green.png`
+  - 透過加工版: `assets-source/generated/ninjoe/ninjoe_attack_punch_heavy_chatgpt_transparent.png`
+  - 制作元: `assets-source/aseprite/ninjoe/ninjoe_attack_punch_heavy.aseprite`
+  - Aseprite書き出し: `assets-source/aseprite/ninjoe/ninjoe_attack_punch_heavy.png`
+  - Aseprite JSON: `assets-source/aseprite/ninjoe/ninjoe_attack_punch_heavy.json`
+  - ゲーム用: `public/assets/images/ninjoe/ninjoe_attack_punch_heavy.png`
+  - Asepriteからは365x399の9フレーム縦並びで出力。Codex側で3285x399の横並びに変換
+  - `正拳` / `涙の正拳` など、カード名に `正拳` を含む攻撃カードだけに割り当てる
 - NIN-JOE生成参照用1フレームを作成
   - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
   - 通常クロマキー抜き版から左端フレームを切り出した透過PNG

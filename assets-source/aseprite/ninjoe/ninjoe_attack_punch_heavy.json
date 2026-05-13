@@ -1,0 +1,90 @@
+{ "frames": {
+   "ninjoe_attack_punch_heavy 0.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_punch_heavy 1.aseprite": {
+    "frame": { "x": 0, "y": 399, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_punch_heavy 2.aseprite": {
+    "frame": { "x": 0, "y": 798, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_punch_heavy 3.aseprite": {
+    "frame": { "x": 0, "y": 1197, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_punch_heavy 4.aseprite": {
+    "frame": { "x": 0, "y": 1596, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_punch_heavy 5.aseprite": {
+    "frame": { "x": 0, "y": 1995, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_punch_heavy 6.aseprite": {
+    "frame": { "x": 0, "y": 2394, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_punch_heavy 7.aseprite": {
+    "frame": { "x": 0, "y": 2793, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_punch_heavy 8.aseprite": {
+    "frame": { "x": 0, "y": 3192, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.x-dev",
+  "image": "ninjoe_attack_punch_heavy.png",
+  "format": "RGBA8888",
+  "size": { "w": 365, "h": 3591 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
