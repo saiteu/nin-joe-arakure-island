@@ -77,6 +77,10 @@
 | `public/assets/images/ninjoe/ninjoe_victory_oss.png` | NIN-JOE victory oss仮スプライト | ユーザー作成 / Gemini画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 7フレーム、2555x399の横並びスプライト | 敵撃破後の勝利/押忍モーションとして使用 |
 | `assets-source/generated/ninjoe/ninjoe_attack_kick_light_chatgpt_green.png` | NIN-JOE light kick生成元 | ユーザー作成 / ChatGPT画像生成 | - | 生成AI素材 | 不要 | 緑背景の軽い前蹴り候補スプライト。5ポーズ入り | 加工前の元画像として保管。Asepriteで手動フレーム化する |
 | `assets-source/generated/ninjoe/ninjoe_attack_kick_light_chatgpt_transparent.png` | NIN-JOE light kick透過版 | ユーザー作成 / ChatGPT画像生成 + ImageMagick加工 | - | 生成AI素材 | 不要 | 緑背景を透明化した1946x808 PNG | 軽い蹴りモーション制作の下絵。ゲームからは直接読み込まない |
+| `assets-source/aseprite/ninjoe/ninjoe_attack_kick_light.aseprite` | NIN-JOE light kick制作元 | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | ChatGPT版をAsepriteで手動調整した制作元。ゲームからは直接読み込まない | 書き出しPNG/JSONとセットで保管する |
+| `assets-source/aseprite/ninjoe/ninjoe_attack_kick_light.png` | NIN-JOE light kick Aseprite書き出しPNG | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | 365x399の5フレーム縦並びPNG | Codex側で横並びに変換してゲーム用PNGにする |
+| `assets-source/aseprite/ninjoe/ninjoe_attack_kick_light.json` | NIN-JOE light kick Aseprite書き出しJSON | ユーザー作成 / Aseprite | - | 制作元ファイル | 不要 | フレーム寸法365x399、5フレーム、各100ms | CSSアニメーション速度の参照にする |
+| `public/assets/images/ninjoe/ninjoe_attack_kick_light.png` | NIN-JOE light kick仮スプライト | ユーザー作成 / ChatGPT画像生成 + Aseprite手直し + ImageMagick加工 | - | 生成AI素材 | 不要 | 5フレーム、1825x399の横並びスプライト。Aseprite出力をゲーム用に変換 | 蹴り系カード使用時の軽い蹴りモーションとして使用 |
 
 ## 生成AI素材ログ
 
@@ -100,6 +104,7 @@
 | 2026-05-12 | キャラクター | Gemini画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、勝利後の押忍ポーズ、複数候補、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_victory_oss_gemini_transparent.png` | Aseprite手動フレーム化前の下絵 |
 | 2026-05-13 | キャラクター | Gemini画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、勝利後の押忍ポーズ、7フレーム、切り貼りと手動調整 | `public/assets/images/ninjoe/ninjoe_victory_oss.png` | 敵撃破後の仮実装用素材。2555x399 |
 | 2026-05-13 | キャラクター | ChatGPT画像生成 + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、軽い前蹴り、5ポーズ、単色緑背景 | `assets-source/generated/ninjoe/ninjoe_attack_kick_light_chatgpt_transparent.png` | Aseprite手動フレーム化前の下絵 |
+| 2026-05-13 | キャラクター | ChatGPT画像生成 + Aseprite + ImageMagick | ユーザー側生成。正式採用前に利用条件を再確認する | 白道着、黒帯、軽い前蹴り、5フレーム、手動で足位置調整 | `public/assets/images/ninjoe/ninjoe_attack_kick_light.png` | 蹴り系カード使用時の仮実装用素材。1825x399 |
 
 ## 候補素材メモ
 

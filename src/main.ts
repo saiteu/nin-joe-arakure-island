@@ -771,10 +771,21 @@ function createCombatCue(options: {
 
   return {
     kind,
+    motion: combatCueMotion(options.card),
     label: options.isCombo ? `Combo ${state.comboCount}: ${options.card.name}` : options.card.name,
     detail: detailParts.join(" / ") || "構え",
     combo: options.isCombo
   };
+}
+
+function combatCueMotion(card: Card): CombatCue["motion"] {
+  if (card.name.includes("蹴り") || card.name.includes("踵") || card.name.includes("胴払い")) {
+    return "kickLight";
+  }
+  if (card.damage && !card.ranged) {
+    return "punchLight";
+  }
+  return undefined;
 }
 
 function combatCueKind(card: Card, knockedBack: boolean): CombatCue["kind"] {
@@ -961,7 +972,13 @@ function playerSpriteClassForCue(cue: CombatCue | null): string {
   if (cue?.kind === "ranged") {
     return "ninjoe-throw";
   }
+  if (cue?.motion === "kickLight") {
+    return "ninjoe-attack-kick-light";
+  }
   if (cue?.kind === "melee") {
+    return "ninjoe-attack-light";
+  }
+  if (cue?.kind === "knockback") {
     return "ninjoe-attack-light";
   }
   return "ninjoe-idle";

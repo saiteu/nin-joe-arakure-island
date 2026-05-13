@@ -306,6 +306,11 @@ h2 {
   animation: ninjoe-attack-light 500ms steps(4, end) both;
 }
 
+.ninjoe-attack-kick-light {
+  background-image: url("/assets/images/ninjoe/ninjoe_attack_kick_light.png");
+  animation: ninjoe-attack-kick-light 420ms steps(4, end) both;
+}
+
 .ninjoe-hit {
   background-image: url("/assets/images/ninjoe/ninjoe_hit.png");
   animation: ninjoe-hit 520ms steps(4, end) both;
@@ -567,6 +572,16 @@ h2 {
 
   to {
     background-position: -1468px 0;
+  }
+}
+
+@keyframes ninjoe-attack-kick-light {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -1460px 0;
   }
 }
 

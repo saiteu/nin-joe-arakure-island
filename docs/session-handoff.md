@@ -547,6 +547,13 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - 透過加工版: `assets-source/generated/ninjoe/ninjoe_attack_kick_light_chatgpt_transparent.png`
   - 1946x808。5ポーズ入りで、軽い前蹴りモーション制作の下絵として使う
   - 3フレーム目の前蹴りは読みやすい。Asepriteで足位置とフレームサイズを既存の365x399基準へ揃える
+- NIN-JOE light kickをAseprite手動調整版として追加
+  - 制作元: `assets-source/aseprite/ninjoe/ninjoe_attack_kick_light.aseprite`
+  - Aseprite書き出し: `assets-source/aseprite/ninjoe/ninjoe_attack_kick_light.png`
+  - Aseprite JSON: `assets-source/aseprite/ninjoe/ninjoe_attack_kick_light.json`
+  - ゲーム用: `public/assets/images/ninjoe/ninjoe_attack_kick_light.png`
+  - Asepriteからは365x399の5フレーム縦並びで出力。Codex側で1825x399の横並びに変換
+  - `回し蹴り`, `踵落とし`, `胴払い` は蹴り系として `ninjoe_attack_kick_light.png` を420msで1回再生する
 - NIN-JOE生成参照用1フレームを作成
   - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
   - 通常クロマキー抜き版から左端フレームを切り出した透過PNG
