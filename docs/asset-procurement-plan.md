@@ -98,8 +98,8 @@ Act1の完成度を上げるための素材計画。今すぐ正式素材を全�
 | A | `intro_bow` | 戦闘開始の一礼 | 敵も一礼する。Ready/Fight演出の前段 |
 | A | `attack_punch_light` | 突き、小攻撃 | 既存 `attack_light` をこの用途として扱う |
 | A | `attack_punch_heavy` | 正拳、強い拳技 | パンチ系の重いカード用 |
-| A | `attack_kick_light` | 前蹴り、小さな蹴り | キック系カード用 |
-| A | `attack_kick_heavy` | 回し蹴り、胴払いなど | 重い攻撃、ノックバック攻撃に使う |
+| A | `attack_kick_light` | 前蹴り、小さな蹴り | 前蹴り専用。回し蹴り、踵落とし、胴払いには使わない |
+| A | `attack_kick_heavy` | 回し蹴り、胴払いなど | 重い蹴り/払いのカード用。踵落としは別モーション候補 |
 | A | `throw` | 投石、手裏剣など | 投擲カード共通。飛翔物やSEで差を出す |
 | A | `guard_ready` | 防御カード選択時の構え | 防御を固めたことを見せる |
 | A | `guard_impact` | 敵攻撃を受け止める瞬間 | Turn End後の敵攻撃解決時に使う |
@@ -133,6 +133,21 @@ Act1の完成度を上げるための素材計画。今すぐ正式素材を全�
 - `evade`
 - `victory_oss`
 - `defeat`
+
+### NIN-JOEカード別モーション方針
+
+攻撃カードは、カテゴリだけでモーションを決めない。カード名と技内容に応じて、できるだけ専用モーションを割り当てる。
+
+| カード/技 | 当面のモーション | 方針 |
+| --- | --- | --- |
+| 突き | `attack_punch_light` | 既存 `attack_light` を使用 |
+| 正拳 / 涙の正拳 | `attack_punch_heavy` | 専用の強い正拳モーションを作る |
+| 前蹴り系 | `attack_kick_light` | 現在の前蹴り素材を使用。該当カード追加待ち |
+| 回し蹴り | `attack_roundhouse` または `attack_kick_heavy` | 前蹴り素材は使わない |
+| 踵落とし | `attack_heel_drop` | 回し蹴りとも別。上から落とす動きを作る |
+| 胴払い | `attack_sweep` | 低い払い/崩しとして別に作る |
+| 鉄肩 | `attack_shoulder` | 拳/蹴りではなく肩のノックバック技として別に作る |
+| 投石 / 手裏剣 / 瓦投げ | `throw` | 投げ方は共通。飛翔物とSEで差を出す |
 
 ### 敵キャラクター
 
@@ -212,8 +227,8 @@ Act1の完成度を上げるための素材計画。今すぐ正式素材を全�
 | `walk` | 6 | 摺り足にも道中歩きにも使える |
 | `attack_punch_light` | 5 | 溜め1、踏み込み2、打撃1、戻り1 |
 | `attack_punch_heavy` | 6 | 溜め、踏み込み、強い正拳、戻り |
-| `attack_kick_light` | 5 | 溜め、蹴り、引き戻し |
-| `attack_kick_heavy` | 7 | 溜め、踏み込み、蹴り/胴払い、残心まで見せる |
+| `attack_kick_light` | 5 | 前蹴りの溜め、蹴り、引き戻し |
+| `attack_kick_heavy` | 7 | 回し蹴り/胴払い系。踵落としは別モーション候補 |
 | `throw` | 6 | 構え、振りかぶり、投げ、戻り |
 | `guard_ready` | 4 | 防御カード選択時の構え直し |
 | `guard_impact` | 4 | 受け、衝撃、戻り |

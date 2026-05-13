@@ -553,7 +553,8 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - Aseprite JSON: `assets-source/aseprite/ninjoe/ninjoe_attack_kick_light.json`
   - ゲーム用: `public/assets/images/ninjoe/ninjoe_attack_kick_light.png`
   - Asepriteからは365x399の5フレーム縦並びで出力。Codex側で1825x399の横並びに変換
-  - `回し蹴り`, `踵落とし`, `胴払い` は蹴り系として `ninjoe_attack_kick_light.png` を420msで1回再生する
+  - この素材は前蹴り専用として扱う。`回し蹴り`, `踵落とし`, `胴払い` には使わず、それぞれ別モーションを作る
+  - 既存カードの `正拳` / `涙の正拳` も、汎用パンチではなくカード内容に応じた専用モーションを今後作る
 - NIN-JOE生成参照用1フレームを作成
   - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
   - 通常クロマキー抜き版から左端フレームを切り出した透過PNG

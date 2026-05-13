@@ -779,8 +779,8 @@ function createCombatCue(options: {
 }
 
 function combatCueMotion(card: Card): CombatCue["motion"] {
-  if (card.name.includes("蹴り") || card.name.includes("踵") || card.name.includes("胴払い")) {
-    return "kickLight";
+  if (card.name.includes("前蹴り")) {
+    return "frontKickLight";
   }
   if (card.damage && !card.ranged) {
     return "punchLight";
@@ -972,7 +972,7 @@ function playerSpriteClassForCue(cue: CombatCue | null): string {
   if (cue?.kind === "ranged") {
     return "ninjoe-throw";
   }
-  if (cue?.motion === "kickLight") {
+  if (cue?.motion === "frontKickLight") {
     return "ninjoe-attack-kick-light";
   }
   if (cue?.kind === "melee") {
