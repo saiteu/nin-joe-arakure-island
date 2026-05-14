@@ -806,6 +806,9 @@ function createCombatCue(options: {
 }
 
 function combatCueMotion(card: Card): CombatCue["motion"] {
+  if (card.name.includes("胴払い")) {
+    return "bodySweep";
+  }
   if (card.name.includes("踵落とし")) {
     return "heelDrop";
   }
@@ -1050,6 +1053,9 @@ function playerSpriteClassForCue(cue: CombatCue | null): string {
   }
   if (cue?.motion === "heelDrop") {
     return "ninjoe-attack-heel-drop";
+  }
+  if (cue?.motion === "bodySweep") {
+    return "ninjoe-attack-body-sweep";
   }
   if (cue?.motion === "punchHeavy") {
     return "ninjoe-attack-punch-heavy";

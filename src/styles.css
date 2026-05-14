@@ -327,6 +327,11 @@ h2 {
   animation: ninjoe-attack-heel-drop 640ms steps(7, end) both;
 }
 
+.ninjoe-attack-body-sweep {
+  background-image: url("/assets/images/ninjoe/ninjoe_attack_body_sweep.png");
+  animation: ninjoe-attack-body-sweep 560ms steps(7, end) both;
+}
+
 .ninjoe-hit {
   background-image: url("/assets/images/ninjoe/ninjoe_hit.png");
   animation: ninjoe-hit 520ms steps(4, end) both;
@@ -622,6 +627,16 @@ h2 {
 }
 
 @keyframes ninjoe-attack-heel-drop {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -2555px 0;
+  }
+}
+
+@keyframes ninjoe-attack-body-sweep {
   from {
     background-position: 0 0;
   }
