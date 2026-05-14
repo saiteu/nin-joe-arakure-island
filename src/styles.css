@@ -324,7 +324,7 @@ h2 {
 
 .ninjoe-attack-heel-drop {
   background-image: url("/assets/images/ninjoe/ninjoe_attack_heel_drop.png");
-  animation: ninjoe-attack-heel-drop 520ms steps(5, end) both;
+  animation: ninjoe-attack-heel-drop 640ms steps(7, end) both;
 }
 
 .ninjoe-hit {
@@ -627,7 +627,7 @@ h2 {
   }
 
   to {
-    background-position: -1825px 0;
+    background-position: -2555px 0;
   }
 }
 

@@ -46,6 +46,22 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
     "sourceSize": { "w": 365, "h": 399 },
     "duration": 100
+   },
+   "ninjoe_attack_heel_drop 6.aseprite": {
+    "frame": { "x": 0, "y": 2394, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
+   },
+   "ninjoe_attack_heel_drop 7.aseprite": {
+    "frame": { "x": 0, "y": 2793, "w": 365, "h": 399 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 365, "h": 399 },
+    "sourceSize": { "w": 365, "h": 399 },
+    "duration": 100
    }
  },
  "meta": {
@@ -53,7 +69,7 @@
   "version": "1.x-dev",
   "image": "ninjoe_attack_heel_drop.png",
   "format": "RGBA8888",
-  "size": { "w": 365, "h": 2394 },
+  "size": { "w": 365, "h": 3192 },
   "scale": "1",
   "frameTags": [
   ],

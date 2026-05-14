@@ -580,7 +580,7 @@ Battle 1〜5はゲーム全体の最終決戦ではなく、Act1相当の縦切�
   - Aseprite書き出し: `assets-source/aseprite/ninjoe/ninjoe_attack_heel_drop.png`
   - Aseprite JSON: `assets-source/aseprite/ninjoe/ninjoe_attack_heel_drop.json`
   - ゲーム用: `public/assets/images/ninjoe/ninjoe_attack_heel_drop.png`
-  - Asepriteからは365x399の6フレーム縦並びで出力。Codex側で2190x399の横並びに変換
+  - Aseprite再調整後は365x399の8フレーム縦並びで出力。Codex側で2920x399の横並びに変換
   - `踵落とし` カードに割り当てる。左右の足より、足を上げて落とす技の読みやすさを優先
 - NIN-JOE生成参照用1フレームを作成
   - `assets-source/generated/ninjoe/ninjoe_idle_reference_frame1.png`
