@@ -18,6 +18,7 @@ import type {
 } from "./game/types";
 
 const appRoot = document.querySelector<HTMLDivElement>("#app");
+const isDebugMode = new URLSearchParams(window.location.search).has("debug");
 
 if (!appRoot) {
   throw new Error("App root was not found.");
@@ -312,6 +313,32 @@ function resetGame(): void {
   state = newGame();
   render();
   scheduleIntroCueClear();
+}
+
+function addDebugCardToHand(cardId: string): void {
+  if (!isDebugMode || state.status !== "playing") {
+    return;
+  }
+
+  const card = rewardCardPool.find((rewardCard) => rewardCard.id === cardId);
+  if (!card) {
+    return;
+  }
+
+  state.hand.push(cloneCard(card));
+  state.spirit = state.maxSpirit;
+  state.log.unshift(`DEBUG: ${card.name}を手札に追加した。`);
+  render();
+}
+
+function refillDebugSpirit(): void {
+  if (!isDebugMode || state.status !== "playing") {
+    return;
+  }
+
+  state.spirit = state.maxSpirit;
+  state.log.unshift("DEBUG: 胆力を全回復した。");
+  render();
 }
 
 function scheduleCombatCueClear(): void {
@@ -779,6 +806,9 @@ function createCombatCue(options: {
 }
 
 function combatCueMotion(card: Card): CombatCue["motion"] {
+  if (card.name.includes("踵落とし")) {
+    return "heelDrop";
+  }
   if (card.name.includes("回し蹴り")) {
     return "roundhouse";
   }
@@ -881,6 +911,8 @@ function render(): void {
         </div>
       </section>
 
+      ${renderDebugPanel()}
+
       <section class="lower-panels">
         <article>
           <h2>Piles</h2>
@@ -908,6 +940,10 @@ function render(): void {
 
   app.querySelector<HTMLButtonElement>("[data-action='end-turn']")?.addEventListener("click", endTurn);
   app.querySelector<HTMLButtonElement>("[data-action='reset']")?.addEventListener("click", resetGame);
+  app.querySelector<HTMLButtonElement>("[data-debug-action='refill-spirit']")?.addEventListener("click", refillDebugSpirit);
+  app.querySelectorAll<HTMLButtonElement>("[data-debug-card-id]").forEach((button) => {
+    button.addEventListener("click", () => addDebugCardToHand(button.dataset.debugCardId ?? ""));
+  });
   app.querySelector<HTMLButtonElement>("[data-action='skip-reward']")?.addEventListener("click", () => chooseReward(null));
   app.querySelectorAll<HTMLButtonElement>("[data-reward-id]").forEach((button) => {
     button.addEventListener("click", () => chooseReward(button.dataset.rewardId ?? null));
@@ -916,6 +952,34 @@ function render(): void {
   app.querySelectorAll<HTMLButtonElement>("[data-travel-choice-id]").forEach((button) => {
     button.addEventListener("click", () => chooseTravelOption(button.dataset.travelChoiceId ?? ""));
   });
+}
+
+function renderDebugPanel(): string {
+  if (!isDebugMode || state.status !== "playing") {
+    return "";
+  }
+
+  const debugCards = rewardCardPool.filter((card) => card.type === "attack");
+
+  return `
+    <section class="debug-panel" aria-label="Debug tools">
+      <div class="section-heading">
+        <h2>Debug</h2>
+        <button class="ghost-button" data-debug-action="refill-spirit">胆力全回復</button>
+      </div>
+      <div class="debug-actions">
+        ${debugCards
+          .map(
+            (card) => `
+              <button class="debug-button" data-debug-card-id="${card.id}">
+                ${card.name}
+              </button>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
 }
 
 function renderCombatCue(): string {
@@ -983,6 +1047,9 @@ function playerSpriteClassForCue(cue: CombatCue | null): string {
   }
   if (cue?.motion === "roundhouse") {
     return "ninjoe-attack-roundhouse";
+  }
+  if (cue?.motion === "heelDrop") {
+    return "ninjoe-attack-heel-drop";
   }
   if (cue?.motion === "punchHeavy") {
     return "ninjoe-attack-punch-heavy";
